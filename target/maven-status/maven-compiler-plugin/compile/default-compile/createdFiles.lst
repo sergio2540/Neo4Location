@@ -1,0 +1,2 @@
+org\neo4location\domain\route\Route.class
+org\neo4location\transactions\StructureTransactionEventHandler.class

@@ -1,0 +1,4 @@
+14-04-2015 00:09:51 ERROR Neo4LocationService:36 - hello
+14-04-2015 00:09:51 ERROR Neo4LocationService:46 - pong
+14-04-2015 00:09:53 ERROR Neo4LocationService:36 - hello
+14-04-2015 00:09:53 ERROR Neo4LocationService:167 - MATCH (person:Person {name: {personName} })-[:START_A]->(trajectory:RawTrajectory {trajName: {trajName} })-[:FROM]->(from:RawPoint)<-[:MOVE_TO*0..2]-(to:RawPoint)RETURN *
