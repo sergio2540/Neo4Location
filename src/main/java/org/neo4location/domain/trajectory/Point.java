@@ -1,38 +1,67 @@
 package org.neo4location.domain.trajectory;
 
+
+import java.util.Collection;
+
 import org.neo4j.graphdb.Label;
-import org.neo4location.graphdb.Neo4JPoint;
 
-public interface Point {
+//@JsonTypeInfo(
+//use = JsonTypeInfo.Id.NAME,
+//include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
+//property = "type")
+//@JsonSubTypes({
+//@JsonSubTypes.Type(value = Neo4JPoint.class, name = "Neo4JPoint"),
+//})
+public class Point {
 
-	//	static RawData mRawData;
-	//	static SemanticData mSemanticData;
-	//	static Iterable<Label> mNeo4jLabels;
+	private RawData mRawData;
+	private SemanticData mSemanticData;
+	//@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="class")
+	private Collection<Label> mNeo4jLabels;
 
-	public static Point create(RawData rawData, SemanticData semanticData, Iterable<Label> labels){
-			
-		Point p = new Neo4JPoint(rawData,semanticData, labels); 
-		
-		return p;
 	
+	public Point(){
 	}
 	
-	//public Iterable<Point> create(Iterable<Object> nodePoints);
+	public Point(RawData rawData, SemanticData semanticData, Collection<Label> labels){
 
-	//Meta informacao
-	public Iterable<Label> getLabels();
+		mRawData = rawData;
+		mSemanticData = semanticData;
+		mNeo4jLabels = labels;
+		
+		//Neo4JPoint p = new Neo4JPoint(rawData,semanticData, labels); 
 
-	//Informacao
-	public RawData getRawData();
-	public SemanticData getSemanticData();
+	}
+	
+	public Collection<Label> getLabels() {
+		return mNeo4jLabels;
+	}
+	
+	public RawData getRawData() {
+		return mRawData;
+	}
 
-	public Move getMove();
 
-	public void setLabels(Label label);
+	public SemanticData getSemanticData() {
+		return mSemanticData;
+	}
 
-	public void setRawData(RawData rd);
-	public void setSemanticData(SemanticData sd);
+	public void setLabels(Collection<Label> labels) {
+		mNeo4jLabels = labels;
 
-	public void setMove(Move mv);
+	}
 
+	public void setRawData(RawData rd) {
+		mRawData = rd;
+	}
+
+	public void setSemanticData(SemanticData sd) {
+		mSemanticData = sd;
+	}
+	
+	
+	@Override
+	public String toString() {
+		 return String.format("[rawData= %s SemanticData= %s", getRawData().toString(), getSemanticData().toString());
+	}
 }

@@ -1,17 +1,14 @@
 package org.neo4location.trajectory.strucuture;
 
-import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Neo4jMockitoHelpers;
-import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.SemanticData;
-import org.neo4location.domain.trajectory.Trajectory;
 
 
 

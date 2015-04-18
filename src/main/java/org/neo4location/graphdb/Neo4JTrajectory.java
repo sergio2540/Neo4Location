@@ -46,7 +46,7 @@ public class Neo4JTrajectory implements Trajectory {
 		Collection<Move> mTemp = new ArrayList<>();
 		
 		Node start = move.getEndNode();
-		pTemp.add(new Neo4JPoint(start));
+		pTemp.add(new Neo4JPoint(start).getPoint());
 		
 		//Relationship move = from;
 		
@@ -57,7 +57,7 @@ public class Neo4JTrajectory implements Trajectory {
 				
 				move.getEndNode();
 				mTemp.add(new Neo4JMove(move));
-				pTemp.add(new Neo4JPoint(move.getEndNode()));
+				pTemp.add(new Neo4JPoint(move.getEndNode()).getPoint());
 	
 			}
 		}

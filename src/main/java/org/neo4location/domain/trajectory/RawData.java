@@ -3,6 +3,8 @@ package org.neo4location.domain.trajectory;
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.distance.GeodesicSphereDistCalc;
 import com.spatial4j.core.shape.impl.PointImpl;
@@ -52,6 +54,10 @@ public class RawData {
 
 	}
 
+	public RawData(){
+		
+	}
+	
 	public RawData(double latitude, double longitude, double altitude, float accuracy, float speed, long timestamp){
 		
 		mLatitude = latitude;
@@ -537,6 +543,8 @@ public class RawData {
      * @see #makeComplete
      * @hide
      */
+    
+    @JsonIgnore
     public boolean isComplete() {
         if (!mHasAccuracy) return false;
         if (mTime == 0) return false;
@@ -563,7 +571,7 @@ public class RawData {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Location[");
+        //s.append("Location[");
         s.append(String.format(" %.6f,%.6f", mLatitude, mLongitude));
         if (mHasAccuracy) s.append(String.format(" acc=%.0f", mAccuracy));
         else s.append(" acc=???");
@@ -573,7 +581,7 @@ public class RawData {
         if (mHasAltitude) s.append(" alt=").append(mAltitude);
         if (mHasSpeed) s.append(" vel=").append(mSpeed);
         if (mHasBearing) s.append(" bear=").append(mBearing);
-        s.append(']');
+        //s.append(']');
         return s.toString();
     }
 

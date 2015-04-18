@@ -1,2 +1,12 @@
-org\neo4location\domain\route\Route.class
-org\neo4location\transactions\StructureTransactionEventHandler.class
+org/neo4location/domain/trajectory/RawData.class
+org/neo4location/trajectory/Identification.class
+org/neo4location/domain/trajectory/Trajectory.class
+org/neo4location/domain/trajectory/Point.class
+org/neo4location/domain/trajectory/RawData$FORMAT.class
+org/neo4location/domain/trajectory/SemanticData.class
+org/neo4location/trajectory/identification/PredefinedTimeIntervalIdentification.class
+org/neo4location/trajectory/strucuture/Stop.class
+org/neo4location/server/plugins/Neo4LocationService.class
+org/neo4location/domain/Neo4LocationRelationships.class
+org/neo4location/domain/route/thoroughfares/WaterWay.class
+org/neo4location/domain/trajectory/Move.class
