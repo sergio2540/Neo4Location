@@ -25,9 +25,13 @@ import org.codehaus.jackson.map.ObjectReader;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.PropertyContainer;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.helpers.collection.MapUtil;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -46,7 +50,7 @@ public class Neo4LocationService {
 	public Neo4LocationService( @Context GraphDatabaseService db)
 	{
 		mDb = db;
-		
+
 	}
 
 
@@ -72,7 +76,7 @@ public class Neo4LocationService {
 	@Path("/users/{personName}/trajectories/{trajectoryName}/raw/points")
 	@Consumes(MediaType.TEXT_PLAIN)
 	//@Produces(MediaType.APPLICATION_JSON) 
-	public Response addRawPoint(String _moves, @PathParam("username") String personName, @PathParam("trajectoryName") String trajectoryName)
+	public Response addRawPoint(String _moves, @PathParam("personName") String personName, @PathParam("trajectoryName") String trajectoryName)
 	{
 
 
@@ -84,18 +88,36 @@ public class Neo4LocationService {
 			logger.error(e.getMessage());
 		} 
 
-		//		for(Move m: moves){
-		//			logger.error(m.toString());
-		//		}
+
+		logger.error(personName);
+		logger.error(trajectoryName);
+
 
 		boolean noTraj = true;
 		StringBuilder cypherQuery = new StringBuilder();
-		//Map<String, Object> params = new HashMap<String, Object>();
+		Map<String,Object>  params = new HashMap<>();
+
+
+		//personProps
+		Map<String, Object> personProps = new HashMap<String, Object>();
+		personProps.put( "personName", personName);
+
+		//trajectoryProps
+		Map<String, Object> trajectoryProps = new HashMap<String, Object>();
+		trajectoryProps.put( "trajectoryName", trajectoryName);
+
+
+		params.put("personProps", personProps);
+		params.put("trajectoryProps", trajectoryProps);
+
+		//		Map<String, Object> params = new HashMap<String, Object>();
+		//		params.put( "props", personProps);
 
 		if(noTraj){
 			//Se nao existir trajectory com o mesmo nome cria uma nova trajectoria.
-			cypherQuery.append("CREATE (person:Person {personName: {personName}})-[:START_A]->(traj {trajName: {trajectoryName} })");
+			cypherQuery.append("CREATE ({personProps})-[:START_A]->({trajectoryProps})");
 		}
+
 
 		if(moves != null){
 
@@ -138,23 +160,20 @@ public class Neo4LocationService {
 		}
 
 		logger.error(cypherQuery.toString());
-		
-		Map<String,Object>  params = new HashMap();
-		
-		params.put("personName", personName);
-		params.put("trajectoryName", trajectoryName);
-		
+
+
+		String r= "";
 		try (Transaction tx = mDb.beginTx(); Result result = mDb.execute(cypherQuery.toString(), params))
 		{
 
-			//			while ( result.hasNext() )
-			//			{
+			while ( result.hasNext() )
+			{
 
-//			r = result.resultAsString();
-//			logger.error(r);
-			//Map<String,Object> row = result.next();
-			//jg.writeString( ((Node) row.get( "colleague" )).getProperty( "name" ).toString() );
-			//			}
+				r += result.resultAsString();
+				//			logger.error(r);
+				//Map<String,Object> row = result.next();
+				//jg.writeString( ((Node) row.get( "colleague" )).getProperty( "name" ).toString() );
+			}
 
 			tx.success();
 
@@ -163,35 +182,37 @@ public class Neo4LocationService {
 			logger.error(e.toString());
 
 		}
-		
-		
-		return Response.status(Response.Status.OK).build();
+
+
+		return Response.status(Response.Status.OK).entity(r).build();
 
 		//Falta meter end
 
 
 	}
 
-	@POST
-	@Path("/users/{personName}/trajectories/{trajectoryName}/semantic/points/")
-	@Consumes(MediaType.APPLICATION_JSON)
-	//@Produces(MediaType.APPLICATION_JSON)
-	public Response addSemanticPoint(Point rp, @PathParam("personName") String username, @PathParam("trajectoryName") String trajectory_name)
-	{
-		return null;
-
-	}
+	//	@POST
+	//	@Path("/users/{personName}/trajectories/{trajectoryName}/semantic/points/")
+	//	@Consumes(MediaType.APPLICATION_JSON)
+	//	//@Produces(MediaType.APPLICATION_JSON)
+	//	public Response addSemanticPoint(Point rp, @PathParam("personName") String username, @PathParam("trajectoryName") String trajectory_name)
+	//	{
+	//		return null;
+	//
+	//	}
 
 	//trajectory_name = index start_timestamp/raw md5(server-id:ISO-8061)
 	//user_name = index
 	@GET
-	@Path("/users/{personName}/trajectories/{trajectoryName}/raw")
+	@Path("/users/{personName}/trajectories/{trajectoryName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRawTrajectory(@Context UriInfo ui){
 
 		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 		MultivaluedMap<String, String> pathParams = ui.getPathParameters();
 		Map<String, Object> params = new HashMap<String, Object>();
+
+
 
 		List<String> username = pathParams.get("personName");	
 		int ret = putInParameters("personName", username, params, 1, 1);
@@ -201,18 +222,22 @@ public class Neo4LocationService {
 
 		//################################MATCH##############################
 		StringBuilder cypherQuery = 
-				new StringBuilder("MATCH (person:Person {name: {personName} })-[:START_A]->(trajectory:RawTrajectory {trajName: {trajName} })-[:FROM]->");
+				new StringBuilder("MATCH (person {personName: {personName}})");
+
+		//logger.error((String) params.get("personName"));
+
+		cypherQuery.append("-[:START_A]->(traj {trajectoryName: {trajectoryName}})");
 
 
 		int start = 0;
-		int offset = 2;
-		String rel = "MOVE_TO";
+		int offset = 1;
+		String rel = "MOVE";
 
 		if(start > 0){
-			cypherQuery.append(String.format("(from)-[:%s*%d..%d]->(to)",rel,start,offset));
+			cypherQuery.append(String.format("-[:FROM]->(from)-[:%s*%d..%d]->(to)",rel,start,offset));
 		}
 		else {
-			cypherQuery.append(String.format("(from)<-[:%s*%d..%d]-(to)",rel, start, offset));
+			cypherQuery.append(String.format("-[:FROM]->(from)<-[:%s*%d..%d]-(to)",rel, start, offset));
 		}
 
 		//		List<String> points = queryParams.get("positions");
@@ -230,34 +255,50 @@ public class Neo4LocationService {
 
 		//################################WHERE##############################
 
-		//		cypherQuery.append("WHERE");
-		//
-		//		List<String> LATITUDE = queryParams.get("LATITUDE");	//LATITUDE=2.8989,3.099090&LONGITUDE=2.8989,3.099090&ALTITUDE=2.8989,3.099090&time=2,3&points=-1,5&fields=LATITUDE,LONGITUDE
-		//		ret = putInParameters("LATITUDE", LATITUDE, params, 0, 2);
-		//
-		//		if(ret >= 1){
-		//			cypherQuery.append("LATITUDE >= {LATITUDE}");
-		//		}
-		//		if (ret == 2){
-		//			cypherQuery.append("LATITUDE ");
-		//		}
-		//
-		//		List<String> LONGITUDE = queryParams.get("LONGITUDE");	//LONGITUDE=2.8989,3.099090
-		//
-		//		//[LATITUDE, LONGITUDE, ]
-		//
-		//
-		//		List<String> ALTITUDE = queryParams.get("ALTITUDE");	//ALTITUDE=2.8989,3.099090
-		//		List<String> time = queryParams.get("time");	//time=2,3
-		//
+		
 
+		List<String> lat = queryParams.get("lat");	//LATITUDE=2.8989,3.099090&LONGITUDE=2.8989,3.099090&ALTITUDE=2.8989,3.099090&time=2,3&points=-1,5&fields=LATITUDE,LONGITUDE
+		//ret = putInParameters(", LATITUDE, params, 0, 2);
+		
+		ret = (lat==null) ? 0 : lat.size();
 
-		//List<String> SPEED = queryParams.get("SPEED"); //SPEED=20,20
+		if(ret >= 1){
+			cypherQuery.append(" WHERE");
+			cypherQuery.append(String.format(Locale.ENGLISH,"lat >= %d",lat.get(0)));
+		}
+		if (ret == 2){
+			cypherQuery.append(String.format(Locale.ENGLISH,"AND lat <= %d",lat.get(1)));
+		}
+
+		List<String> lon = queryParams.get("lon");	//LONGITUDE=2.8989,3.099090
+		ret = (lon==null) ? 0 : lon.size();
+		
+		if(ret >= 1){
+			cypherQuery.append(String.format(Locale.ENGLISH,"AND lon >= %d",lon.get(0)));
+		}
+		if (ret == 2){
+			cypherQuery.append(String.format(Locale.ENGLISH,"AND lon <= %d",lon.get(1)));
+		}
+		
+		List<String> time = queryParams.get("time");	//LONGITUDE=2.8989,3.099090
+		ret = (time==null) ? 0 : time.size();
+		
+		if(ret >= 1){
+			cypherQuery.append(String.format(Locale.ENGLISH,"AND time >= %l",time.get(0)));
+		}
+		if (ret == 2){
+			cypherQuery.append(String.format(Locale.ENGLISH,"AND time <= %l",time.get(1)));
+		}
+		
+		// List<String> ALTITUDE = queryParams.get("ALTITUDE");	//ALTITUDE=2.8989,3.099090
+		// List<String> SPEED = queryParams.get("SPEED"); //SPEED=20,20
 
 		//#########################RETURN##########################
-		cypherQuery.append("RETURN *");
-		List<String> fields = queryParams.get("fields");
-		ret = putInParameters("fields",fields, params, 0, Integer.MAX_VALUE);
+		cypherQuery.append(" RETURN *");
+
+
+
+		//ret = putInParameters("fields",fields, params, 0, Integer.MAX_VALUE);
 
 		//		for(String field: fields){
 		//			cypherQuery.append("{field}");
@@ -276,17 +317,47 @@ public class Neo4LocationService {
 		logger.error(cypherQuery.toString());
 
 		String r = "";
-		try (Transaction tx = mDb.beginTx(); Result result = mDb.execute(cypherQuery.toString(), params))
+		try (Transaction tx = mDb.beginTx(); Result result = mDb.execute(cypherQuery.toString(),params))
 		{
 
-			//			while ( result.hasNext() )
-			//			{
+			while (result.hasNext())
+			{
 
-			r = result.resultAsString();
-			logger.error(r);
-			//Map<String,Object> row = result.next();
-			//jg.writeString( ((Node) row.get( "colleague" )).getProperty( "name" ).toString() );
-			//			}
+				//r = result.resultAsString;
+				//logger.error(r);
+				Map<String,Object> row = result.next();
+
+
+				for(Entry<String, Object> kv: row.entrySet()){
+
+					String key = kv.getKey();
+
+					r += String.format("node:%s ",key); //person - nome da var
+
+					PropertyContainer t = (PropertyContainer) kv.getValue();
+
+					/*if(isNode(key)){
+						t = (Node) kv.getValue(); 
+					}
+					else {
+						t = (Relationship) kv.getValue(); 
+					}*/
+
+					List<String> fields = queryParams.get("field");
+
+					if(fields!=null)
+						for(String field : fields){
+							logger.error("FIELD: " + field);
+							if(t.hasProperty(field)){
+								r += String.format("%s:%s",field,t.getProperty(field).toString()); 
+							}
+						}
+
+					r += "\n";
+
+				}
+
+			}
 
 			tx.success();
 
@@ -313,6 +384,12 @@ public class Neo4LocationService {
 
 	}
 
+
+
+	//	private boolean isNode(String key) {
+	//		// TODO Auto-generated method stub
+	//		return false;
+	//	}
 
 
 	private int putInParameters(String key, List<String> values, Map<String,Object> params, int minSize, int maxSize){
