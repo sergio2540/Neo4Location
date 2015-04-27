@@ -8,9 +8,14 @@ public enum Neo4LocationRelationships implements RelationshipType, Serializable,
 	
 	//User START_A TRAJECTORY
 	START_A,
+
 	//FROM UK TO LISBON
 	FROM,
 	TO,
+	
+	//HEAD,
+	//LAST,
+	
 	//TIME
 	START,
 	END,
@@ -42,6 +47,5 @@ public enum Neo4LocationRelationships implements RelationshipType, Serializable,
 	BYCYCLE,
 	PLANE,
 	HELICOPTER,
-	BOAT
-	
+	BOAT, 
 }

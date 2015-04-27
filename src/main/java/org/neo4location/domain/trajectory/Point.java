@@ -2,6 +2,8 @@ package org.neo4location.domain.trajectory;
 
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.neo4j.graphdb.Label;
 
@@ -59,6 +61,18 @@ public class Point {
 		mSemanticData = sd;
 	}
 	
+	public Map<String,String> toMap(){
+		
+		Map<String,String> rawMap = getRawData().toMap();
+		Map<String,String> semanticMap = getSemanticData().toMap();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		map.putAll(rawMap);
+		map.putAll(semanticMap);
+		
+		return map;
+	}
 	
 	@Override
 	public String toString() {

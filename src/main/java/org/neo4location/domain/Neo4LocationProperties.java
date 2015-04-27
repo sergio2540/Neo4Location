@@ -17,15 +17,23 @@ public interface Neo4LocationProperties {
 
 	public String getValue();
 	
+	public final String USERNAME = "USERNAME";
+	public final String TRAJNAME = "TRAJNAME";
+	
+	//public final String DISTANCE = "DISTANCE";
+	//public final String duration = "duration";
+	//public final String INSTANT = "instant";
+	
+	public final String LATITUDE = "lat";
+	public final String LONGITUDE = "lon";
+	public final String ALTITUDE = "ALTITUDE";
+	
 	/**
 	 *Get the estimated ACCURACY of this location, in meters.
 	 */
-	
+	public final String ACCURACY = "ACCURACY";
+	public final String TIMESTAMP = "TIMESTAMP";
 	public final String SPEED = "SPEED";
-	public final String DISTANCE = "DISTANCE";
-	
-	//public final String duration = "duration";
-	//public final String INSTANT = "instant";
 	
 	/**
 	 * Get the BEARING, in degrees.
@@ -36,13 +44,4 @@ public interface Neo4LocationProperties {
 	 */
 	public final String BEARING = "BEARING";
 	
-	public final String LATITUDE = "LATITUDE";
-	public final String LONGITUDE = "LONGITUDE";
-	public final String ALTITUDE = "ALTITUDE";
-
-
-	public final String ACCURACY = "ACCURACY";
-	//public final String time = "time";
-	public final String TIMESTAMP = "TIMESTAMP";
-
 }

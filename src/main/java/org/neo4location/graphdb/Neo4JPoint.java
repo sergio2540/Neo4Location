@@ -46,25 +46,27 @@ public class Neo4JPoint {
 		
 		mPoint = p;
 		
-		Node n = mNeo4JNode.getGraphDatabase().createNode();
-		for(Label l : p.getLabels()){
-			n.addLabel(l);
+		Node n = mNeo4JNode.getGraphDatabase().createNode(p.getLabels().toArray(new Label[0]));
+
+		RawData rd = p.getRawData();
+		
+		if(rd != null){
+			n.setProperty(Neo4LocationProperties.LATITUDE, rd.getLatitude());
+			n.setProperty(Neo4LocationProperties.LONGITUDE, rd.getLongitude());
+			n.setProperty(Neo4LocationProperties.ALTITUDE, rd.getAltitude());
+	
+			n.setProperty(Neo4LocationProperties.ACCURACY, rd.getAccuracy());
+	
+			n.setProperty(Neo4LocationProperties.SPEED, rd.getSpeed());
+			n.setProperty(Neo4LocationProperties.TIMESTAMP, rd.getTime());
 		}
 
-		n.setProperty(Neo4LocationProperties.LATITUDE, p.getRawData().getLatitude());
-		n.setProperty(Neo4LocationProperties.LONGITUDE,p.getRawData().getLongitude());
-		n.setProperty(Neo4LocationProperties.ALTITUDE, p.getRawData().getAltitude());
-
-		n.setProperty(Neo4LocationProperties.ACCURACY, p.getRawData().getAccuracy());
-
-		n.setProperty(Neo4LocationProperties.SPEED, p.getRawData().getSpeed());
-		n.setProperty(Neo4LocationProperties.TIMESTAMP, p.getRawData().getTime());
-
-		Set<Entry<String, Object>> temp = p.getSemanticData().getKeysAndValues();
-		for (Entry<String, Object> entry : temp) {
-			mNeo4JNode.setProperty(entry.getKey(), entry.getValue());
+		SemanticData sd = p.getSemanticData();
+		
+		if(sd != null){
+			sd.getKeysAndValues().forEach((k,v) -> mNeo4JNode.setProperty(k, v));
 		}
-
+		
 		mNeo4JNode = n;
 	}
 
@@ -155,13 +157,9 @@ public class Neo4JPoint {
 	
 	public void setSemanticData(SemanticData sd) {
 		
-		Set<Entry<String, Object>> temp = sd.getKeysAndValues();
-		
-		for (Entry<String, Object> entry : temp) {
-			mNeo4JNode.setProperty(entry.getKey(), entry.getValue());
-		}
-		
+		sd.getKeysAndValues().forEach( (k,v) -> mNeo4JNode.setProperty(k, v));
 		mPoint.setSemanticData(sd);
+	
 	}
 
 

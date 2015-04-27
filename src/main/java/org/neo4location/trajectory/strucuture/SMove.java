@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.graphdb.Label;
+import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -56,6 +57,36 @@ public class SMove implements Move {
 	public Map<String, Object> getSemanticData() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Neo4LocationRelationships getRelationship() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setRelationship(Neo4LocationRelationships rt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setFrom(Point from) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTo(Point to) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSemanticData(Map<String, Object> sd) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
