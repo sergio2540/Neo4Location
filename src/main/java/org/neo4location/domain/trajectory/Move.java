@@ -1,15 +1,10 @@
 package org.neo4location.domain.trajectory;
 
+
 import java.util.Map;
 
-
-
-
-
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4location.domain.Neo4LocationRelationships;
-import org.neo4location.graphdb.Neo4JMove;
+
 
 //@JsonTypeInfo(
 //use = JsonTypeInfo.Id.NAME, 
@@ -19,33 +14,65 @@ import org.neo4location.graphdb.Neo4JMove;
 //@JsonSubTypes({
 //	@JsonSubTypes.Type(value = Neo4JMove.class, name = "Neo4JMove"),
 //})
-public interface Move {
+public class Move {
+	
+	private Neo4LocationRelationships mRel;
+	private Point mFrom;
+	private Point mTo;
+	private Map<String, Object> mSemanticData;
+	
+	
+	
+	public Move(){
+	}
+	
+	public Move(Neo4LocationRelationships rel, Point from, Point to, Map<String, Object> sd){
 
-	public static Move create(Neo4LocationRelationships rel, Point from, Point to, Map<String, Object> properties){
+		mRel = rel;
+		mFrom = from;
+		mTo = to;
+		mSemanticData = sd;
+	}
+	
+	public Neo4LocationRelationships getRelationship() {
+		return mRel;
+	}
 
-		Move mv = new Neo4JMove(rel, from,to,properties); 
 
-		return mv;
+	public void setRelationship(Neo4LocationRelationships rel) {
+		mRel = rel;
+
+	}
+	
+	
+	public Point getFrom() {
+		return mFrom;
+	}
+
+	public void setFrom(Point from) {
+		mFrom = from;
+	}
+
+	public Point getTo() {
+		return mTo;
+	}
+
+	public void setTo(Point to) {
+		mTo = to;
+	}
+
+
+	public Map<String,Object> getSemanticData() {
+
+		return mSemanticData;
 
 	}
 
-	public Neo4LocationRelationships getRelationship();
-	public void setRelationship(Neo4LocationRelationships rt);
-	
-	public Point getFrom();
-	public void setFrom(Point from);
-	public Point getTo();
-	public void setTo(Point to);
 
+	public void setSemanticData(Map<String,Object> sd) {
 
-	//	public double getDuration();
-	//	public double getDistance();
-
-	public Map<String,Object> getSemanticData();
-	public void setSemanticData(Map<String,Object>  sd);
-
-//	public Label getLabel();
-//	public void setLabel(Label label);
+		mSemanticData = sd;
+	}
 
 
 
@@ -57,7 +84,7 @@ public interface Move {
 	//		mDurationInSeconds = durationInSeconds;
 	//		mDistanceInMeters = distanceInMeters;
 	//		
-	//		mProperties = properties;
+	//		mSemanticData = properties;
 	//		
 	//	}
 

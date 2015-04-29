@@ -1,7 +1,11 @@
 package org.neo4location.graphdb;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -9,6 +13,7 @@ import java.util.Set;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
@@ -20,6 +25,8 @@ import org.neo4location.domain.trajectory.SemanticData;
 public class Neo4JPoint {
 
 
+	//private String Neo4LocationLabels;
+	
 	private Node mNeo4JNode;
 	private Point mPoint;
 
@@ -64,7 +71,7 @@ public class Neo4JPoint {
 		SemanticData sd = p.getSemanticData();
 		
 		if(sd != null){
-			sd.getKeysAndValues().forEach((k,v) -> mNeo4JNode.setProperty(k, v));
+			sd.getSemanticData().forEach((k,v) -> mNeo4JNode.setProperty(k, v));
 		}
 		
 		mNeo4JNode = n;
@@ -74,21 +81,39 @@ public class Neo4JPoint {
 
 
 	private void createLabels(Node neo4jPoint) {
-		Collection<Label> list = new ArrayList<Label>();
-		Iterable<Label> iter = neo4jPoint.getLabels();
-		for (Label item : iter) {
-	        list.add(item);
-	    }
+		
+		Collection<Neo4LocationLabels> list = new ArrayList<>();
+		Set<Neo4LocationLabels> labels = EnumSet.allOf(Neo4LocationLabels.class);
+		
+		for(Neo4LocationLabels label: labels){
+		
+			if(neo4jPoint.hasLabel(label)){
+				list.add(label);
+			}
+		}
 		
 		mPoint.setLabels(list);
 	}
 
 
 	private void createSemanticData(Node neo4jPoint) {
+		
 		Map<String,Object> temp = new HashMap<>();
 
+		Set<String> lockedKeys = new HashSet<>();
+		lockedKeys.add(Neo4LocationProperties.LATITUDE);
+		lockedKeys.add(Neo4LocationProperties.LONGITUDE);
+		lockedKeys.add(Neo4LocationProperties.ALTITUDE);
+		
+		lockedKeys.add(Neo4LocationProperties.ACCURACY);
+		lockedKeys.add(Neo4LocationProperties.SPEED);
+		lockedKeys.add(Neo4LocationProperties.TIMESTAMP);
+		
 		for(String k : neo4jPoint.getPropertyKeys()){
-			temp.put(k, neo4jPoint.getProperty(k));
+			
+			if(!lockedKeys.contains(k))
+				temp.put(k, neo4jPoint.getProperty(k));
+		
 		}
 
 		mPoint.setSemanticData(new SemanticData(temp));
@@ -102,34 +127,34 @@ public class Neo4JPoint {
 		double longitude = (double) neo4jPoint.getProperty(Neo4LocationProperties.LONGITUDE,-1.0);
 		double altitude = (double) neo4jPoint.getProperty(Neo4LocationProperties.ALTITUDE, -1.0);
 
-		float accuracy = (float) neo4jPoint.getProperty(Neo4LocationProperties.ACCURACY, -1.0);
+		float accuracy = (float) neo4jPoint.getProperty(Neo4LocationProperties.ACCURACY, -1.0f);
 
-		float speed = (float) neo4jPoint.getProperty(Neo4LocationProperties.SPEED, -1.0);
-		long timestamp = (long) neo4jPoint.getProperty(Neo4LocationProperties.TIMESTAMP, -1);
+		float speed = (float) neo4jPoint.getProperty(Neo4LocationProperties.SPEED, -1.0f);
+		long timestamp = (long) neo4jPoint.getProperty(Neo4LocationProperties.TIMESTAMP, -1L);
 
 		mPoint.setRawData(new RawData(latitude, longitude, altitude, accuracy, speed, timestamp));
 
 	}
 	
 	
-	public Collection<Label> getLabels() {
+	private Collection<Neo4LocationLabels> getLabels() {
 
 		return mPoint.getLabels();
 
 	}
 	
-	public RawData getRawData() {
+	private RawData getRawData() {
 		return mPoint.getRawData();
 	}
 
 
-	public SemanticData getSemanticData() {
+	private SemanticData getSemanticData() {
 		return mPoint.getSemanticData();
 	}
 
 
 	
-	public void setLabels(Collection<Label> labels) {
+	private void setLabels(Collection<Neo4LocationLabels> labels) {
 		
 		for(Label l: labels){
 			if(!mNeo4JNode.hasLabel(l)){
@@ -140,7 +165,7 @@ public class Neo4JPoint {
 		mPoint.setLabels(labels);
 	}
 	
-	public void setRawData(RawData rd) {
+	private void setRawData(RawData rd) {
 		
 		mNeo4JNode.setProperty(Neo4LocationProperties.LATITUDE,rd.getLatitude());
 		mNeo4JNode.setProperty(Neo4LocationProperties.LONGITUDE,rd.getLongitude());
@@ -155,9 +180,9 @@ public class Neo4JPoint {
 
 	}
 	
-	public void setSemanticData(SemanticData sd) {
+	private void setSemanticData(SemanticData sd) {
 		
-		sd.getKeysAndValues().forEach( (k,v) -> mNeo4JNode.setProperty(k, v));
+		sd.getSemanticData().forEach( (k,v) -> mNeo4JNode.setProperty(k, v));
 		mPoint.setSemanticData(sd);
 	
 	}

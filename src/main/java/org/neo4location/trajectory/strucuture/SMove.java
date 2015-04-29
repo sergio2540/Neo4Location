@@ -12,7 +12,7 @@ import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.SemanticData;
 
-public class SMove implements Move {
+public class SMove  {
 
 	public SMove(long instantFrom, long instantTo, Duration duration) {
 		
@@ -41,52 +41,8 @@ public class SMove implements Move {
 	
 	}
 
-	@Override
-	public Point getFrom() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public Point getTo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> getSemanticData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Neo4LocationRelationships getRelationship() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setRelationship(Neo4LocationRelationships rt) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setFrom(Point from) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTo(Point to) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSemanticData(Map<String, Object> sd) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

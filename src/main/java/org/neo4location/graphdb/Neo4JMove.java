@@ -1,50 +1,60 @@
 package org.neo4location.graphdb;
+
+
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipType;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
-import org.neo4location.domain.trajectory.Point;
 
 
-public class Neo4JMove implements Move {
+public class Neo4JMove {
+
+//	Neo4LocationRelationships mRel;
+//
+//	Point mFrom;
+//	Point mTo;
 
 	Neo4LocationRelationships mRel;
-	Point mFrom;
-	Point mTo;
+	Move mMove;
 	
-//	double mDurationInSeconds;
-//	double mDistanceInMeters;
-
-	Map<String,Object> mProperties;
+	//Map<String,Object> mProperties;
 
 	public Neo4JMove(){
-		
-	}
-	
-	public Neo4JMove(Neo4LocationRelationships rel, Point from, Point to, Map<String,Object> properties)
-	{
-		if(from == null && to == null && properties == null)
-			throw new IllegalArgumentException();
-
-		mRel = rel;
-		mFrom = from;
-		mTo = to;
-		mProperties = properties;
 
 	}
+
+//	private Neo4JMove(Neo4LocationRelationships rel, Point from, Point to, Map<String,Object> properties)
+//	{
+//		if(from == null && to == null && properties == null)
+//			throw new IllegalArgumentException();
+//
+//  		mRel = rel;
+//  		mFrom = from;
+//  		mTo = to;
+//	    	mProperties = properties;
+//
+//	}
 
 	public Neo4JMove(Relationship move)
 	{
+		mMove = new Move();
+		
+		Set<Neo4LocationRelationships> rels = EnumSet.allOf(Neo4LocationRelationships.class);
 
-		mFrom = new Neo4JPoint(move.getStartNode()).getPoint();
-		mTo = new Neo4JPoint(move.getEndNode()).getPoint();
+		for(Neo4LocationRelationships rel: rels){
 
-		//		mDurationInSeconds = durationInSeconds;
-		//		mDistanceInMeters = distanceInMeters;
+			if(move.getType().equals(rel)){
+				mMove.setRelationship(rel);
+				break;
+			}
+		}
+
+		mMove.setFrom(new Neo4JPoint(move.getStartNode()).getPoint());
+		mMove.setTo(new Neo4JPoint(move.getEndNode()).getPoint());
 
 		Map<String,Object> temp = new HashMap<>();
 
@@ -52,63 +62,29 @@ public class Neo4JMove implements Move {
 			temp.put(k, move.getProperty(k));
 		}
 
-		mProperties = temp;
+		mMove.setSemanticData(temp);
+
+
+		//mMove = Move.create(mRel, mFrom, mTo, mProperties);
 
 	}
 
 
-	@Override
-	public Point getFrom() {
-		return mFrom;
-	}
-	
-	@Override
-	public void setFrom(Point from) {
-		mFrom = from;
-	}
-	
 
-
-	@Override
-	public Point getTo() {
-		return mTo;
-	}
-	
-	@Override
-	public void setTo(Point to) {
-		mTo = to;
+	public Move getMove() {
+		return mMove;
 	}
 
-	@Override
-	public Map<String,Object> getSemanticData() {
+	//Remover manter apenas getMove
 
-		return mProperties;
-
-	}
-	
-	@Override
-	public void setSemanticData(Map<String,Object> sd) {
-
-		mProperties = sd;
-
-	}
 
 	@Override
 	public String toString(){
-		
-		return String.format("[from= %s to= %s]", mFrom, mTo);
+
+		return mMove.toString();
+
+	}
+
 	
-	}
-
-	@Override
-	public Neo4LocationRelationships getRelationship() {
-		return mRel;
-	}
-
-	@Override
-	public void setRelationship(Neo4LocationRelationships rt) {
-		mRel = rt;
-		
-	}
 
 }

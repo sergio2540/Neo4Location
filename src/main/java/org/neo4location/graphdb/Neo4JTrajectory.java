@@ -5,48 +5,55 @@ import java.util.Collection;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
+import org.neo4location.domain.trajectory.Person;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.Trajectory;
 
 
-public class Neo4JTrajectory implements Trajectory {
+public class Neo4JTrajectory {
 	
-//	public Neo4JTrajectory(Iterable<Node> nodes, Neo4LocationLabels label){
-//		
-//		Arrays.asList(StreamSupport.stream(nodes.spliterator(), true)
-//        .filter(
-//        		(n) -> n.hasLabel(label)
-//        		)
-//        .sorted(
-//        		(n1,n2) -> ((String) n1.getProperty(Neo4LocationProperties.TIMESTAMP, "")).
-//        		compareTo((String) n2.getProperty(Neo4LocationProperties.TIMESTAMP, ""))
-//        		)
-//        .toArray(Trajectory[]::new));
-//	}
+
 	
-	private Node mTrajectory;
-	private Collection<Point> mPoints;
-	private Collection<Move> mMoves;
+	private Node mNode;
+	private Trajectory mTrajectory;
+	
+//	private Collection<Point> mPoints;
+//	private Collection<Move> mMoves;
 
 	public Neo4JTrajectory(Node trajectory){
+		
+				
+		String trajectoryName  = (String) trajectory.getProperty(Neo4LocationProperties.TRAJNAME);
+		
+		Relationship startA = trajectory.getSingleRelationship(Neo4LocationRelationships.START_A, Direction.INCOMING);
+		
+		Person person = null;
+		
+		if(startA != null){
+			person = new Neo4JPerson(startA.getStartNode()).getPerson();
+		}
 	
 		Relationship from = trajectory.getSingleRelationship(Neo4LocationRelationships.FROM, Direction.OUTGOING);
 		
+		Collection<Move> moves = null;
 		if(from !=null)
-		createPointsAndMoves(from);
+			moves = createPointsAndMoves(from);
+		
+		mTrajectory = new Trajectory(trajectoryName, person, moves);
 		
 	}
 	
 	
-	private void createPointsAndMoves(Relationship move) {
+	private Collection<Move> createPointsAndMoves(Relationship move) {
 		
-		Collection<Point> pTemp = new ArrayList<>();
+		//Collection<Point> pTemp = new ArrayList<>();
 		Collection<Move> mTemp = new ArrayList<>();
 		
 		Node start = move.getEndNode();
-		pTemp.add(new Neo4JPoint(start).getPoint());
+		//pTemp.add(new Neo4JPoint(start).getPoint());
 		
 		//Relationship move = from;
 		
@@ -55,16 +62,25 @@ public class Neo4JTrajectory implements Trajectory {
 			move  = start.getSingleRelationship(Neo4LocationRelationships.MOVE, Direction.OUTGOING);
 			if(move != null){
 				
-				move.getEndNode();
-				mTemp.add(new Neo4JMove(move));
-				pTemp.add(new Neo4JPoint(move.getEndNode()).getPoint());
+				//move.getEndNode();
+				mTemp.add(new Neo4JMove(move).getMove());
+				//pTemp.add(new Neo4JPoint(move.getEndNode()).getPoint());
 	
 			}
 		}
 		
-		mPoints = pTemp;
-		mMoves = mTemp;
+		return mTemp;
 	
+	}
+	
+	
+	public Trajectory getTrajectory(){
+		return mTrajectory;
+	}
+	
+	
+	public void setTrajectory(Trajectory trajectory){
+		mTrajectory = trajectory;
 	}
 
 
@@ -76,25 +92,13 @@ public class Neo4JTrajectory implements Trajectory {
 	//or getLocations()
 	
 	
-	public Collection<Point> getPoints(){
-		return mPoints;
-	}
+//	public Collection<Point> getPoints(){
+//		return mPoints;
+//	}
+//	
+//
+//	public Collection<Move> getMoves(){
+//		return mMoves;
+//	}
 	
-
-	public Collection<Move> getMoves(){
-		return mMoves;
-	}
-
-
-	@Override
-	public void setPoints(Collection<Point> points){
-		mPoints = points;	
-	}
-
-
-	@Override
-	public void setMoves(Collection<Move> moves) {
-		mMoves = moves;
-	}
-
 }

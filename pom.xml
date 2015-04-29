@@ -5,7 +5,7 @@
 	<groupId>org.neo4j.examples</groupId>
 	<artifactId>neo4j-server-examples</artifactId>
 	<name>Neo4j - Server Examples</name>
-	<version>2.1.8</version>
+	<version>2.2.0</version>
 
 	<description>Neo4j Server Plugin Examples</description>
 
@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-spatial</artifactId>
-			<version>0.13-neo4j-2.1.8</version>
+			<version>0.14-neo4j-2.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -83,13 +83,13 @@
 		</dependency>
 
 		<!-- Test dependencies -->
-		
+
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
-			<version>1.17</version>
+			<version>1.18.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-kernel</artifactId>
@@ -133,13 +133,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.neo4j</groupId> <artifactId>neo4j-io</artifactId> 
-			<version>${project.version}</version> <type>test-jar</type> <scope>test</scope> 
-			</dependency> <dependency> <groupId>org.neo4j.test</groupId> <artifactId>neo4j-harness</artifactId> 
-			<version>${project.version}</version> <scope>test</scope> </dependency> <dependency> 
-			<groupId>junit</groupId> <artifactId>junit</artifactId> <version>4.12</version> 
-			<scope>test</scope> </dependency> -->
-
 		<dependency>
 			<groupId>net.sf.supercsv</groupId>
 			<artifactId>super-csv</artifactId>
@@ -158,12 +151,6 @@
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<version>${metrics.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard.metrics</groupId>
-			<artifactId>metrics-jersey</artifactId>
 			<version>${metrics.version}</version>
 		</dependency>
 

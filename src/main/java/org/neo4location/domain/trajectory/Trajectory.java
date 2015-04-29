@@ -4,24 +4,49 @@ import java.util.Collection;
 
 
 
-public interface Trajectory {
-	
-	
-	//public Point getFrom();
-	//	public Point getTo();
-	//
-	//	public long getStart();
-	//	public long getEnd();
+public class Trajectory {
 
+	String mTrajectoryName;
+	Person mPerson;
+	Collection<Move> mMoves;
 	
-	//or getLocations()
+	public Trajectory(){
+		
+	}
 	
-	public Collection<Point> getPoints();
-	public Collection<Move> getMoves();
+	public Trajectory(String trajectoryName, Person person, Collection<Move> moves){
+		
+		mTrajectoryName = trajectoryName;
+		mPerson = person;
+		mMoves = moves;
+		
+	}
 	
-
-	public void setPoints(Collection<Point> points);
-	public void setMoves(Collection<Move> moves);
 	
+	public String getTrajectoryName(){
+		return mTrajectoryName;	
+	}
+	
+	public void setTrajectoryName(String trajectoryName){
+		mTrajectoryName = trajectoryName;	
+	}
+	
+	public Person getPerson(){
+		return mPerson;	
+	}
+	
+	public void setPerson(Person person){
+		mPerson = person;	
+	}
+	
+	
+	public Collection<Move> getMoves(){
+		return mMoves;
+		
+	}
+	
+	public void setMoves(Collection<Move> moves){
+		mMoves = moves;
+	}
 	
 }

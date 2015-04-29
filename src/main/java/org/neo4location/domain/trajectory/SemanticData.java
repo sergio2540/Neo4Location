@@ -15,12 +15,13 @@ public class SemanticData {
 	public SemanticData(Map<String,Object> semanticData){
 		mSemanticData = semanticData;
 	}
-
-	public  Map<String,Object> getKeysAndValues(){
+	
+	
+	public  Map<String,Object> getSemanticData(){
 		return mSemanticData;
 	}
 	
-	public void setKeysAndValues(Map<String,Object> semanticData){
+	public void setSemanticData(Map<String,Object> semanticData){
 		
 		mSemanticData = semanticData;
 		//for(Entry<String, Object> kv: kvs){
@@ -41,7 +42,7 @@ public class SemanticData {
 		
 		StringBuilder s = new StringBuilder();
 	
-		getKeysAndValues()
+		getSemanticData()
 		.forEach((k,v) -> s.append(String.format("%s= %s ", k, v.toString())));
 		
 		return s.toString();
@@ -51,7 +52,7 @@ public class SemanticData {
 		
 		final Map<String,String> map = new HashMap<String, String>();
 		
-		getKeysAndValues().forEach((k,v) -> map.put(k, v.toString()));
+		getSemanticData().forEach((k,v) -> map.put(k, v.toString()));
 		
 		return map;
 	}

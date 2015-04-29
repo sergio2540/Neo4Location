@@ -6,26 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.graphdb.Label;
+import org.neo4location.domain.Neo4LocationLabels;
 
-//@JsonTypeInfo(
-//use = JsonTypeInfo.Id.NAME,
-//include = JsonTypeInfo.As.EXTERNAL_PROPERTY,
-//property = "type")
-//@JsonSubTypes({
-//@JsonSubTypes.Type(value = Neo4JPoint.class, name = "Neo4JPoint"),
-//})
+
 public class Point {
 
 	private RawData mRawData;
 	private SemanticData mSemanticData;
-	//@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="class")
-	private Collection<Label> mNeo4jLabels;
+	private Collection<Neo4LocationLabels> mNeo4jLabels;
 
 	
 	public Point(){
 	}
 	
-	public Point(RawData rawData, SemanticData semanticData, Collection<Label> labels){
+	public Point(RawData rawData, SemanticData semanticData, Collection<Neo4LocationLabels> labels){
 
 		mRawData = rawData;
 		mSemanticData = semanticData;
@@ -35,7 +29,7 @@ public class Point {
 
 	}
 	
-	public Collection<Label> getLabels() {
+	public Collection<Neo4LocationLabels> getLabels() {
 		return mNeo4jLabels;
 	}
 	
@@ -48,7 +42,7 @@ public class Point {
 		return mSemanticData;
 	}
 
-	public void setLabels(Collection<Label> labels) {
+	public void setLabels(Collection<Neo4LocationLabels> labels) {
 		mNeo4jLabels = labels;
 
 	}

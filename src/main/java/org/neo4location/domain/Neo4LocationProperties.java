@@ -44,4 +44,7 @@ public interface Neo4LocationProperties {
 	 */
 	public final String BEARING = "BEARING";
 	
+	
+	public final String CONFIDENCE = "CONFIDENCE";
+	
 }
