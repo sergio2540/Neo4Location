@@ -2,19 +2,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.neo4j.examples</groupId>
-	<artifactId>neo4j-server-examples</artifactId>
-	<name>Neo4j - Server Examples</name>
+	<groupId>org.neo4location.plugin</groupId>
+	<artifactId>neo4location-plugin</artifactId>
+	<name>Neo4Location Plugin</name>
 	<version>2.2.0</version>
 
-	<description>Neo4j Server Plugin Examples</description>
+	<description>Neo4Location</description>
 
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<short-name>neo4j-server-examples</short-name>
-		<version-package>examples.server.impl</version-package>
+		<short-name>neo4locations-plugin</short-name>
+		
 		<bundle.namespace>org.neo4j.examples.server</bundle.namespace>
 
 		<license-text.header>ApacheLicense-2.0-header.txt</license-text.header>
