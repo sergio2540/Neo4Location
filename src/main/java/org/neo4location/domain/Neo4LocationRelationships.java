@@ -6,7 +6,7 @@ import org.neo4j.graphdb.RelationshipType;
 
 public enum Neo4LocationRelationships implements RelationshipType, Serializable, Comparable<Neo4LocationRelationships> {
 	
-	//Person START_A TRAJECTORY
+	//User START_A TRAJECTORY
 	START_A,
 
 	//FROM UK TO LISBON

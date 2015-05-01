@@ -2,6 +2,7 @@ package org.neo4location.domain.trajectory;
 
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.neo4location.domain.Neo4LocationRelationships;
 
@@ -72,6 +73,20 @@ public class Move {
 	public void setSemanticData(Map<String,Object> sd) {
 
 		mSemanticData = sd;
+	}
+	
+	@Override
+	public String toString(){
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("Move:  rel: %s from: %s to: %s", mRel, mFrom, mTo));
+		
+		for(Entry<String, Object> kv : mSemanticData.entrySet())
+			sb.append(String.format("%s: %s", kv.getKey(), kv.getValue()));
+		
+		return sb.toString();
+		
 	}
 
 

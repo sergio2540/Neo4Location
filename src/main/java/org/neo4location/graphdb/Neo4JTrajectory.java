@@ -8,7 +8,7 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
-import org.neo4location.domain.trajectory.Person;
+import org.neo4location.domain.trajectory.User;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.Trajectory;
 
@@ -30,10 +30,10 @@ public class Neo4JTrajectory {
 		
 		Relationship startA = trajectory.getSingleRelationship(Neo4LocationRelationships.START_A, Direction.INCOMING);
 		
-		Person person = null;
+		User user = null;
 		
 		if(startA != null){
-			person = new Neo4JPerson(startA.getStartNode()).getPerson();
+			user = new Neo4JPerson(startA.getStartNode()).getPerson();
 		}
 	
 		Relationship from = trajectory.getSingleRelationship(Neo4LocationRelationships.FROM, Direction.OUTGOING);
@@ -42,7 +42,7 @@ public class Neo4JTrajectory {
 		if(from !=null)
 			moves = createPointsAndMoves(from);
 		
-		mTrajectory = new Trajectory(trajectoryName, person, moves);
+		mTrajectory = new Trajectory(trajectoryName, user, moves);
 		
 	}
 	

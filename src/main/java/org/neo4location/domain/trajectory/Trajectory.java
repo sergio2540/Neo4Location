@@ -3,21 +3,20 @@ package org.neo4location.domain.trajectory;
 import java.util.Collection;
 
 
-
 public class Trajectory {
 
 	String mTrajectoryName;
-	Person mPerson;
+	User mUser;
 	Collection<Move> mMoves;
 	
 	public Trajectory(){
 		
 	}
 	
-	public Trajectory(String trajectoryName, Person person, Collection<Move> moves){
+	public Trajectory(String trajectoryName, User user, Collection<Move> moves){
 		
 		mTrajectoryName = trajectoryName;
-		mPerson = person;
+		mUser = user;
 		mMoves = moves;
 		
 	}
@@ -31,12 +30,12 @@ public class Trajectory {
 		mTrajectoryName = trajectoryName;	
 	}
 	
-	public Person getPerson(){
-		return mPerson;	
+	public User getUser(){
+		return mUser;	
 	}
 	
-	public void setPerson(Person person){
-		mPerson = person;	
+	public void setUser(User user){
+		mUser = user;	
 	}
 	
 	
@@ -47,6 +46,22 @@ public class Trajectory {
 	
 	public void setMoves(Collection<Move> moves){
 		mMoves = moves;
+	}
+	
+	@Override
+	public String toString(){
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("[Trajectory %s %s", mTrajectoryName, mUser));
+		
+		for(Move move : mMoves){
+			sb.append(String.format(" %s", move));
+		}
+		
+		sb.append("]");
+		
+		return sb.toString();
 	}
 	
 }

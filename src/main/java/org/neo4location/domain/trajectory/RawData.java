@@ -574,17 +574,21 @@ public class RawData {
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		//s.append("Location[");
-		s.append(String.format(" %.6f,%.6f", mLatitude, mLongitude));
-		if (mHasAccuracy) s.append(String.format(" acc=%.0f", mAccuracy));
-		else s.append(" acc=???");
+
+		s.append(String.format("lat=%f lon=%f", mLatitude, mLongitude));
+		if (mHasAltitude) s.append(" alt=").append(mAltitude);
+		
 		if (mTime == 0) {
 			s.append(" t=?!?");
 		}
-		if (mHasAltitude) s.append(" alt=").append(mAltitude);
+		
+		
+		if (mHasAccuracy) s.append(String.format(" acc=%.0f", mAccuracy));
+		else s.append(" acc=???");	
+	
 		if (mHasSpeed) s.append(" vel=").append(mSpeed);
 		if (mHasBearing) s.append(" bear=").append(mBearing);
-		//s.append(']');
+		
 		return s.toString();
 	}
 
