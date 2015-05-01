@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.neo4location.domain.Neo4LocationProperties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.distance.GeodesicSphereDistCalc;
 import com.spatial4j.core.shape.impl.PointImpl;

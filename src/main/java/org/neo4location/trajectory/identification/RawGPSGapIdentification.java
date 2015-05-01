@@ -29,8 +29,10 @@ public class RawGPSGapIdentification implements Identification {
 
 	public void process(){
 
-
-		Iterator<Point> rawPoints = mTrajectory.getPoints().iterator();
+		//TODO:
+		//Iterator<Point> rawPoints = mTrajectory.getMoves();
+		
+		Iterator<Point> rawPoints = null;
 		List<Point> tempTrajectory = new ArrayList<Point>();
 		
 		Point first = rawPoints.hasNext() ? rawPoints.next() : null;

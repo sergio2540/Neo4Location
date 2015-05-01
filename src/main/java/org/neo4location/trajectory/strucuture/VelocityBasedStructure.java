@@ -55,8 +55,9 @@ public class VelocityBasedStructure {
 		/* episode annotation: tag each GPS point with ‘S’ or ‘M’ */
 		
 
-		Collection<Point> rawPoints = trajectory.getPoints();
+		//Collection<Point> rawPoints = trajectory.getPoints();
 
+		Collection<Point> rawPoints = null;
 		tempStopPoints = new ArrayList<Point>();
 		tempMovePoints = new ArrayList<Point>();
 
