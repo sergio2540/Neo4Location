@@ -1,5 +1,4 @@
 [ {
-  "trajectoryName" : "20090420235106",
   "user" : {
     "username" : "000"
   },
@@ -10,9 +9,9 @@
         "latitude" : 40.010497,
         "longitude" : 116.315568,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -25,17 +24,17 @@
         "latitude" : 40.010521,
         "longitude" : 116.315554,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -43,9 +42,9 @@
         "latitude" : 40.009649,
         "longitude" : 116.315005,
         "altitude" : 123.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -58,17 +57,17 @@
         "latitude" : 40.010497,
         "longitude" : 116.315568,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -76,9 +75,9 @@
         "latitude" : 40.00973,
         "longitude" : 116.315054,
         "altitude" : 123.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -91,17 +90,17 @@
         "latitude" : 40.009649,
         "longitude" : 116.315005,
         "altitude" : 123.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -109,9 +108,9 @@
         "latitude" : 40.009788,
         "longitude" : 116.315122,
         "altitude" : 157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -124,17 +123,17 @@
         "latitude" : 40.00973,
         "longitude" : 116.315054,
         "altitude" : 123.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -142,9 +141,9 @@
         "latitude" : 40.009788,
         "longitude" : 116.315122,
         "altitude" : 157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -157,17 +156,17 @@
         "latitude" : 40.009788,
         "longitude" : 116.315122,
         "altitude" : 157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -175,9 +174,9 @@
         "latitude" : 40.00979,
         "longitude" : 116.315119,
         "altitude" : 155.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -190,17 +189,17 @@
         "latitude" : 40.009788,
         "longitude" : 116.315122,
         "altitude" : 157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -208,9 +207,9 @@
         "latitude" : 40.009858,
         "longitude" : 116.315072,
         "altitude" : 147.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -223,17 +222,17 @@
         "latitude" : 40.00979,
         "longitude" : 116.315119,
         "altitude" : 155.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -241,9 +240,9 @@
         "latitude" : 40.009858,
         "longitude" : 116.315032,
         "altitude" : 145.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -256,17 +255,17 @@
         "latitude" : 40.009858,
         "longitude" : 116.315072,
         "altitude" : 147.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -274,9 +273,9 @@
         "latitude" : 40.009848,
         "longitude" : 116.314925,
         "altitude" : 143.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -289,17 +288,17 @@
         "latitude" : 40.009858,
         "longitude" : 116.315032,
         "altitude" : 145.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -307,9 +306,9 @@
         "latitude" : 40.009767,
         "longitude" : 116.314795,
         "altitude" : 140.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -322,20 +321,23 @@
         "latitude" : 40.009848,
         "longitude" : 116.314925,
         "altitude" : 143.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20090420235106",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081203032326",
   "user" : {
     "username" : "000"
   },
@@ -346,9 +348,9 @@
         "latitude" : 39.999831,
         "longitude" : 116.324756,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -361,17 +363,17 @@
         "latitude" : 39.999955,
         "longitude" : 116.324784,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -379,9 +381,9 @@
         "latitude" : 39.999793,
         "longitude" : 116.324786,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -394,17 +396,17 @@
         "latitude" : 39.999831,
         "longitude" : 116.324756,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -412,9 +414,9 @@
         "latitude" : 39.999748,
         "longitude" : 116.324809,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -427,17 +429,17 @@
         "latitude" : 39.999793,
         "longitude" : 116.324786,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -445,9 +447,9 @@
         "latitude" : 39.999684,
         "longitude" : 116.324829,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -460,17 +462,17 @@
         "latitude" : 39.999748,
         "longitude" : 116.324809,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -478,9 +480,9 @@
         "latitude" : 39.999638,
         "longitude" : 116.324816,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -493,17 +495,17 @@
         "latitude" : 39.999684,
         "longitude" : 116.324829,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -511,9 +513,9 @@
         "latitude" : 39.999717,
         "longitude" : 116.324743,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -526,17 +528,17 @@
         "latitude" : 39.999638,
         "longitude" : 116.324816,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -544,9 +546,9 @@
         "latitude" : 39.999792,
         "longitude" : 116.324737,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -559,17 +561,17 @@
         "latitude" : 39.999717,
         "longitude" : 116.324743,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -577,9 +579,9 @@
         "latitude" : 39.999796,
         "longitude" : 116.324748,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -592,17 +594,17 @@
         "latitude" : 39.999792,
         "longitude" : 116.324737,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -610,9 +612,9 @@
         "latitude" : 39.999788,
         "longitude" : 116.324757,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -625,17 +627,17 @@
         "latitude" : 39.999796,
         "longitude" : 116.324748,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -643,9 +645,9 @@
         "latitude" : 39.999813,
         "longitude" : 116.324734,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -658,20 +660,23 @@
         "latitude" : 39.999788,
         "longitude" : 116.324757,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081203032326",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20090526170706",
   "user" : {
     "username" : "000"
   },
@@ -682,9 +687,9 @@
         "latitude" : 39.999604,
         "longitude" : 116.326916,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -697,17 +702,17 @@
         "latitude" : 39.999571,
         "longitude" : 116.326935,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -715,9 +720,9 @@
         "latitude" : 39.999621,
         "longitude" : 116.326925,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -730,17 +735,17 @@
         "latitude" : 39.999604,
         "longitude" : 116.326916,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -748,9 +753,9 @@
         "latitude" : 39.999684,
         "longitude" : 116.326956,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -763,17 +768,17 @@
         "latitude" : 39.999621,
         "longitude" : 116.326925,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -781,9 +786,9 @@
         "latitude" : 39.999722,
         "longitude" : 116.326965,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -796,17 +801,17 @@
         "latitude" : 39.999684,
         "longitude" : 116.326956,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -814,9 +819,9 @@
         "latitude" : 39.999858,
         "longitude" : 116.327007,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -829,17 +834,17 @@
         "latitude" : 39.999722,
         "longitude" : 116.326965,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -847,9 +852,9 @@
         "latitude" : 40.000012,
         "longitude" : 116.327007,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -862,17 +867,17 @@
         "latitude" : 39.999858,
         "longitude" : 116.327007,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -880,9 +885,9 @@
         "latitude" : 40.000139,
         "longitude" : 116.327044,
         "altitude" : 489.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -895,17 +900,17 @@
         "latitude" : 40.000012,
         "longitude" : 116.327007,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -913,9 +918,9 @@
         "latitude" : 40.0002,
         "longitude" : 116.327122,
         "altitude" : 483.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -928,17 +933,17 @@
         "latitude" : 40.000139,
         "longitude" : 116.327044,
         "altitude" : 489.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -946,9 +951,9 @@
         "latitude" : 40.000339,
         "longitude" : 116.327089,
         "altitude" : 476.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -961,17 +966,17 @@
         "latitude" : 40.0002,
         "longitude" : 116.327122,
         "altitude" : 483.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -979,9 +984,9 @@
         "latitude" : 40.000434,
         "longitude" : 116.327013,
         "altitude" : 469.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -994,20 +999,23 @@
         "latitude" : 40.000339,
         "longitude" : 116.327089,
         "altitude" : 476.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20090526170706",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20090331003904",
   "user" : {
     "username" : "000"
   },
@@ -1018,9 +1026,9 @@
         "latitude" : 40.006816,
         "longitude" : 116.317435,
         "altitude" : 489.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1033,17 +1041,17 @@
         "latitude" : 40.007225,
         "longitude" : 116.318037,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1051,9 +1059,9 @@
         "latitude" : 40.0066,
         "longitude" : 116.317679,
         "altitude" : 485.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1066,17 +1074,17 @@
         "latitude" : 40.006816,
         "longitude" : 116.317435,
         "altitude" : 489.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1084,9 +1092,9 @@
         "latitude" : 40.006488,
         "longitude" : 116.317499,
         "altitude" : 485.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1099,17 +1107,17 @@
         "latitude" : 40.0066,
         "longitude" : 116.317679,
         "altitude" : 485.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1117,9 +1125,9 @@
         "latitude" : 40.006298,
         "longitude" : 116.317711,
         "altitude" : 476.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1132,17 +1140,17 @@
         "latitude" : 40.006488,
         "longitude" : 116.317499,
         "altitude" : 485.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1150,9 +1158,9 @@
         "latitude" : 40.006142,
         "longitude" : 116.317666,
         "altitude" : 473.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1165,17 +1173,17 @@
         "latitude" : 40.006298,
         "longitude" : 116.317711,
         "altitude" : 476.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1183,9 +1191,9 @@
         "latitude" : 40.006003,
         "longitude" : 116.317514,
         "altitude" : 481.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1198,17 +1206,17 @@
         "latitude" : 40.006142,
         "longitude" : 116.317666,
         "altitude" : 473.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1216,9 +1224,9 @@
         "latitude" : 40.005762,
         "longitude" : 116.317556,
         "altitude" : 473.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1231,17 +1239,17 @@
         "latitude" : 40.006003,
         "longitude" : 116.317514,
         "altitude" : 481.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1249,9 +1257,9 @@
         "latitude" : 40.005623,
         "longitude" : 116.317608,
         "altitude" : 466.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1264,17 +1272,17 @@
         "latitude" : 40.005762,
         "longitude" : 116.317556,
         "altitude" : 473.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1282,9 +1290,9 @@
         "latitude" : 40.005508,
         "longitude" : 116.317485,
         "altitude" : 457.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1297,17 +1305,17 @@
         "latitude" : 40.005623,
         "longitude" : 116.317608,
         "altitude" : 466.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1315,9 +1323,9 @@
         "latitude" : 40.005371,
         "longitude" : 116.317295,
         "altitude" : 447.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1330,20 +1338,23 @@
         "latitude" : 40.005508,
         "longitude" : 116.317485,
         "altitude" : 457.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20090331003904",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081112023003",
   "user" : {
     "username" : "000"
   },
@@ -1354,9 +1365,9 @@
         "latitude" : 39.995833,
         "longitude" : 116.326268,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1369,17 +1380,17 @@
         "latitude" : 39.995805,
         "longitude" : 116.326236,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1387,9 +1398,9 @@
         "latitude" : 39.995981,
         "longitude" : 116.32611,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1402,17 +1413,17 @@
         "latitude" : 39.995833,
         "longitude" : 116.326268,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1420,9 +1431,9 @@
         "latitude" : 39.995929,
         "longitude" : 116.326169,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1435,17 +1446,17 @@
         "latitude" : 39.995981,
         "longitude" : 116.32611,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1453,9 +1464,9 @@
         "latitude" : 39.995883,
         "longitude" : 116.326181,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1468,17 +1479,17 @@
         "latitude" : 39.995929,
         "longitude" : 116.326169,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1486,9 +1497,9 @@
         "latitude" : 39.995889,
         "longitude" : 116.32619,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1501,17 +1512,17 @@
         "latitude" : 39.995883,
         "longitude" : 116.326181,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1519,9 +1530,9 @@
         "latitude" : 39.995829,
         "longitude" : 116.326253,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1534,17 +1545,17 @@
         "latitude" : 39.995889,
         "longitude" : 116.32619,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1552,9 +1563,9 @@
         "latitude" : 39.995664,
         "longitude" : 116.326427,
         "altitude" : 537.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1567,17 +1578,17 @@
         "latitude" : 39.995829,
         "longitude" : 116.326253,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1585,9 +1596,9 @@
         "latitude" : 39.995701,
         "longitude" : 116.32638,
         "altitude" : 536.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1600,17 +1611,17 @@
         "latitude" : 39.995664,
         "longitude" : 116.326427,
         "altitude" : 537.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1618,9 +1629,9 @@
         "latitude" : 39.995724,
         "longitude" : 116.326339,
         "altitude" : 535.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1633,17 +1644,17 @@
         "latitude" : 39.995701,
         "longitude" : 116.32638,
         "altitude" : 536.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1651,9 +1662,9 @@
         "latitude" : 39.995684,
         "longitude" : 116.326327,
         "altitude" : 534.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1666,20 +1677,23 @@
         "latitude" : 39.995724,
         "longitude" : 116.326339,
         "altitude" : 535.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081112023003",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20110905040559",
   "user" : {
     "username" : "020"
   },
@@ -1690,9 +1704,9 @@
         "latitude" : 39.97753,
         "longitude" : 116.30522,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1705,17 +1719,17 @@
         "latitude" : 39.9773066666667,
         "longitude" : 116.305606666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1723,9 +1737,9 @@
         "latitude" : 39.9775366666667,
         "longitude" : 116.305135,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1738,17 +1752,17 @@
         "latitude" : 39.97753,
         "longitude" : 116.30522,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1756,9 +1770,9 @@
         "latitude" : 39.9776716666667,
         "longitude" : 116.304938333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1771,17 +1785,17 @@
         "latitude" : 39.9775366666667,
         "longitude" : 116.305135,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1789,9 +1803,9 @@
         "latitude" : 39.9777366666667,
         "longitude" : 116.304865,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1804,17 +1818,17 @@
         "latitude" : 39.9776716666667,
         "longitude" : 116.304938333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1822,9 +1836,9 @@
         "latitude" : 39.9778083333333,
         "longitude" : 116.304788333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1837,17 +1851,17 @@
         "latitude" : 39.9777366666667,
         "longitude" : 116.304865,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1855,9 +1869,9 @@
         "latitude" : 39.9777983333333,
         "longitude" : 116.304806666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1870,17 +1884,17 @@
         "latitude" : 39.9778083333333,
         "longitude" : 116.304788333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1888,9 +1902,9 @@
         "latitude" : 39.9778833333333,
         "longitude" : 116.30471,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1903,17 +1917,17 @@
         "latitude" : 39.9777983333333,
         "longitude" : 116.304806666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1921,9 +1935,9 @@
         "latitude" : 39.9779583333333,
         "longitude" : 116.304623333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1936,17 +1950,17 @@
         "latitude" : 39.9778833333333,
         "longitude" : 116.30471,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1954,9 +1968,9 @@
         "latitude" : 39.978015,
         "longitude" : 116.304555,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -1969,17 +1983,17 @@
         "latitude" : 39.9779583333333,
         "longitude" : 116.304623333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -1987,9 +2001,9 @@
         "latitude" : 39.978015,
         "longitude" : 116.304555,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2002,20 +2016,23 @@
         "latitude" : 39.978015,
         "longitude" : 116.304555,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20110905040559",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20110904143255",
   "user" : {
     "username" : "020"
   },
@@ -2026,9 +2043,9 @@
         "latitude" : 39.974875,
         "longitude" : 116.311491666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2041,17 +2058,17 @@
         "latitude" : 39.9748666666667,
         "longitude" : 116.311488333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2059,9 +2076,9 @@
         "latitude" : 39.9748666666667,
         "longitude" : 116.311511666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2074,17 +2091,17 @@
         "latitude" : 39.974875,
         "longitude" : 116.311491666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2092,9 +2109,9 @@
         "latitude" : 39.974865,
         "longitude" : 116.311528333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2107,17 +2124,17 @@
         "latitude" : 39.9748666666667,
         "longitude" : 116.311511666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2125,9 +2142,9 @@
         "latitude" : 39.97487,
         "longitude" : 116.311551666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2140,17 +2157,17 @@
         "latitude" : 39.974865,
         "longitude" : 116.311528333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2158,9 +2175,9 @@
         "latitude" : 39.9748566666667,
         "longitude" : 116.311563333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2173,17 +2190,17 @@
         "latitude" : 39.97487,
         "longitude" : 116.311551666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2191,9 +2208,9 @@
         "latitude" : 39.9748566666667,
         "longitude" : 116.311576666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2206,17 +2223,17 @@
         "latitude" : 39.9748566666667,
         "longitude" : 116.311563333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2224,9 +2241,9 @@
         "latitude" : 39.97486,
         "longitude" : 116.311598333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2239,17 +2256,17 @@
         "latitude" : 39.9748566666667,
         "longitude" : 116.311576666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2257,9 +2274,9 @@
         "latitude" : 39.9748583333333,
         "longitude" : 116.311613333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2272,17 +2289,17 @@
         "latitude" : 39.97486,
         "longitude" : 116.311598333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2290,9 +2307,9 @@
         "latitude" : 39.9748683333333,
         "longitude" : 116.311641666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2305,17 +2322,17 @@
         "latitude" : 39.9748583333333,
         "longitude" : 116.311613333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2323,9 +2340,9 @@
         "latitude" : 39.97487,
         "longitude" : 116.311658333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2338,20 +2355,23 @@
         "latitude" : 39.9748683333333,
         "longitude" : 116.311641666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20110904143255",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20110902153037",
   "user" : {
     "username" : "020"
   },
@@ -2362,9 +2382,9 @@
         "latitude" : 39.978985,
         "longitude" : 116.304213333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2377,17 +2397,17 @@
         "latitude" : 39.9790416666667,
         "longitude" : 116.304195,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2395,9 +2415,9 @@
         "latitude" : 39.9789616666667,
         "longitude" : 116.304238333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2410,17 +2430,17 @@
         "latitude" : 39.978985,
         "longitude" : 116.304213333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2428,9 +2448,9 @@
         "latitude" : 39.9789583333333,
         "longitude" : 116.304251666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2443,17 +2463,17 @@
         "latitude" : 39.9789616666667,
         "longitude" : 116.304238333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2461,9 +2481,9 @@
         "latitude" : 39.97895,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2476,17 +2496,17 @@
         "latitude" : 39.9789583333333,
         "longitude" : 116.304251666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2494,9 +2514,9 @@
         "latitude" : 39.97893,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2509,17 +2529,17 @@
         "latitude" : 39.97895,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2527,9 +2547,9 @@
         "latitude" : 39.9789383333333,
         "longitude" : 116.30426,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2542,17 +2562,17 @@
         "latitude" : 39.97893,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2560,9 +2580,9 @@
         "latitude" : 39.97895,
         "longitude" : 116.304258333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2575,17 +2595,17 @@
         "latitude" : 39.9789383333333,
         "longitude" : 116.30426,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2593,9 +2613,9 @@
         "latitude" : 39.9789366666667,
         "longitude" : 116.30426,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2608,17 +2628,17 @@
         "latitude" : 39.97895,
         "longitude" : 116.304258333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2626,9 +2646,9 @@
         "latitude" : 39.9789266666667,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2641,17 +2661,17 @@
         "latitude" : 39.9789366666667,
         "longitude" : 116.30426,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2659,9 +2679,9 @@
         "latitude" : 39.9789133333333,
         "longitude" : 116.304258333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2674,20 +2694,23 @@
         "latitude" : 39.9789266666667,
         "longitude" : 116.304261666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20110902153037",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20110831014501",
   "user" : {
     "username" : "020"
   },
@@ -2698,9 +2721,9 @@
         "latitude" : 39.9767316666667,
         "longitude" : 116.33186,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2713,17 +2736,17 @@
         "latitude" : 39.97677,
         "longitude" : 116.331831666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2731,9 +2754,9 @@
         "latitude" : 39.9766683333333,
         "longitude" : 116.331808333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2746,17 +2769,17 @@
         "latitude" : 39.9767316666667,
         "longitude" : 116.33186,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2764,9 +2787,9 @@
         "latitude" : 39.976585,
         "longitude" : 116.331656666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2779,17 +2802,17 @@
         "latitude" : 39.9766683333333,
         "longitude" : 116.331808333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2797,9 +2820,9 @@
         "latitude" : 39.9765316666667,
         "longitude" : 116.33171,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2812,17 +2835,17 @@
         "latitude" : 39.976585,
         "longitude" : 116.331656666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2830,9 +2853,9 @@
         "latitude" : 39.976455,
         "longitude" : 116.331581666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2845,17 +2868,17 @@
         "latitude" : 39.9765316666667,
         "longitude" : 116.33171,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2863,9 +2886,9 @@
         "latitude" : 39.9763733333333,
         "longitude" : 116.331431666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2878,17 +2901,17 @@
         "latitude" : 39.976455,
         "longitude" : 116.331581666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2896,9 +2919,9 @@
         "latitude" : 39.9763216666667,
         "longitude" : 116.331343333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2911,17 +2934,17 @@
         "latitude" : 39.9763733333333,
         "longitude" : 116.331431666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2929,9 +2952,9 @@
         "latitude" : 39.97628,
         "longitude" : 116.331291666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2944,17 +2967,17 @@
         "latitude" : 39.9763216666667,
         "longitude" : 116.331343333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2962,9 +2985,9 @@
         "latitude" : 39.9762383333333,
         "longitude" : 116.331236666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -2977,17 +3000,17 @@
         "latitude" : 39.97628,
         "longitude" : 116.331291666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -2995,9 +3018,9 @@
         "latitude" : 39.9761616666667,
         "longitude" : 116.33099,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3010,20 +3033,23 @@
         "latitude" : 39.9762383333333,
         "longitude" : 116.331236666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20110831014501",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20110910113041",
   "user" : {
     "username" : "020"
   },
@@ -3034,9 +3060,9 @@
         "latitude" : 39.9844066666667,
         "longitude" : 116.299341666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3049,17 +3075,17 @@
         "latitude" : 39.984425,
         "longitude" : 116.299366666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3067,9 +3093,9 @@
         "latitude" : 39.9843833333333,
         "longitude" : 116.299328333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3082,17 +3108,17 @@
         "latitude" : 39.9844066666667,
         "longitude" : 116.299341666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3100,9 +3126,9 @@
         "latitude" : 39.984365,
         "longitude" : 116.299331666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3115,17 +3141,17 @@
         "latitude" : 39.9843833333333,
         "longitude" : 116.299328333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3133,9 +3159,9 @@
         "latitude" : 39.9843283333333,
         "longitude" : 116.29933,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3148,17 +3174,17 @@
         "latitude" : 39.984365,
         "longitude" : 116.299331666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3166,9 +3192,9 @@
         "latitude" : 39.9843016666667,
         "longitude" : 116.29933,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3181,17 +3207,17 @@
         "latitude" : 39.9843283333333,
         "longitude" : 116.29933,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3199,9 +3225,9 @@
         "latitude" : 39.98426,
         "longitude" : 116.299323333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3214,17 +3240,17 @@
         "latitude" : 39.9843016666667,
         "longitude" : 116.29933,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3232,9 +3258,9 @@
         "latitude" : 39.984215,
         "longitude" : 116.299321666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3247,17 +3273,17 @@
         "latitude" : 39.98426,
         "longitude" : 116.299323333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3265,9 +3291,9 @@
         "latitude" : 39.9841566666667,
         "longitude" : 116.29931,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3280,17 +3306,17 @@
         "latitude" : 39.984215,
         "longitude" : 116.299321666667,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3298,9 +3324,9 @@
         "latitude" : 39.9841216666667,
         "longitude" : 116.299298333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3313,17 +3339,17 @@
         "latitude" : 39.9841566666667,
         "longitude" : 116.29931,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3331,9 +3357,9 @@
         "latitude" : 39.9840616666667,
         "longitude" : 116.299285,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3346,20 +3372,23 @@
         "latitude" : 39.9841216666667,
         "longitude" : 116.299298333333,
         "altitude" : 0.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20110910113041",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081214235553",
   "user" : {
     "username" : "001"
   },
@@ -3370,9 +3399,9 @@
         "latitude" : 40.013833,
         "longitude" : 116.306538,
         "altitude" : 144.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3385,17 +3414,17 @@
         "latitude" : 40.013794,
         "longitude" : 116.30653,
         "altitude" : 139.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3403,9 +3432,9 @@
         "latitude" : 40.013967,
         "longitude" : 116.306339,
         "altitude" : 101.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3418,17 +3447,17 @@
         "latitude" : 40.013833,
         "longitude" : 116.306538,
         "altitude" : 144.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3436,9 +3465,9 @@
         "latitude" : 40.014051,
         "longitude" : 116.306288,
         "altitude" : 102.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3451,17 +3480,17 @@
         "latitude" : 40.013967,
         "longitude" : 116.306339,
         "altitude" : 101.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3469,9 +3498,9 @@
         "latitude" : 40.014113,
         "longitude" : 116.30616,
         "altitude" : 113.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3484,17 +3513,17 @@
         "latitude" : 40.014051,
         "longitude" : 116.306288,
         "altitude" : 102.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3502,9 +3531,9 @@
         "latitude" : 40.014114,
         "longitude" : 116.306025,
         "altitude" : 113.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3517,17 +3546,17 @@
         "latitude" : 40.014113,
         "longitude" : 116.30616,
         "altitude" : 113.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3535,9 +3564,9 @@
         "latitude" : 40.014113,
         "longitude" : 116.30589,
         "altitude" : 112.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3550,17 +3579,17 @@
         "latitude" : 40.014114,
         "longitude" : 116.306025,
         "altitude" : 113.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3568,9 +3597,9 @@
         "latitude" : 40.014096,
         "longitude" : 116.305761,
         "altitude" : 114.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3583,17 +3612,17 @@
         "latitude" : 40.014113,
         "longitude" : 116.30589,
         "altitude" : 112.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3601,9 +3630,9 @@
         "latitude" : 40.014017,
         "longitude" : 116.305688,
         "altitude" : 110.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3616,17 +3645,17 @@
         "latitude" : 40.014096,
         "longitude" : 116.305761,
         "altitude" : 114.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3634,9 +3663,9 @@
         "latitude" : 40.013926,
         "longitude" : 116.305682,
         "altitude" : 114.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3649,17 +3678,17 @@
         "latitude" : 40.014017,
         "longitude" : 116.305688,
         "altitude" : 110.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3667,9 +3696,9 @@
         "latitude" : 40.013823,
         "longitude" : 116.305693,
         "altitude" : 111.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3682,20 +3711,23 @@
         "latitude" : 40.013926,
         "longitude" : 116.305682,
         "altitude" : 114.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081214235553",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081109033335",
   "user" : {
     "username" : "001"
   },
@@ -3706,9 +3738,9 @@
         "latitude" : 40.013851,
         "longitude" : 116.306907,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3721,17 +3753,17 @@
         "latitude" : 40.013797,
         "longitude" : 116.306938,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3739,9 +3771,9 @@
         "latitude" : 40.013851,
         "longitude" : 116.306907,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3754,17 +3786,17 @@
         "latitude" : 40.013851,
         "longitude" : 116.306907,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3772,9 +3804,9 @@
         "latitude" : 40.013843,
         "longitude" : 116.306909,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3787,17 +3819,17 @@
         "latitude" : 40.013851,
         "longitude" : 116.306907,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3805,9 +3837,9 @@
         "latitude" : 40.01381,
         "longitude" : 116.306928,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3820,17 +3852,17 @@
         "latitude" : 40.013843,
         "longitude" : 116.306909,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3838,9 +3870,9 @@
         "latitude" : 40.013814,
         "longitude" : 116.306946,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3853,17 +3885,17 @@
         "latitude" : 40.01381,
         "longitude" : 116.306928,
         "altitude" : 493.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3871,9 +3903,9 @@
         "latitude" : 40.013764,
         "longitude" : 116.307011,
         "altitude" : 483.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3886,17 +3918,17 @@
         "latitude" : 40.013814,
         "longitude" : 116.306946,
         "altitude" : 494.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3904,9 +3936,9 @@
         "latitude" : 40.013754,
         "longitude" : 116.306215,
         "altitude" : -161.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3919,17 +3951,17 @@
         "latitude" : 40.013764,
         "longitude" : 116.307011,
         "altitude" : 483.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3937,9 +3969,9 @@
         "latitude" : 40.013808,
         "longitude" : 116.306244,
         "altitude" : -157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3952,17 +3984,17 @@
         "latitude" : 40.013754,
         "longitude" : 116.306215,
         "altitude" : -161.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -3970,9 +4002,9 @@
         "latitude" : 40.013823,
         "longitude" : 116.306254,
         "altitude" : -151.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -3985,17 +4017,17 @@
         "latitude" : 40.013808,
         "longitude" : 116.306244,
         "altitude" : -157.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4003,9 +4035,9 @@
         "latitude" : 40.013833,
         "longitude" : 116.306255,
         "altitude" : -142.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4018,20 +4050,23 @@
         "latitude" : 40.013823,
         "longitude" : 116.306254,
         "altitude" : -151.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081109033335",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081023055305",
   "user" : {
     "username" : "001"
   },
@@ -4042,9 +4077,9 @@
         "latitude" : 39.984198,
         "longitude" : 116.319322,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4057,17 +4092,17 @@
         "latitude" : 39.984094,
         "longitude" : 116.319236,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4075,9 +4110,9 @@
         "latitude" : 39.984224,
         "longitude" : 116.319402,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4090,17 +4125,17 @@
         "latitude" : 39.984198,
         "longitude" : 116.319322,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4108,9 +4143,9 @@
         "latitude" : 39.984211,
         "longitude" : 116.319389,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4123,17 +4158,17 @@
         "latitude" : 39.984224,
         "longitude" : 116.319402,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4141,9 +4176,9 @@
         "latitude" : 39.984217,
         "longitude" : 116.319422,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4156,17 +4191,17 @@
         "latitude" : 39.984211,
         "longitude" : 116.319389,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4174,9 +4209,9 @@
         "latitude" : 39.98471,
         "longitude" : 116.319865,
         "altitude" : 320.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4189,17 +4224,17 @@
         "latitude" : 39.984217,
         "longitude" : 116.319422,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4207,9 +4242,9 @@
         "latitude" : 39.984674,
         "longitude" : 116.31981,
         "altitude" : 325.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4222,17 +4257,17 @@
         "latitude" : 39.98471,
         "longitude" : 116.319865,
         "altitude" : 320.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4240,9 +4275,9 @@
         "latitude" : 39.984623,
         "longitude" : 116.319773,
         "altitude" : 326.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4255,17 +4290,17 @@
         "latitude" : 39.984674,
         "longitude" : 116.31981,
         "altitude" : 325.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4273,9 +4308,9 @@
         "latitude" : 39.984606,
         "longitude" : 116.319732,
         "altitude" : 327.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4288,17 +4323,17 @@
         "latitude" : 39.984623,
         "longitude" : 116.319773,
         "altitude" : 326.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4306,9 +4341,9 @@
         "latitude" : 39.984555,
         "longitude" : 116.319728,
         "altitude" : 324.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4321,17 +4356,17 @@
         "latitude" : 39.984606,
         "longitude" : 116.319732,
         "altitude" : 327.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4339,9 +4374,9 @@
         "latitude" : 39.984579,
         "longitude" : 116.319769,
         "altitude" : 309.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4354,20 +4389,23 @@
         "latitude" : 39.984555,
         "longitude" : 116.319728,
         "altitude" : 324.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081023055305",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081105110052",
   "user" : {
     "username" : "001"
   },
@@ -4378,9 +4416,9 @@
         "latitude" : 39.977026,
         "longitude" : 116.327362,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4393,17 +4431,17 @@
         "latitude" : 39.976724,
         "longitude" : 116.3274,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4411,9 +4449,9 @@
         "latitude" : 39.976936,
         "longitude" : 116.327367,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4426,17 +4464,17 @@
         "latitude" : 39.977026,
         "longitude" : 116.327362,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4444,9 +4482,9 @@
         "latitude" : 39.976843,
         "longitude" : 116.32734,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4459,17 +4497,17 @@
         "latitude" : 39.976936,
         "longitude" : 116.327367,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4477,9 +4515,9 @@
         "latitude" : 39.97682,
         "longitude" : 116.327345,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4492,17 +4530,17 @@
         "latitude" : 39.976843,
         "longitude" : 116.32734,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4510,9 +4548,9 @@
         "latitude" : 39.97685,
         "longitude" : 116.327322,
         "altitude" : 490.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4525,17 +4563,17 @@
         "latitude" : 39.97682,
         "longitude" : 116.327345,
         "altitude" : 491.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4543,9 +4581,9 @@
         "latitude" : 39.977058,
         "longitude" : 116.327199,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4558,17 +4596,17 @@
         "latitude" : 39.97685,
         "longitude" : 116.327322,
         "altitude" : 490.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4576,9 +4614,9 @@
         "latitude" : 39.977041,
         "longitude" : 116.327166,
         "altitude" : 497.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4591,17 +4629,17 @@
         "latitude" : 39.977058,
         "longitude" : 116.327199,
         "altitude" : 492.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4609,9 +4647,9 @@
         "latitude" : 39.976953,
         "longitude" : 116.327286,
         "altitude" : 499.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4624,17 +4662,17 @@
         "latitude" : 39.977041,
         "longitude" : 116.327166,
         "altitude" : 497.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4642,9 +4680,9 @@
         "latitude" : 39.977321,
         "longitude" : 116.32742,
         "altitude" : 177.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4657,17 +4695,17 @@
         "latitude" : 39.976953,
         "longitude" : 116.327286,
         "altitude" : 499.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4675,9 +4713,9 @@
         "latitude" : 39.977296,
         "longitude" : 116.32745,
         "altitude" : 162.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4690,20 +4728,23 @@
         "latitude" : 39.977321,
         "longitude" : 116.32742,
         "altitude" : 177.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081105110052",
+  "semanticData" : {
+    "error" : 0.1
+  }
 }, {
-  "trajectoryName" : "20081103133204",
   "user" : {
     "username" : "001"
   },
@@ -4714,9 +4755,9 @@
         "latitude" : 39.978896,
         "longitude" : 116.327193,
         "altitude" : 10.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4729,17 +4770,17 @@
         "latitude" : 39.978833,
         "longitude" : 116.327198,
         "altitude" : 145.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4747,9 +4788,9 @@
         "latitude" : 39.978919,
         "longitude" : 116.327177,
         "altitude" : 47.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4762,17 +4803,17 @@
         "latitude" : 39.978896,
         "longitude" : 116.327193,
         "altitude" : 10.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4780,9 +4821,9 @@
         "latitude" : 39.978958,
         "longitude" : 116.327171,
         "altitude" : 82.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4795,17 +4836,17 @@
         "latitude" : 39.978919,
         "longitude" : 116.327177,
         "altitude" : 47.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4813,9 +4854,9 @@
         "latitude" : 39.979077,
         "longitude" : 116.327196,
         "altitude" : 92.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4828,17 +4869,17 @@
         "latitude" : 39.978958,
         "longitude" : 116.327171,
         "altitude" : 82.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4846,9 +4887,9 @@
         "latitude" : 39.979155,
         "longitude" : 116.327214,
         "altitude" : 109.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4861,17 +4902,17 @@
         "latitude" : 39.979077,
         "longitude" : 116.327196,
         "altitude" : 92.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4879,9 +4920,9 @@
         "latitude" : 39.979225,
         "longitude" : 116.327223,
         "altitude" : 130.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4894,17 +4935,17 @@
         "latitude" : 39.979155,
         "longitude" : 116.327214,
         "altitude" : 109.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4912,9 +4953,9 @@
         "latitude" : 39.97934,
         "longitude" : 116.327233,
         "altitude" : 137.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4927,17 +4968,17 @@
         "latitude" : 39.979225,
         "longitude" : 116.327223,
         "altitude" : 130.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4945,9 +4986,9 @@
         "latitude" : 39.979437,
         "longitude" : 116.327195,
         "altitude" : 128.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4960,17 +5001,17 @@
         "latitude" : 39.97934,
         "longitude" : 116.327233,
         "altitude" : 137.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -4978,9 +5019,9 @@
         "latitude" : 39.979523,
         "longitude" : 116.327169,
         "altitude" : 140.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -4993,17 +5034,17 @@
         "latitude" : 39.979437,
         "longitude" : 116.327195,
         "altitude" : 128.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
+    "semanticData" : { },
+    "relationship" : "MOVE"
   }, {
     "to" : {
       "rawData" : {
@@ -5011,9 +5052,9 @@
         "latitude" : 39.979628,
         "longitude" : 116.327145,
         "altitude" : 136.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
@@ -5026,16 +5067,20 @@
         "latitude" : 39.979523,
         "longitude" : 116.327169,
         "altitude" : 140.0,
+        "accuracy" : 0.0,
         "speed" : 0.0,
-        "bearing" : 0.0,
-        "accuracy" : 0.0
+        "bearing" : 0.0
       },
       "semanticData" : {
         "semanticData" : { }
       },
       "labels" : [ ]
     },
-    "relationship" : "MOVE",
-    "semanticData" : { }
-  } ]
+    "semanticData" : { },
+    "relationship" : "MOVE"
+  } ],
+  "trajectoryName" : "20081103133204",
+  "semanticData" : {
+    "error" : 0.1
+  }
 } ]

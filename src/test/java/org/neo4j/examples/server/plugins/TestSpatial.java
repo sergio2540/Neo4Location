@@ -191,39 +191,7 @@ public class TestSpatial {
 
 	}
 
-	//@Test
-	public void shouldReturnKPositions() throws JsonParseException, IOException
-	{
-
-
-		//Given one person give all trajectories
-
-		//Given user+traj return list with 1 traj with k last trajs
-
-		String personId = "s";
-		//String trajectoryId = "s";
-
-		StringBuilder url = new StringBuilder("neo4location/trajectories?");
-		url.append(String.format("person=s",personId));
-
-
-		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpsURI(), url.toString());
-
-		String json = Neo4LocationIO.getRawContent(response.getEntityInputStream());
-		Files.write(Paths.get("./shouldReturnKPositions.out.json"), json.getBytes());
-
-		Collection<Trajectory> trajectories = Neo4LocationIO.JsonTotrajectories(json);
-
-
-		assertThat(response.getStatus())
-		.isEqualTo(Response.Status.OK);
-
-		assertThat(trajectories)
-		.hasSize(2)
-		.doesNotContainNull();
-
-
-	}
+	
 
 	@Test
 	public void shouldReturnTrajectoryAtoB() throws JsonParseException, IOException

@@ -47,4 +47,5 @@ public interface Neo4LocationProperties {
 	
 	public final String CONFIDENCE = "CONFIDENCE";
 	
+	
 }

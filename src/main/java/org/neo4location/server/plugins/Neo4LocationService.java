@@ -27,7 +27,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import org.neo4j.gis.spatial.SpatialDatabaseRecord;
 import org.neo4j.gis.spatial.SpatialDatabaseService;
+import org.neo4j.gis.spatial.indexprovider.LayerNodeIndex;
 import org.neo4j.gis.spatial.indexprovider.SpatialIndexProvider;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -38,6 +40,7 @@ import org.neo4j.graphdb.Result;
 //import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.index.Index;
+import org.neo4j.graphdb.index.IndexHits;
 import org.neo4j.graphdb.index.IndexManager;
 import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
@@ -49,6 +52,7 @@ import org.neo4location.domain.trajectory.SemanticData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.domain.trajectory.User;
 import org.neo4location.graphdb.Neo4JMove;
+import org.neo4location.graphdb.Neo4JPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,6 +69,8 @@ public class Neo4LocationService {
 	private final SpatialDatabaseService mSpatialService; 
 
 	private Index<Node> mIndex;
+	
+	private double mAccuracyInKm = 0.1;
 
 	private Status status = Status.OK;
 
@@ -79,9 +85,9 @@ public class Neo4LocationService {
 			.build();
 
 	private final static int GET_QUERY_PARAMS_START_DEFAULT = 0;
-	private final static int GET_QUERY_PARAMS_OFFSET_DEFAULT = 10;
+	private final static int GET_QUERY_PARAMS_OFFSET_DEFAULT = 100;
 
-	private static final String GET_QUERY_PARAMS_WEIGHT_DEFAULT = "weight";
+
 	private static final int GET_QUERY_PARAMS_LIMIT_DEFAULT = 3;
 
 	private static final String GET_QUERY_PARAMS_REL_DEFAULT = Neo4LocationRelationships.MOVE.toString();
@@ -136,30 +142,33 @@ public class Neo4LocationService {
 			//logger.error(String.valueOf(trajectories.size()));
 
 			for(Trajectory trajectory : trajectories){
+				
+				mAccuracyInKm = 0.1;
 
 				//Devia remover trajectoryName
 				String trajectoryName = trajectory.getTrajectoryName();
+				Map<String, Object> props = trajectory.getSemanticData();
 
 				String personName = trajectory.getUser().getUsername();
 
 				List<Move> moves = new ArrayList<>(trajectory.getMoves());
 
-				logger.error("---------------------------------");
-				logger.error(String.format("user: %s", personName));
-				logger.error(String.format("traj: %s", trajectoryName));
-				logger.error("----------------------------------");
+				//				logger.error("---------------------------------");
+				//				logger.error(String.format("user: %s", personName));
+				//				logger.error(String.format("traj: %s", trajectoryName));
+				//				logger.error("----------------------------------");
 
 				//logger.error(String.format("traj size: %s", String.valueOf(moves.size())));
 
 				Node person = getOrCreatePerson(personName);
-				Node traj = getOrCreateTrajectory(trajectoryName);
+				Node traj = getOrCreateTrajectory(trajectoryName,props);
 				Node nLast;
 
 				if(!traj.hasRelationship(Neo4LocationRelationships.FROM, Direction.OUTGOING)){
 					//logger.error("first time");
 					//FIRST TIME WE SEE THIS TRAJ
 					person.createRelationshipTo(traj, Neo4LocationRelationships.START_A);	
-					nLast = getOrCreateMove(moves.get(0), false);
+					nLast = getOrCreatePoint(moves.get(0), false);
 					traj.createRelationshipTo(nLast, Neo4LocationRelationships.FROM);
 
 				} 
@@ -194,7 +203,13 @@ public class Neo4LocationService {
 
 
 
-		return Response.status(Response.Status.CREATED).build();
+		if(status.equals(Status.CREATED)){
+			return Response.status(Response.Status.CREATED).build();
+		}
+		else {
+			status = Status.OK;
+			return Response.status(Response.Status.OK).build();
+		}
 
 		//Falta meter end
 
@@ -206,8 +221,11 @@ public class Neo4LocationService {
 		Node cursor = nLast;
 		for(Move m : moves){
 
-			Node nTo = getOrCreateMove(m, true);
+			Node nTo = getOrCreatePoint(m, true);
+
 			cursor.createRelationshipTo(nTo, m.getRelationship());
+			status = Status.CREATED;
+
 			Relationship r = nLast.getSingleRelationship(m.getRelationship(), Direction.OUTGOING);
 
 			//Devia retornar SemanticData ou Map
@@ -233,7 +251,7 @@ public class Neo4LocationService {
 	}
 
 
-	private Node getOrCreateMove(Move move, boolean to) {
+	private Node getOrCreatePoint(Move move, boolean to) {
 
 		Point ret;
 		if(to) {
@@ -244,34 +262,46 @@ public class Neo4LocationService {
 			ret = move.getFrom();
 		}
 
-		return toPointNode(ret);
+		return toNode(ret);
 	}
 
 
-	private Node toPointNode(Point p) {
+	private Node toNode(Point p) {
 
-		//TODO: Merge Similar Points.
 		//Adicionar suporte a Z.
+		//Timestamp nao deixa fazer merge
+
+		double lat = p.getRawData().getLatitude(); 
+		double lon =  p.getRawData().getLongitude();
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(LayerNodeIndex.DISTANCE_IN_KM_PARAMETER, mAccuracyInKm);
+		params.put(LayerNodeIndex.POINT_PARAMETER, new Double[] { lat, lon });
+
+		IndexHits<Node> results = mIndex.query(LayerNodeIndex.WITHIN_DISTANCE_QUERY, params);
+		Node point = null;
+
+		int degree = 1;
+
+		if (results.hasNext()) {
+
+			//Retorna primeiro que encontra
+			//Estava tao proximo que a db considera igual
+			//Nao e clustering
+			point = results.next();
+
+			//degree
+			degree = (int) point.getProperty("degree") + 1;
+			point.setProperty("degree", degree);
 
 
-		//		double lat = 10; 
-		//		double lon =  10;
+		}
 
-		//TODO: Ver Envelope
+		//por enquanto cria sempre
 
-		//		Envelope maxDistanceInKm = new Envelope
-
-		//		List<SpatialDatabaseRecord> results = GeoPipeline.
-		//					startNearestNeighborLatLonSearch(mSpatialService.getLayer("points"), new Coordinate(lat, lon), maxDistanceInKm)
-		//		        	.toSpatialDatabaseRecordList();
-		//		   
-
-		//IF EXISTS NODE IN X KM DONT CREATE
-		//UPDATE INFO
-
-
+		point = mDb.createNode(p.getLabels().toArray(new Label[0]));
 		status = Status.CREATED;
-		Node point = mDb.createNode(p.getLabels().toArray(new Label[0]));
+
 
 		RawData rd = p.getRawData();
 
@@ -300,24 +330,36 @@ public class Neo4LocationService {
 
 		}
 
-		//mEditableLayer.add(point);
+
+		point.setProperty("degree", degree);
+
 
 		mIndex.add(point, String.valueOf(point.getId()), String.valueOf(point.getId()));
 
 		return point;
 	}
 
-	private Node getOrCreateTrajectory(String trajectoryName) {
+	private Node getOrCreateTrajectory(String trajectoryName, Map<String,Object> props) {
 		//logger.error("getTraj");
 		Node traj =  mDb.findNode(Neo4LocationLabels.TRAJECTORY, Neo4LocationProperties.TRAJNAME, trajectoryName);
 
 
-		if(traj != null)
-			return traj;
+		if(traj == null){
+			status = Status.CREATED;
+			traj = mDb.createNode(Neo4LocationLabels.TRAJECTORY);
+		}
 
-		status = Status.CREATED;
-		traj = mDb.createNode(Neo4LocationLabels.TRAJECTORY);
 		traj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
+		
+		for(Entry<String, Object> prop: props.entrySet()){
+			
+			traj.setProperty(prop.getKey(),prop.getValue());
+			
+			if(prop.getKey().equals("error")){
+				mAccuracyInKm = (double) prop.getValue();
+			}
+		
+		}
 
 		return traj;
 
@@ -328,15 +370,14 @@ public class Neo4LocationService {
 
 		Node person =  mDb.findNode(Neo4LocationLabels.USER, Neo4LocationProperties.USERNAME, personName);
 
-		if(person != null)
-			return person;
+		if(person == null){
+			status = Status.CREATED;
+			person = mDb.createNode(Neo4LocationLabels.USER);
 
+		}
 
-		status = Status.CREATED;
-		person = mDb.createNode(Neo4LocationLabels.USER);
 		person.setProperty(Neo4LocationProperties.USERNAME, personName);
 		return person;
-
 
 	}
 
@@ -501,7 +542,7 @@ public class Neo4LocationService {
 					cypherQuery.append(String.format("-[:%s]->(start)", Neo4LocationRelationships.FROM));
 				}
 
-				
+
 				cypherQuery.append(",p=(start)");
 
 				if(iOffset == 0)
@@ -509,23 +550,23 @@ public class Neo4LocationService {
 				else 
 					cypherQuery.append(String.format("-[:%s*%d..%d]->(end)", rel, iStart, iOffset));
 
-				
+
 				if(!hasEnd){
 					//Nao tem end usamos o TO como end
 					cypherQuery.append(String.format(",(end)<-[:%s]-(traj)", Neo4LocationRelationships.TO));
 				}
-				
+
 
 			}
 			else {
 
 				iStart = Math.abs(iStart);
-				
+
 				if(!hasStart){
 					//Nao tem start usamos o TO como start
 					cypherQuery.append(String.format("-[:%s]->(start)", Neo4LocationRelationships.TO));
 				}
-				
+
 				cypherQuery.append(",p=(start)");
 
 				if(iOffset == 0)
@@ -538,37 +579,55 @@ public class Neo4LocationService {
 					//Nao tem end usamos o FROM como end
 					cypherQuery.append(String.format(",(end)<-[:%s]-(traj)", Neo4LocationRelationships.FROM));
 				}
-				
-				
+
+
 
 			}
-
-
 
 			//################################WHERE##############################
 
 
 			final Map<String,String> lWhere = new HashMap<String, String>();
 
+			lWhere.put("lat", Neo4LocationProperties.LATITUDE);
+			lWhere.put("lon", Neo4LocationProperties.LONGITUDE);
 			lWhere.put("alt", Neo4LocationProperties.ALTITUDE);
 			lWhere.put("timestamp", Neo4LocationProperties.TIMESTAMP);
 			lWhere.put("speed", Neo4LocationProperties.SPEED);
 			lWhere.put("accuracy", Neo4LocationProperties.ACCURACY);
 
-			//cypherQuery.append(" WHERE TRUE ");
+			cypherQuery.append(" WHERE true ");
 			for(Entry<String, String> kv : lWhere.entrySet()){
 
-				List<String> t = queryParams.get(kv.getKey());	
+				List<String> t = queryParams.get(kv.getKey());
+
 				int it = (t==null) ? 0 : t.size();
+
+				//				if(it == 1){
+				//					
+				//				}
 
 				if(it >= 1){
 
-					cypherQuery.append(String.format(Locale.ENGLISH,"AND %s >= %s ", kv.getValue(), t.get(0)));
+					cypherQuery.append(String.format(Locale.ENGLISH,"AND start.%s >= %s ", kv.getValue(), t.get(0)));
 
 				}
-				if (it == 2){
 
-					cypherQuery.append(String.format(Locale.ENGLISH,"AND %s <= %s ",kv.getValue(), t.get(1)));
+				if (it >= 2){
+
+					cypherQuery.append(String.format(Locale.ENGLISH,"AND start.%s <= %s ",kv.getValue(), t.get(1)));
+
+				}
+
+				if(it >= 3){
+
+					cypherQuery.append(String.format(Locale.ENGLISH,"AND end.%s >= %s ", kv.getValue(), t.get(0)));
+
+				}
+
+				if (it == 4){
+
+					cypherQuery.append(String.format(Locale.ENGLISH,"AND end.%s <= %s ",kv.getValue(), t.get(1)));
 
 				}
 
@@ -576,18 +635,13 @@ public class Neo4LocationService {
 
 			//TODO: Create String Point.parse(String property, String value)
 
-			//		List<String> altitude = queryParams.get("alt");	//ALTITUDE=2.8989,3.099090
-			//		
-			//		List<String> speed = queryParams.get("speed"); //SPEED=20,20
-			//		
-			//		List<String> accuracy = queryParams.get("accuracy");
-
 			//#########################RETURN##########################
 
-			cypherQuery.append(" RETURN user, trajectory, relationships(p) AS rels");
-			//			cypherQuery.append(", length(p) AS len ");
 
-			//#########################STATICS##########################
+			cypherQuery.append(" RETURN user, trajectory, relationships(p) AS rels ");
+
+
+			//#########################SUM##########################
 
 
 			List<String> lSum = queryParams.get("sum");
@@ -597,10 +651,12 @@ public class Neo4LocationService {
 				for(String sum : lSum){
 
 					if(sum.startsWith("n.")){
-						cypherQuery.append(String.format(", reduce(c = 0, n IN nodes(p) | c + %s) AS %s_total", sum, sum));
+						sum = sum.substring(2);
+						cypherQuery.append(String.format(", reduce(c = 0, n IN nodes(p) | c + n.%s) AS %s ", sum, sum));
 					}
 					else if(sum.startsWith("r.")){
-						cypherQuery.append(String.format(", reduce(c = 0, r IN relationships(p) | c + %s) AS %s_total", sum, sum));
+						sum = sum.substring(2);
+						cypherQuery.append(String.format(", reduce(c = 0, r IN relationships(p) | c + r.%s) AS %s ", sum, sum));
 					}
 					else {
 						//TODO: Throw
@@ -610,8 +666,42 @@ public class Neo4LocationService {
 
 			}
 
-		}
-		catch(Exception e){
+			List<String> lOrderBy = queryParams.get("orderBy");
+			int lOrderBySize = (lOrderBy==null) ? 0 : lOrderBy.size();
+
+			if(lOrderBySize > 0){	
+
+				cypherQuery.append(String.format(" ORDER BY %s ", lOrderBy.remove(0).substring(2)));
+
+				for(String orderBy : lOrderBy){
+					orderBy = orderBy.substring(2);
+					cypherQuery.append(String.format(", %s",orderBy));
+
+				}
+
+			}
+
+			List<String> lSkip = queryParams.get("skip");
+			int lSkipSize = (lSkip==null) ? 0 : lSkip.size();
+
+			if(lSkipSize == 1){	
+
+				cypherQuery.append(String.format(" SKIP %s ",lSkip.get(0)));
+
+			}
+
+			List<String> lLimit = queryParams.get("limit");
+			int lLimitSize = (lLimit==null) ? 0 : lLimit.size();
+
+			if(lLimitSize == 1){	
+
+				cypherQuery.append(String.format(" LIMIT %s ", lLimit.get(0)));
+
+			}
+
+
+
+		} catch(Exception e){
 
 			logger.error(e.toString());
 			for(StackTraceElement st :e.getStackTrace()){
@@ -691,15 +781,17 @@ public class Neo4LocationService {
 					} else {
 						trajName = (String) t.getProperty(Neo4LocationProperties.TRAJNAME);
 					}
+
 				}
-				if(value instanceof Relationship){
+				else if(value instanceof Relationship){
 					rel.add((Relationship) value);
 				}
-				if(value instanceof List<?>){
+				else if(value instanceof List<?>){
 					rel.addAll((List<Relationship>) value);
 				} else {
 					props.put(key, value.toString());
-					//logger.error(key,value.toString());
+
+					logger.error(key,value.toString());
 				}
 
 			}
@@ -708,16 +800,10 @@ public class Neo4LocationService {
 			for(Relationship t : rel){
 
 				Move m = new Neo4JMove(t).getMove();
-
-				//				for(Entry<String, Object> prop: props.entrySet()){
-				//					
-				//				}
-
 				mvs.add(m);
-			}
+			}	
 
-
-			trajs.add(new Trajectory(trajName, person, mvs));
+			trajs.add(new Trajectory(trajName, person, mvs, props));
 
 		}
 

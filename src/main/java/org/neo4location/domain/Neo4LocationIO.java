@@ -38,11 +38,12 @@ import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -276,7 +277,9 @@ public class Neo4LocationIO {
 				System.out.println(index);
 				System.out.println(moves);
 				
-				trajectories[index++] = new Trajectory(trajectoryNames[t], user, moves);	
+				Map<String,Object> props = new HashMap<String,Object>();
+				props.put("error", 0.1);
+				trajectories[index++] = new Trajectory(trajectoryNames[t], user, moves, props);	
 				
 			}
 
@@ -300,9 +303,7 @@ public class Neo4LocationIO {
 		ObjectMapper mapper = new ObjectMapper();
 		Collection<Trajectory> trajectories = new HashSet<Trajectory>();
 
-		trajectories = mapper.readValue(json, 
-				TypeFactory.defaultInstance()
-				.constructParametricType(Collection.class, Trajectory.class));
+		trajectories = mapper.readValue(json, new TypeReference<Collection<Trajectory>>(){});
 
 		return trajectories;
 	}

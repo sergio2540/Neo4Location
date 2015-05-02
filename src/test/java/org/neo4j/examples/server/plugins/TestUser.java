@@ -36,6 +36,7 @@ import org.neo4location.domain.Neo4LocationIO;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationService;
+import org.supercsv.cellprocessor.ParseBigDecimal;
 
 import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.MetricRegistry;
@@ -138,7 +139,12 @@ public class TestUser {
 		StringBuilder url = new StringBuilder("neo4location/trajectories?");
 		
 		String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
+		
+		
+		
 		url.append(String.format("username=%s", username));
+		url.append(String.format("&timestamp=0", username));
+		
 		
 		Collection<Trajectory> trajectories = httpGET(url.toString());
 		assertTrajectoriesGivenUser(trajectories, 1);
@@ -159,12 +165,105 @@ public class TestUser {
 
 	}
 	
+	//Testar melhor skip, limit, orderBy
+	@Test
+	public void shouldSkipTrajectories() throws JsonParseException, IOException
+	{
+		int skip = 2;
+		
+		StringBuilder url = new StringBuilder("neo4location/trajectories?");
+		
+		String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
+		url.append(String.format("username=%s", username));
+		
+		url.append(String.format("&skip=%d", skip));
+		Collection<Trajectory> trajectories = httpGET(url.toString());
+
+		assertThat(trajectories)
+		.hasSize(mTrajectoriesPerUser-skip)
+		.doesNotContainNull();
+		
+	}
+	
+	@Test
+	public void shouldSkipAndLimitTrajectories() throws JsonParseException, IOException
+	{
+		
+	
+		int skip =  1;
+		int limit = 2;
+		
+		StringBuilder url = new StringBuilder("neo4location/trajectories?");
+		url.append(String.format("skip=%d&limit=%d",skip,limit));
+		Collection<Trajectory> trajectories = httpGET(url.toString());
+
+		assertThat(trajectories)
+		.hasSize(limit)
+		.doesNotContainNull();
+		
+	}
+	
+	@Test
+	public void shouldSkipLimitAndOrderByTrajectories() throws JsonParseException, IOException
+	{
+		
+		int skip = 1;
+		int limit = 2;
+		
+		String orderBy = "n.degree";
+		
+		StringBuilder url = new StringBuilder("neo4location/trajectories?");
+		url.append(String.format("skip=%d&limit=%d",skip,limit));
+		url.append(String.format("&orderBy=%s", orderBy));
+		url.append(String.format("&sum=%s", orderBy));
+		
+		Collection<Trajectory> trajectories = httpGET(url.toString());
+
+		
+		assertThat(trajectories)
+		.hasSize(limit)
+		.doesNotContainNull();
+		
+		
+		Trajectory prevTraj = null;  
+		boolean first = true;
+		
+		for(Trajectory traj : trajectories){
+			
+			if(first){
+				prevTraj = traj;
+				first = false;
+				continue;
+			}
+
+			int prev = Integer.parseInt(((String) prevTraj.getSemanticData().get("degree")));
+			
+			
+			int current = Integer.parseInt(((String) traj.getSemanticData().get("degree")));
+			
+			
+			assertThat(prev).isGreaterThanOrEqualTo(current);
+			
+			//new prev
+			prevTraj = traj;
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+	}
+	
 	private Collection<Trajectory> httpGET(String url) throws JsonGenerationException, JsonMappingException, IOException{
 		
 		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpsURI(), url);
 		String json = Neo4LocationIO.getRawContent(response.getEntityInputStream());
 		
-		//Files.write(Paths.get("./create-%d-%d-%d.json.json"), json.getBytes());
+		//Files.write(Paths.get("./get-%d-%d-%d.json.json"), json.getBytes());
 		
 		Collection<Trajectory> trajectories = Neo4LocationIO.JsonTotrajectories(json);
 		

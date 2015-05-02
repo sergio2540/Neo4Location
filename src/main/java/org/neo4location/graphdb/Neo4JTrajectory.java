@@ -1,6 +1,8 @@
 package org.neo4location.graphdb;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
@@ -42,7 +44,9 @@ public class Neo4JTrajectory {
 		if(from !=null)
 			moves = createPointsAndMoves(from);
 		
-		mTrajectory = new Trajectory(trajectoryName, user, moves);
+		
+		Map<String,Object> props = new HashMap<String, Object>(); 
+		mTrajectory = new Trajectory(trajectoryName, user, moves, props);
 		
 	}
 	

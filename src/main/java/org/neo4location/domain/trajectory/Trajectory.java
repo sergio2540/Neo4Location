@@ -1,23 +1,27 @@
 package org.neo4location.domain.trajectory;
 
 import java.util.Collection;
+import java.util.Map;
 
 
 public class Trajectory {
 
-	String mTrajectoryName;
-	User mUser;
-	Collection<Move> mMoves;
+	private String mTrajectoryName;
+	private User mUser;
+	private Collection<Move> mMoves;
+	private Map<String,Object> mSemanticData;
+	
 	
 	public Trajectory(){
 		
 	}
 	
-	public Trajectory(String trajectoryName, User user, Collection<Move> moves){
+	public Trajectory(String trajectoryName, User user, Collection<Move> moves, Map<String,Object> semanticData){
 		
 		mTrajectoryName = trajectoryName;
 		mUser = user;
 		mMoves = moves;
+		mSemanticData = semanticData;
 		
 	}
 	
@@ -46,6 +50,14 @@ public class Trajectory {
 	
 	public void setMoves(Collection<Move> moves){
 		mMoves = moves;
+	}
+	
+	public Map<String, Object> getSemanticData() {
+		return mSemanticData;
+	}
+
+	public void setSemanticData(Map<String, Object> semanticData) {
+		this.mSemanticData = semanticData;
 	}
 	
 	@Override
