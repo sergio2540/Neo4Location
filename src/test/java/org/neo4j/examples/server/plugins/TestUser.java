@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -29,6 +30,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.neo4j.harness.ServerControls;
+import org.neo4j.harness.TestServerBuilders;
 import org.neo4j.harness.junit.Neo4jRule;
 import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
@@ -48,7 +51,7 @@ import com.sun.jersey.api.client.WebResource;
 
 @RunWith(Parameterized.class)
 public class TestUser {
-	
+
 	private static final int ITERATIONS = 7;
 
 	//Max 8
@@ -60,7 +63,7 @@ public class TestUser {
 
 	private static final int START_MOVES_PER_TRAJECTORY = 6;
 	private static final int INC_MOVES_PER_TRAJECTORY = 0;
-	
+
 	@Parameters(name = "{index}:")
 	public static Collection<Object[]> data() {
 
@@ -85,50 +88,55 @@ public class TestUser {
 	}
 
 	@Parameter // first data value (0) is default
-	public /* NOT private */ int mTest;
+	public static /* NOT private */ int mTest;
 
 	@Parameter(value = 1)
-	public /* NOT private */ int mNumberOfUsers;
+	public static /* NOT private */ int mNumberOfUsers;
 
 	@Parameter(value = 2)
-	public /* NOT private */ int mTrajectoriesPerUser;
+	public static /* NOT private */ int mTrajectoriesPerUser;
 
 	@Parameter(value = 3)
-	public /* NOT private */ int mMovesPerTrajectory;
+	public static /* NOT private */ int mMovesPerTrajectory;
 
 	@Parameter(value = 4)
-	public /* NOT private */ int mUser;
-	
-	private Trajectory[] mTrajectories;
+	public static /* NOT private */ int mUser;
+
+	private static Trajectory[] mTrajectories;
 
 
 	@Rule public Mute mMute = Mute.muteAll();
 
 	@Rule
-	public final Neo4jRule mNeo4j = new Neo4jRule()
-	.withExtension("/neo4location", Neo4LocationService.class);
+	public Neo4jRule mNeo4j = new Neo4jRule()
+		.withExtension("/neo4location", Neo4LocationService.class);
 
-	@BeforeClass
-	public static void init(){
-		//reporter.start(1, TimeUnit.SECONDS);	
-	}
+	//public static ServerControls mNeo4j;
 
 
 	//Mudar para BeforeClass
 	@Before
 	public void shouldCreateTrajectory() throws Exception
 	{
+		
+		//reporter.start(1, TimeUnit.SECONDS);	
+		
+//		mNeo4j = TestServerBuilders.newInProcessBuilder()
+//				.withExtension("/neo4location", Neo4LocationService.class)
+//				//.withConfig("dbms.security.auth_enabled", "false")
+//				.newServer();
 
+		
 		String url = "neo4location/trajectories";
 		mTrajectories = Neo4LocationIO.createTrajectory(mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
 		String json = Neo4LocationIO.trajectoriesToJson(mTrajectories);
-		
-		String filename = String.format("./create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
-		Files.write(Paths.get(filename), json.getBytes());
-		
-		ClientResponse response = Neo4LocationIO.POST(mNeo4j.httpsURI(), url.toString(),json);
 
-		assertEquals(201, response.getStatus());
+		//String filename = String.format("./create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
+		//Files.write(Paths.get(filename), json.getBytes());
+
+		ClientResponse response = Neo4LocationIO.POST(mNeo4j.httpURI(), url.toString(),json);
+
+		//assertEquals(201, response.getStatus());
 
 	}
 
@@ -137,62 +145,62 @@ public class TestUser {
 	public void shouldReturnTrajectories() throws JsonParseException, IOException
 	{
 		StringBuilder url = new StringBuilder("neo4location/trajectories?");
-		
+
 		String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
-		
-		
-		
+
+
+
 		url.append(String.format("username=%s", username));
 		url.append(String.format("&timestamp=0", username));
-		
-		
+
+
 		Collection<Trajectory> trajectories = httpGET(url.toString());
 		assertTrajectoriesGivenUser(trajectories, 1);
 		assertTrajectoriesGivenOnlyOneUser(trajectories);
 
 	}
-	
-	
+
+
 	@Test
 	public void shouldReturnAllTrajectories() throws JsonParseException, IOException
 	{
-		
+
 		StringBuilder url = new StringBuilder("neo4location/trajectories");
-		
+
 		Collection<Trajectory> trajectories = httpGET(url.toString());
 
 		assertTrajectoriesGivenUser(trajectories, mNumberOfUsers);
 
 	}
-	
+
 	//Testar melhor skip, limit, orderBy
 	@Test
 	public void shouldSkipTrajectories() throws JsonParseException, IOException
 	{
 		int skip = 2;
-		
+
 		StringBuilder url = new StringBuilder("neo4location/trajectories?");
-		
+
 		String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
 		url.append(String.format("username=%s", username));
-		
+
 		url.append(String.format("&skip=%d", skip));
 		Collection<Trajectory> trajectories = httpGET(url.toString());
 
 		assertThat(trajectories)
 		.hasSize(mTrajectoriesPerUser-skip)
 		.doesNotContainNull();
-		
+
 	}
-	
+
 	@Test
 	public void shouldSkipAndLimitTrajectories() throws JsonParseException, IOException
 	{
-		
-	
+
+
 		int skip =  1;
 		int limit = 2;
-		
+
 		StringBuilder url = new StringBuilder("neo4location/trajectories?");
 		url.append(String.format("skip=%d&limit=%d",skip,limit));
 		Collection<Trajectory> trajectories = httpGET(url.toString());
@@ -200,36 +208,36 @@ public class TestUser {
 		assertThat(trajectories)
 		.hasSize(limit)
 		.doesNotContainNull();
-		
+
 	}
-	
+
 	@Test
 	public void shouldSkipLimitAndOrderByTrajectories() throws JsonParseException, IOException
 	{
-		
+
 		int skip = 1;
 		int limit = 2;
-		
+
 		String orderBy = "n.degree";
-		
+
 		StringBuilder url = new StringBuilder("neo4location/trajectories?");
 		url.append(String.format("skip=%d&limit=%d",skip,limit));
 		url.append(String.format("&orderBy=%s", orderBy));
 		url.append(String.format("&sum=%s", orderBy));
-		
+
 		Collection<Trajectory> trajectories = httpGET(url.toString());
 
-		
+
 		assertThat(trajectories)
 		.hasSize(limit)
 		.doesNotContainNull();
-		
-		
+
+
 		Trajectory prevTraj = null;  
 		boolean first = true;
-		
+
 		for(Trajectory traj : trajectories){
-			
+
 			if(first){
 				prevTraj = traj;
 				first = false;
@@ -237,44 +245,47 @@ public class TestUser {
 			}
 
 			int prev = Integer.parseInt(((String) prevTraj.getSemanticData().get("degree")));
-			
-			
+
+
 			int current = Integer.parseInt(((String) traj.getSemanticData().get("degree")));
-			
-			
+
+
 			assertThat(prev).isGreaterThanOrEqualTo(current);
-			
+
 			//new prev
 			prevTraj = traj;
-			
-			
-			
-			
+
+
+
+
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
-	
+
 	private Collection<Trajectory> httpGET(String url) throws JsonGenerationException, JsonMappingException, IOException{
-		
-		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpsURI(), url);
-		String json = Neo4LocationIO.getRawContent(response.getEntityInputStream());
-		
-		//Files.write(Paths.get("./get-%d-%d-%d.json.json"), json.getBytes());
-		
-		Collection<Trajectory> trajectories = Neo4LocationIO.JsonTotrajectories(json);
-		
+
+		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpURI(), url);
+
+		MultivaluedMap<String, String> s = response.getHeaders();
+
+		//assertThat(s).containsKey("application/x-gzip");
+
+		Collection<Trajectory> trajectories = Neo4LocationIO.getStreamingCollection(response.getEntityInputStream());
+
+		//Files.write(Paths.get("./get-%d-%d-%d.json"), json.getBytes());
+
 		assertThat(response.getStatus())
 		.isEqualTo(Response.Status.OK.getStatusCode());
-		
+
 		return trajectories;
 	}
 
 	private void assertTrajectoriesGivenUser(Collection<Trajectory>  trajectories, int numberOfUsers) throws IOException{
-		
+
 		assertThat(trajectories)
 		.hasSize(numberOfUsers*mTrajectoriesPerUser)
 		.doesNotContainNull();	
@@ -282,7 +293,7 @@ public class TestUser {
 
 
 	private void assertTrajectoriesGivenOnlyOneUser(Collection<Trajectory> trajectories) {
-		
+
 		for(Trajectory trajectory : trajectories){
 
 			assertThat(trajectory.getTrajectoryName())
@@ -293,9 +304,9 @@ public class TestUser {
 
 			assertThat(trajectory.getUser())
 			.isNotNull();
-			
+
 			String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
-			
+
 			assertThat(trajectory.getUser().getUsername())
 			.isNotNull()
 			.isNotEmpty()

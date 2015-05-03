@@ -10,20 +10,16 @@ import org.neo4j.server.plugins.Parameter;
 import org.neo4j.server.plugins.PluginTarget;
 import org.neo4j.server.plugins.ServerPlugin;
 import org.neo4j.server.plugins.Source;
-//import org.neo4location.trajectory.strucuture.VelocityBasedStructure;
-//import org.neo4location.transactions.StructureTransactionEventHandler;
+import org.neo4location.domain.trajectory.Trajectory;
+import org.neo4location.transactions.RawGPSGapIdentificationEventHandler;
 
 
 @Description("A set of extensions that perform operations using the neo4location-post processing component")
 public class PostProcessingPlugin extends ServerPlugin {
-
-	private GraphDatabaseService db;
-
-	//Neo4LocationDatabaseService
-	//private SpatialDatabaseService neo4LocationDatabaseService;
-
+	
+	
 	@PluginTarget(GraphDatabaseService.class)
-	@Description("add a new structure")
+	@Description("Add a new structure")
 	public void addVelocityBasedStructure(
 			@Source GraphDatabaseService graphdb,
 			@Description("Speed property.") @Parameter(name = "speedThreshold", optional = true) double speedThreshold,
@@ -36,12 +32,57 @@ public class PostProcessingPlugin extends ServerPlugin {
 		//System.out.println("Creating new layer '" + layer + "' unless it already exists");
 		Duration _minStopTime = Duration.parse(minStopTime);
 
-//		VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, _minStopTime, delta1, delta2);
-//		graphdb.registerTransactionEventHandler(new StructureTransactionEventHandler(str));
+		VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, _minStopTime, delta1, delta2);
+		graphdb.registerTransactionEventHandler(new StructureTransactionEventHandler(graphdb, executor, str));
+		
 		return;
+	
 	}
+	
+	@PluginTarget(GraphDatabaseService.class)
+	@Description("Add a new structure")
+	public void addDensityBasedStructure(
+			@Source GraphDatabaseService graphdb,
+			@Description("Maximum distance.") @Parameter(name = "maxDistance", optional = true) double maxDistance,
+			@Description("Min stop time. Default is ?") @Parameter(name = "minStopTime", optional = true) long minStopTime
+			) 
+	{
+		
+		DensityBasedStructure str = new DensityBasedStructure(maxDistance, _minStopTime);
+		graphdb.registerTransactionEventHandler(new StructureTransactionEventHandler(graphdb, executor, str));
+		
+	
+	}
+	
+	@PluginTarget(GraphDatabaseService.class)
+	@Description("Add a new identification")
+	public void addRawGPSGapIdentification(
+			@Source GraphDatabaseService graphdb,
+			@Description("Maximum distance.") @Parameter(name = "maxDistance", optional = true) double maxDistance,
+			@Description("Min stop time. Default is ?") @Parameter(name = "minStopTime", optional = true) long minStopTime
+			) 
+	{
+		
+		RawGPSGapIdentification id = new RawGPSGapIdentification(distance, minStopTime);
+		graphdb.registerTransactionEventHandler(new IdentificationEventHandler(graphdb, executor, id)) ;
+	
+	}
+	
+	@PluginTarget(GraphDatabaseService.class)
+	@Description("Add a new identification")
+	public void addPredefinedTimeInterval(
+			@Source GraphDatabaseService graphdb,
+			@Description("Min stop time. Default is ?") @Parameter(name = "minStopTime", optional = true) long minStopTime
+			) 
+	{
+		PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(maxDistance, minStopTime);
+		graphdb.registerTransactionEventHandler(new StructureTransactionEventHandler(graphdb, executor, id));
+	
+	}
+	
+	
 
-
+	/*
 	@PluginTarget(GraphDatabaseService.class)
 	@Description("add a new structure")
 	public void addRawTrajectory(
@@ -59,81 +100,6 @@ public class PostProcessingPlugin extends ServerPlugin {
 	{
 		return;
 	}
-
-
-	@PluginTarget(GraphDatabaseService.class)
-	@Description("add a new structure")
-	public void getUsers(
-			@Source GraphDatabaseService graphdb,
-
-			@Description("Speed property.") @Parameter(name = "speedThreshold", optional = true) double lat,
-			@Description("Min stop time. Default is ?") @Parameter(name = "minStopTime", optional = true) double lon,
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "delta1", optional = true) double alt,
-			
-			
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "delta1", optional = true) double accuracy,
-
-
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "delta1", optional = true) String interval
-			) 
-	{
-
-		//System.out.println("Creating new layer '" + layer + "' unless it already exists");
-
-		return;
-	}
-
-
-	@PluginTarget(GraphDatabaseService.class)
-	@Description("add a new structure")
-	public void getMostPopularPath(
-			@Source GraphDatabaseService graphdb,
-
-			@Description("Speed property.") @Parameter(name = "source_lat", optional = true) double sourceLat,
-			@Description("Min stop time. Default is ?") @Parameter(name = "source_lon", optional = true) double sourceLon,
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "source_alt", optional = true) double sourceAlt,
-			
-			@Description("Speed property.") @Parameter(name = "target_lat", optional = true) double targetLat,
-			@Description("Min stop time. Default is ?") @Parameter(name = "target_lon", optional = true) double targetLon,
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "target_alt", optional = true) double targetAlt,
-
-			
-			@Description("Delta 1. Default is 0.3") @Parameter(name = "ACCURACY", optional = true) double accuracy,
-
-
-			@Description( "The relationship types to follow when searching for the shortest path(s). " +
-					"Order is insignificant, if omitted all types are followed." )
-			@Parameter( name = "relTypes", optional = true ) String[] relTypes,
-			
-			
-			@Description( "The maximum path length to search for, default value (if omitted) is 4." )
-			@Parameter( name = "depth", optional = true ) Integer depth
-
-			) 
-	{
-
-		//System.out.println("Creating new layer '" + layer + "' unless it already exists");
-
-		return;
-	}
-
-	@PluginTarget(GraphDatabaseService.class)
-	@Description("add a new structure")
-	public Iterable<Node> getKLastPositions(
-			@Source GraphDatabaseService graphdb,
-
-			@Description("User identifier.") @Parameter(name = "userId", optional = true) String userId,
-			@Description("Trajectory.") @Parameter(name = "trajectory", optional = true) String trajectory,
-
-			@Description("Number of last positions returned. Default is 0") @Parameter(name = "k", optional = true) int k
-			) 
-			{
-
-		//System.out.println("Creating new layer '" + layer + "' unless it already exists");
-
-		return null;
-			}
-
-
+	*/
 
 }

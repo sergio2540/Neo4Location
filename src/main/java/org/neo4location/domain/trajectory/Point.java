@@ -12,14 +12,14 @@ import org.neo4location.domain.Neo4LocationLabels;
 public class Point {
 
 	private RawData mRawData;
-	private SemanticData mSemanticData;
+	private Map<String,Object> mSemanticData;
 	private Collection<Neo4LocationLabels> mNeo4jLabels;
 
 	
 	public Point(){
 	}
 	
-	public Point(RawData rawData, SemanticData semanticData, Collection<Neo4LocationLabels> labels){
+	public Point(RawData rawData, Map<String,Object> semanticData, Collection<Neo4LocationLabels> labels){
 
 		mRawData = rawData;
 		mSemanticData = semanticData;
@@ -38,7 +38,7 @@ public class Point {
 	}
 
 
-	public SemanticData getSemanticData() {
+	public Map<String,Object>  getSemanticData() {
 		return mSemanticData;
 	}
 
@@ -51,22 +51,22 @@ public class Point {
 		mRawData = rd;
 	}
 
-	public void setSemanticData(SemanticData sd) {
+	public void setSemanticData(Map<String,Object> sd) {
 		mSemanticData = sd;
 	}
 	
-	public Map<String,String> toMap(){
-		
-		Map<String,String> rawMap = getRawData().toMap();
-		Map<String,String> semanticMap = getSemanticData().toMap();
-		
-		Map<String,String> map = new HashMap<String, String>();
-		
-		map.putAll(rawMap);
-		map.putAll(semanticMap);
-		
-		return map;
-	}
+//	public Map<String,String> toMap(){
+//		
+//		Map<String,String> rawMap = getRawData().toMap();
+//		Map<String,String> semanticMap = getSemanticData().toMap();
+//		
+//		Map<String,String> map = new HashMap<String, String>();
+//		
+//		map.putAll(rawMap);
+//		map.putAll(semanticMap);
+//		
+//		return map;
+//	}
 	
 	@Override
 	public String toString() {

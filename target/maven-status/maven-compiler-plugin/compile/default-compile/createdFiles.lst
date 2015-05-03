@@ -23,6 +23,7 @@ org/neo4location/trajectory/strucuture/SMove.class
 org/neo4location/domain/route/thoroughfares/Restrictions.class
 org/neo4location/graphdb/Neo4JMove.class
 org/neo4location/domain/Neo4LocationLabels.class
+org/neo4location/domain/Neo4LocationIO$2.class
 org/neo4location/domain/trajectory/Trajectory.class
 org/neo4location/domain/route/thoroughfares/Highway.class
 org/neo4location/domain/route/thoroughfares/RailWay.class

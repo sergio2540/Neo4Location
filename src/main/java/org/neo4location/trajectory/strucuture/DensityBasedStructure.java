@@ -11,9 +11,9 @@ public class DensityBasedStructure {
 	private Trajectory mTrajectory;
 	private Duration mDuration;
 
-	public DensityBasedStructure(Trajectory trajectory, double maxDist, Duration duration){
+	public DensityBasedStructure(double maxDist, Duration duration){
 		
-		this.mTrajectory = trajectory;
+		//this.mTrajectory = trajectory;
 		this.mMaxDist = maxDist;
 		this.mDuration = duration;
 	

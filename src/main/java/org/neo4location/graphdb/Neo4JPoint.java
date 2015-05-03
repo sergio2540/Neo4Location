@@ -68,10 +68,10 @@ public class Neo4JPoint {
 			n.setProperty(Neo4LocationProperties.TIMESTAMP, rd.getTime());
 		}
 
-		SemanticData sd = p.getSemanticData();
+		Map<String,Object> sd = p.getSemanticData();
 		
 		if(sd != null){
-			sd.getSemanticData().forEach((k,v) -> mNeo4JNode.setProperty(k, v));
+			sd.forEach((k,v) -> mNeo4JNode.setProperty(k, v));
 		}
 		
 		mNeo4JNode = n;
@@ -116,7 +116,7 @@ public class Neo4JPoint {
 		
 		}
 
-		mPoint.setSemanticData(new SemanticData(temp));
+		mPoint.setSemanticData(temp);
 
 	}
 
@@ -148,7 +148,7 @@ public class Neo4JPoint {
 	}
 
 
-	private SemanticData getSemanticData() {
+	private Map<String,Object> getSemanticData() {
 		return mPoint.getSemanticData();
 	}
 
@@ -180,9 +180,9 @@ public class Neo4JPoint {
 
 	}
 	
-	private void setSemanticData(SemanticData sd) {
+	private void setSemanticData(Map<String,Object> sd) {
 		
-		sd.getSemanticData().forEach( (k,v) -> mNeo4JNode.setProperty(k, v));
+		sd.forEach( (k,v) -> mNeo4JNode.setProperty(k, v));
 		mPoint.setSemanticData(sd);
 	
 	}

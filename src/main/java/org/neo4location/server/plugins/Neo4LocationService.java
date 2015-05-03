@@ -1,6 +1,7 @@
 package org.neo4location.server.plugins;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,22 +11,32 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.sun.jersey.spi.inject.Inject;
 
 import org.neo4j.gis.spatial.SpatialDatabaseRecord;
 import org.neo4j.gis.spatial.SpatialDatabaseService;
@@ -42,6 +53,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
 import org.neo4j.graphdb.index.IndexManager;
+import org.neo4location.domain.Compress;
 import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
@@ -61,25 +73,21 @@ import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.Slf4jReporter.LoggingLevel;
 import com.codahale.metrics.Timer;
 
+//@Singleton
 @Path("")
 public class Neo4LocationService {
 
 	private final GraphDatabaseService mDb;
-
 	private final SpatialDatabaseService mSpatialService; 
-
 	private Index<Node> mIndex;
-	
 	private double mAccuracyInKm = 0.1;
-
 	private Status status = Status.OK;
-
+	
+	
 	private Logger logger = LoggerFactory.getLogger(Neo4LocationService.class);
 	private MetricRegistry metrics = new MetricRegistry();
-	private Timer tIndex;
-
-
-	final Slf4jReporter reporter = Slf4jReporter.forRegistry(metrics)
+	private final Timer tIndex;
+	private final Slf4jReporter reporter = Slf4jReporter.forRegistry(metrics)
 			.outputTo(logger)
 			.withLoggingLevel(LoggingLevel.ERROR)
 			.build();
@@ -102,7 +110,7 @@ public class Neo4LocationService {
 
 		//Metrics
 		tIndex = metrics.timer("index");
-		//reporter.start(1, TimeUnit.SECONDS);
+		//reporter.start(2, TimeUnit.SECONDS);
 		//mEditableLayer = mSpatialDb.getOrCreatePointLayer(mLayerPoints , Neo4LocationProperties.LATITUDE, Neo4LocationProperties.LONGITUDE);
 
 	}
@@ -117,7 +125,7 @@ public class Neo4LocationService {
 	@POST
 	@Path("/trajectories")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addRawPoint(String _trajectories)
+	public Response addRawPoint(String  _trajectories) throws Exception
 	{
 
 
@@ -142,7 +150,7 @@ public class Neo4LocationService {
 			//logger.error(String.valueOf(trajectories.size()));
 
 			for(Trajectory trajectory : trajectories){
-				
+
 				mAccuracyInKm = 0.1;
 
 				//Devia remover trajectoryName
@@ -210,8 +218,6 @@ public class Neo4LocationService {
 			status = Status.OK;
 			return Response.status(Response.Status.OK).build();
 		}
-
-		//Falta meter end
 
 	}
 
@@ -317,11 +323,11 @@ public class Neo4LocationService {
 
 		}
 
-		SemanticData sd = p.getSemanticData();
+		Map<String,Object> sd = p.getSemanticData();
 
 		if(sd != null){
 
-			for(Entry<String, Object> kv : sd.getSemanticData().entrySet()){
+			for(Entry<String, Object> kv : sd.entrySet()){
 
 				point.setProperty(kv.getKey(), kv.getValue());
 
@@ -350,15 +356,15 @@ public class Neo4LocationService {
 		}
 
 		traj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
-		
+
 		for(Entry<String, Object> prop: props.entrySet()){
-			
+
 			traj.setProperty(prop.getKey(),prop.getValue());
-			
+
 			if(prop.getKey().equals("error")){
 				mAccuracyInKm = (double) prop.getValue();
 			}
-		
+
 		}
 
 		return traj;
@@ -383,15 +389,17 @@ public class Neo4LocationService {
 
 
 	@GET
+	@Compress
 	@Path("/trajectories")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRawTrajectory(@Context UriInfo ui){
 
+		
 		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 		//MultivaluedMap<String, String> pathParams = ui.getPathParameters();
 
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuilder cypherQuery = new StringBuilder();
+		final StringBuilder cypherQuery = new StringBuilder();
 
 		try {
 
@@ -452,7 +460,7 @@ public class Neo4LocationService {
 
 			//Entre 1 e 2, 1 e 2, 1 e 2
 			if(latSize >= 1 && lonSize >= 1 && radiusSize >= 1){
-				cypherQuery = new StringBuilder(String.format(Locale.ENGLISH,"START start=node:points('withinDistance:[%f, %f, %f]') ", withinDistance.get(0), withinDistance.get(1), withinDistance.get(2)));
+				cypherQuery.append(String.format(Locale.ENGLISH,"START start=node:points('withinDistance:[%f, %f, %f]') ", withinDistance.get(0), withinDistance.get(1), withinDistance.get(2)));
 			}
 
 			if(latSize == 2 && lonSize == 2 && radiusSize == 2){
@@ -463,7 +471,7 @@ public class Neo4LocationService {
 
 			if (latSize >= 2 && lonSize >= 2  && radiusSize == 0){
 
-				cypherQuery = new StringBuilder(String.format(Locale.ENGLISH,"START start=node:points('bbox:[%f, %f, %f, %f]') ", bbox.get(0), bbox.get(1), bbox.get(2), bbox.get(3)));
+				cypherQuery.append(String.format(Locale.ENGLISH,"START start=node:points('bbox:[%f, %f, %f, %f]') ", bbox.get(0), bbox.get(1), bbox.get(2), bbox.get(3)));
 
 			} 
 
@@ -637,10 +645,8 @@ public class Neo4LocationService {
 
 			//#########################RETURN##########################
 
-
 			cypherQuery.append(" RETURN user, trajectory, relationships(p) AS rels ");
-
-
+			
 			//#########################SUM##########################
 
 
@@ -710,105 +716,147 @@ public class Neo4LocationService {
 
 		}
 
-		logger.error(cypherQuery.toString());
+		//logger.error(cypherQuery.toString());
 
-		String r = "";
+		//String r = "";
 
-		try (Transaction tx = mDb.beginTx())
-		{
+		final StreamingOutput stream = new StreamingOutput(){
+			@Override
+			public void write(OutputStream os) throws IOException, WebApplicationException
+			{
+				try (Transaction tx = mDb.beginTx()){
 
-			Result result = mDb.execute(cypherQuery.toString(), params);
+					Result result = mDb.execute(cypherQuery.toString(), params);
 
-			ObjectWriter mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
-			Collection<Trajectory> trajectories = toTrajectories(result);
-			r = mapper.writeValueAsString(trajectories);
+					JsonFactory jsonfactory = new JsonFactory();
+					JsonGenerator jg = jsonfactory.createGenerator(os);
+					jg.setCodec(new ObjectMapper());
 
-			tx.success();
+					jg.writeStartArray();
+					//logger.error("start array");
+					
+					while (result.hasNext())
+					{
 
-		} catch (Exception e) {
+						User user = null;
+						String trajName = null;
+						//Collection<Move> mvs = new ArrayList<>();
+						Collection<Relationship> rels = new ArrayList<>();
+						//Map<String,Object> props = new HashMap<>();
 
-			logger.error(e.toString());
-			for(StackTraceElement st :e.getStackTrace()){
-				logger.error(st.toString());
+						Map<String,Object> row = result.next();
+						
+						jg.writeStartObject();
+						for (String key : result.columns())
+						{
+
+							Object value = row.get(key);
+
+							if(value instanceof Node){
+
+								Node t = (Node) value;
+
+								if(t.hasLabel(Neo4LocationLabels.USER)){
+									String personName = (String) t.getProperty(Neo4LocationProperties.USERNAME);
+									user = new User(personName);
+									jg.writeObjectField("user", user);
+
+								} else {
+									trajName = (String) t.getProperty(Neo4LocationProperties.TRAJNAME);
+
+									jg.writeStringField("trajectoryName", trajName);
+									
+									
+								}
+
+							}
+							//							else if(value instanceof Relationship){
+							//								rel.add((Relationship) value);
+							//							}
+							else if(value instanceof List<?>){
+
+								jg.writeArrayFieldStart("moves");
+
+								rels = (List<Relationship>) value;
+								for(Relationship rel :rels){
+									Move m = new Neo4JMove(rel).getMove();
+									//mvs.add(m);
+									jg.writeObject(m);
+								}
+
+								jg.writeEndArray();
+
+							} else {
+								//props.put(key, value.toString());
+								
+								
+								jg.writeObjectFieldStart("semanticData");
+								
+								//Aglomerar todas as props de trajectoria e colocar um for
+								//para iterar sobre elas
+								jg.writeStringField(key, value.toString()); 
+								
+								jg.writeEndObject();
+								///logger.error(key,value.toString());
+							}
+
+						}
+
+						jg.writeEndObject();
+						//jg.writeObject(new Trajectory(trajName, user, mvs, props));
+
+					}
+
+					//logger.error("end array");
+					jg.writeEndArray();
+					jg.flush();
+					jg.close();
+
+					tx.success();
+
+
+				} catch (Exception e) {
+
+					logger.error(e.toString());
+					for(StackTraceElement st :e.getStackTrace()){
+						logger.error(st.toString());
+					}
+
+
+				}
+
 			}
+		};
+		
+		
+		//			ObjectWriter mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
+		//			Collection<Trajectory> trajectories = toTrajectories(result);
+		//			r = mapper.writeValueAsString(trajectories);
 
-
-		}
-
-		return Response.status(Response.Status.OK).entity(r).build();
-
-		//Filtering
-		//page=1,-2&per_page=100&sort=
-
-		//Select
-		//fields=LATITUDE,LONGITUDE,TIMESTAMP&
-
-		//Where
-		//LATITUDE=10
-
-		//last k points de uma uma trajectoria ok
-		//page=-1&per_page=k&fields=LATITUDE,LONGITUDE&sort=-time&LATITUDE=10
-
-
+		
+		return Response.status(Response.Status.OK).entity(stream).type(MediaType.APPLICATION_JSON).build();
 	}
 
 	private Collection<Trajectory> toTrajectories(Result result){
 
-		Collection<Trajectory> trajs = new HashSet<>();
-
-		while (result.hasNext())
-		{
-			User person = null;
-			String trajName = null;
-			Collection<Move> mvs = new ArrayList<>();
-			Set<Relationship> rel = new HashSet<>();
-			Map<String,Object> props = new HashMap<>();
-
-			Map<String,Object> row = result.next();
-
-			for ( String key : result.columns() )
-			{
-
-				Object value = row.get(key);
-
-				if(value instanceof Node){
-
-					Node t = (Node) value;
-
-					if(t.hasLabel(Neo4LocationLabels.USER)){
-						String personName = (String) t.getProperty(Neo4LocationProperties.USERNAME);
-						person = new User(personName);
-					} else {
-						trajName = (String) t.getProperty(Neo4LocationProperties.TRAJNAME);
-					}
-
-				}
-				else if(value instanceof Relationship){
-					rel.add((Relationship) value);
-				}
-				else if(value instanceof List<?>){
-					rel.addAll((List<Relationship>) value);
-				} else {
-					props.put(key, value.toString());
-
-					logger.error(key,value.toString());
-				}
-
-			}
-
-
-			for(Relationship t : rel){
-
-				Move m = new Neo4JMove(t).getMove();
-				mvs.add(m);
-			}	
-
-			trajs.add(new Trajectory(trajName, person, mvs, props));
-
-		}
-
-
-		return trajs;
+		//		Collection<Trajectory> trajs = new HashSet<>();
+		//
+		//		
+		//
+		//
+		//			for(Relationship t : rel){
+		//
+		//				Move m = new Neo4JMove(t).getMove();
+		//				mvs.add(m);
+		//			}	
+		//
+		//			trajs.add(new Trajectory(trajName, person, mvs, props));
+		//
+		//		}
+		//
+		//
+		//		return trajs;
+		return null;
 
 	}
 

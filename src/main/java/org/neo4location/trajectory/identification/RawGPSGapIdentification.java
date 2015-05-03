@@ -7,24 +7,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.event.TransactionData;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.trajectory.Identification;
 
-public class RawGPSGapIdentification implements Identification {
+public class RawGPSGapIdentification implements Identification, Runnable {
 
 	private Duration mDuration;
 	private double mDistance;
 	private Trajectory mTrajectory;
 
 
-	public RawGPSGapIdentification(Trajectory trajectory, Duration duration, double distance){
+	public RawGPSGapIdentification(double distance, long duration){
 
-		this.mTrajectory = trajectory;	
-		this.mDuration = duration;
+		//this.mTrajectory = trajectory;	
+		this.mDuration = Duration.ofMillis(duration);
 		this.mDistance = distance;
 		
 
+	}
+
+	public RawGPSGapIdentification(TransactionData transactionData,
+			GraphDatabaseService db) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public void process(){
@@ -83,6 +90,12 @@ public class RawGPSGapIdentification implements Identification {
 	}
 
 	private void createSemanticTrajectory(List<Point> tempTrajectory2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
