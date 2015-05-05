@@ -1,5 +1,6 @@
-package org.neo4location.domain;
+package org.neo4location.utils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,8 +20,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.core.MediaType;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.neo4location.domain.Neo4LocationLabels;
+import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -36,7 +54,17 @@ import org.supercsv.comment.CommentMatcher;
 import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
+import org.xerial.snappy.SnappyFramedInputStream;
+import org.xerial.snappy.SnappyInputStream;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.pool.KryoCallback;
+import com.esotericsoftware.kryo.pool.KryoFactory;
+import com.esotericsoftware.kryo.pool.KryoPool;
+import com.esotericsoftware.kryo.serializers.BeanSerializer;
+import com.esotericsoftware.kryo.serializers.CollectionSerializer;
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -45,17 +73,17 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
-
-import org.glassfish.jersey.client.filter.EncodingFilter;
-import org.glassfish.jersey.message.DeflateEncoder;
-import org.glassfish.jersey.message.GZipEncoder;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 
-public class Neo4LocationIO {
+
+
+
+public class Neo4LocationTestsUtils {
 
 
 	public static final String DATA_DIR = "./Data/";
@@ -205,7 +233,7 @@ public class Neo4LocationIO {
 
 		//GET LIST OF ALL FILES IN
 
-		System.out.println(trajDir);
+		//System.out.println(trajDir);
 
 		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(trajDir).toAbsolutePath());
 
@@ -268,7 +296,7 @@ public class Neo4LocationIO {
 
 			String username = usernames[u];
 
-			System.out.println("username: " + username);
+			//System.out.println("username: " + username);
 
 			String trajectoriesDirectory = DATA_DIR + username + TRAJECTORY_DIR;
 			String[] trajectoryNames = getTrajectories(trajectoriesDirectory, trajectoriesPerUser);
@@ -277,11 +305,11 @@ public class Neo4LocationIO {
 
 			for(int t=0; t < trajectoriesPerUser; t++){
 
-				System.out.println("trajectory: " + trajectoryNames[t]);
+				//System.out.println("trajectory: " + trajectoryNames[t]);
 
 				Collection<Move> moves = csvListPointReader(trajectoryNames[t], username, movesPerTrajectory);
-				System.out.println(index);
-				System.out.println(moves);
+				//				System.out.println(index);
+				//				System.out.println(moves);
 
 				Map<String,Object> props = new HashMap<String,Object>();
 				props.put("error", 0.1);
@@ -315,47 +343,93 @@ public class Neo4LocationIO {
 	}
 
 
-	public static ClientResponse POST(URI serverURI, String url, String json){
+
+	//	String post(String url, String json) throws IOException {
+	//
+	//	}
+
+	public static OkHttpClient client = new OkHttpClient();
+
+	public static Response POST(URI serverURI, String url, String json) throws IOException{
+
+		final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
 
-		Client client = Client.create();
-		WebResource webResource = client.resource(serverURI.resolve(url.toString()).toString());
-		ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON)
-				.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
+
+		RequestBody body = RequestBody.create(JSON, json);
+
+		Request request = new Request.Builder()
+		.url(serverURI.resolve(url).toString())
+		.post(body)
+		.build();
+
+		Response response = client.newCall(request).execute();
 
 		return response;
 
 	}
 
-	public static ClientResponse GET(URI serverURI, String url){
+	public static Response GET(URI serverURI, String url) throws IOException{
 
+		Request request = new Request.Builder()
+		.url(serverURI.resolve(url).toString())
+		.build();
 
-		Client client = Client.create();
-		client.addFilter(new GZIPContentEncodingFilter());
+		Response response = client.newCall(request).execute();
 
-		WebResource r = client.resource(serverURI.resolve(url.toString()).toString());
-		
-		return r.accept(MediaType.APPLICATION_JSON)
-				.type(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-
+		return response;
 	}
 
-	public static Collection<Trajectory> getStreamingCollection(InputStream in) throws JsonParseException, JsonMappingException, IOException{
+	//Registo e iniciação so precisa de ser feita uma vez
+	private final static KryoFactory mFactory = new KryoFactory() {
+		public Kryo create () {
+			Kryo kryo = new Kryo();
+			// configure kryo instance, customize settings
+			return kryo;
+		}
+	}; 
 
-		ObjectMapper mapper = new ObjectMapper();
-		Collection<Trajectory> trajectories = new HashSet<Trajectory>();
+	// Build pool with SoftReferences enabled (optional)
+	private final static KryoPool mPool = new KryoPool.Builder(mFactory).softReferences().build();
 
-		trajectories = mapper.readValue(in, new TypeReference<Collection<Trajectory>>(){});
 
+	public static Collection<Trajectory> getStreamingCollection(Response res) throws JsonParseException, JsonMappingException, IOException{
+
+	
+		InputStream in = res.body().byteStream();
+		Collection<Trajectory> trajectories;
+		
+		//TODO: Olhar para o header para perceber que formata esta a ser enviado
+		boolean isKryo = false;
+
+		if(isKryo){
+			
+			InputStream snappyIn = new SnappyFramedInputStream(in);
+			Input i = new Input(snappyIn);
+			trajectories = mPool.run(new KryoCallback<Collection<Trajectory>>() {
+				public Collection<Trajectory> execute(Kryo kryo) {
+					return (Collection<Trajectory>) kryo.readClassAndObject(i);
+				}
+			});
+			
+		} else {
+
+			ObjectMapper mapper = new ObjectMapper();
+			trajectories = mapper.readValue(in, new TypeReference<Collection<Trajectory>>(){});
+		
+		}
+		
 		return trajectories;
 
 	}
 
-	public static String getRawContent(InputStream in){
+	public static String getRawContent(Response res) throws IOException{
+
+
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(res.body().byteStream()));
 
 
 		br.lines().forEach((l) -> sb.append(l + "\n"));

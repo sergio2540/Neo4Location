@@ -1,4 +1,4 @@
-package org.neo4location.trajectory.strucuture;
+package org.neo4location.processing.strucuture;
 
 import java.time.Duration;
 import java.time.Instant;

@@ -1,21 +1,24 @@
 package org.neo4location.transactions;
 
-import java.util.stream.Stream;
+import java.util.concurrent.ExecutorService;
 
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.event.TransactionData;
 import org.neo4j.graphdb.event.TransactionEventHandler;
-import org.neo4location.domain.Neo4LocationLabels;
-import org.neo4location.domain.trajectory.Trajectory;
-import org.neo4location.trajectory.strucuture.VelocityBasedStructure;
+import org.neo4location.processing.Structure;
 
 public class StructureTransactionEventHandler implements TransactionEventHandler<Void> {
 
-	VelocityBasedStructure str;
+	private Structure mStructure;
+	private static GraphDatabaseService mGraphDatabaseService;
+	private ExecutorService mExecutor;
 
-	public StructureTransactionEventHandler(VelocityBasedStructure str){
+	public StructureTransactionEventHandler(GraphDatabaseService graphDatabaseService, ExecutorService executor, Structure structure){
 
-		this.str = str;
+		mStructure = structure;
+		mExecutor = executor;
+		mGraphDatabaseService = graphDatabaseService;
 
 	}
 

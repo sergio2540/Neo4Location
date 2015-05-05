@@ -27,12 +27,12 @@ import org.junit.runners.Parameterized.Parameters;
 import org.neo4j.harness.junit.Neo4jRule;
 import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
-import org.neo4location.domain.Neo4LocationIO;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationService;
+import org.neo4location.utils.Neo4LocationTestsUtils;
 
 import com.codahale.metrics.ConsoleReporter;
 import com.codahale.metrics.MetricRegistry;
@@ -115,15 +115,15 @@ public class TestSpatial {
 
 		System.err.println(mNumberOfUsers);
 		String url = "neo4location/trajectories";
-		mTrajectories = Neo4LocationIO.createTrajectory(mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
-		String json = Neo4LocationIO.trajectoriesToJson(mTrajectories);
+		mTrajectories = Neo4LocationTestsUtils.createTrajectory(mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
+		String json = Neo4LocationTestsUtils.trajectoriesToJson(mTrajectories);
 
 		String filename = String.format("./create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
 		Files.write(Paths.get(filename), json.getBytes());
 
-		ClientResponse response = Neo4LocationIO.POST(mNeo4j.httpsURI(), url.toString(),json);
+		com.squareup.okhttp.Response response = Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(),json);
 
-		assertEquals(201, response.getStatus());
+		assertEquals(201, response.code());
 
 	}
 
@@ -131,15 +131,19 @@ public class TestSpatial {
 
 	private Collection<Trajectory> httpGET(String url) throws JsonGenerationException, JsonMappingException, IOException{
 
-		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpsURI(), url);
-		String json = Neo4LocationIO.getRawContent(response.getEntityInputStream());
-
-		//Files.write(Paths.get("./create-%d-%d-%d.json.json"), json.getBytes());
-
-		Collection<Trajectory> trajectories = Neo4LocationIO.JsonTotrajectories(json);
-
-		assertThat(response.getStatus())
+		com.squareup.okhttp.Response response = Neo4LocationTestsUtils.GET(mNeo4j.httpsURI(), url);
+		
+		
+		assertThat(response.code())
 		.isEqualTo(Response.Status.OK.getStatusCode());
+		
+		//assertThat(response.body().bytes()).hasSize(2);
+		
+		Collection<Trajectory> trajectories = Neo4LocationTestsUtils.getStreamingCollection(response);
+
+		
+		
+		//assertThat(response.headers().toString()).isEmpty();
 
 		return trajectories;
 	}

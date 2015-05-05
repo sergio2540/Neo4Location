@@ -1,10 +1,19 @@
 package org.neo4location.domain.trajectory;
 
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.neo4location.domain.Neo4LocationRelationships;
+
+import com.esotericsoftware.kryo.serializers.BeanSerializer;
+import com.esotericsoftware.kryo.serializers.DefaultSerializers.EnumSerializer;
+import com.esotericsoftware.kryo.serializers.DefaultSerializers.StringSerializer;
+import com.esotericsoftware.kryo.serializers.FieldSerializer;
+import com.esotericsoftware.kryo.serializers.JavaSerializer;
+import com.esotericsoftware.kryo.serializers.FieldSerializer.Bind;
+import com.esotericsoftware.kryo.serializers.MapSerializer.BindMap;
 
 
 //@JsonTypeInfo(
@@ -15,11 +24,28 @@ import org.neo4location.domain.Neo4LocationRelationships;
 //@JsonSubTypes({
 //	@JsonSubTypes.Type(value = Neo4JMove.class, name = "Neo4JMove"),
 //})
-public class Move {
+public class Move implements Serializable  {
 	
-	private Neo4LocationRelationships mRel;
+//	/**
+//	 * 
+//	 */
+
+private static final long serialVersionUID = 1L;
+
+	//@Bind(JavaSerializer.class)
+	private Neo4LocationRelationships mRelationship;
+	
+	//@Bind(BeanSerializer.class)
 	private Point mFrom;
+	
+	//@Bind(BeanSerializer.class)
 	private Point mTo;
+	
+//	@BindMap(valueSerializer = FieldSerializer.class, 
+//			keySerializer = StringSerializer.class, 
+//			valueClass = Object.class, 
+//			keyClass = String.class, 
+//			keysCanBeNull = true)
 	private Map<String, Object> mSemanticData;
 	
 	
@@ -29,19 +55,21 @@ public class Move {
 	
 	public Move(Neo4LocationRelationships rel, Point from, Point to, Map<String, Object> sd){
 
-		mRel = rel;
+		mRelationship = rel;
 		mFrom = from;
 		mTo = to;
 		mSemanticData = sd;
 	}
 	
 	public Neo4LocationRelationships getRelationship() {
-		return mRel;
+		return Neo4LocationRelationships.MOVE;
 	}
 
 
 	public void setRelationship(Neo4LocationRelationships rel) {
-		mRel = rel;
+		
+		//Se descomentado causa erro
+		//mRelationship = rel;
 
 	}
 	
@@ -80,7 +108,7 @@ public class Move {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(String.format("Move:  rel: %s from: %s to: %s", mRel, mFrom, mTo));
+		sb.append(String.format("Move:  rel: %s from: %s to: %s", mRelationship, mFrom, mTo));
 		
 		for(Entry<String, Object> kv : mSemanticData.entrySet())
 			sb.append(String.format("%s: %s", kv.getKey(), kv.getValue()));

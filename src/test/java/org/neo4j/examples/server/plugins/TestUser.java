@@ -35,10 +35,10 @@ import org.neo4j.harness.TestServerBuilders;
 import org.neo4j.harness.junit.Neo4jRule;
 import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
-import org.neo4location.domain.Neo4LocationIO;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationService;
+import org.neo4location.utils.Neo4LocationTestsUtils;
 import org.supercsv.cellprocessor.ParseBigDecimal;
 
 import com.codahale.metrics.ConsoleReporter;
@@ -128,13 +128,13 @@ public class TestUser {
 
 		
 		String url = "neo4location/trajectories";
-		mTrajectories = Neo4LocationIO.createTrajectory(mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
-		String json = Neo4LocationIO.trajectoriesToJson(mTrajectories);
+		mTrajectories = Neo4LocationTestsUtils.createTrajectory(mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
+		String json = Neo4LocationTestsUtils.trajectoriesToJson(mTrajectories);
 
 		//String filename = String.format("./create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
 		//Files.write(Paths.get(filename), json.getBytes());
 
-		ClientResponse response = Neo4LocationIO.POST(mNeo4j.httpURI(), url.toString(),json);
+		com.squareup.okhttp.Response response = Neo4LocationTestsUtils.POST(mNeo4j.httpURI(), url.toString(),json);
 
 		//assertEquals(201, response.getStatus());
 
@@ -268,17 +268,17 @@ public class TestUser {
 
 	private Collection<Trajectory> httpGET(String url) throws JsonGenerationException, JsonMappingException, IOException{
 
-		ClientResponse response = Neo4LocationIO.GET(mNeo4j.httpURI(), url);
+		com.squareup.okhttp.Response response = Neo4LocationTestsUtils.GET(mNeo4j.httpURI(), url);
 
-		MultivaluedMap<String, String> s = response.getHeaders();
+		//MultivaluedMap<String, String> s = response.getHeaders();
 
 		//assertThat(s).containsKey("application/x-gzip");
 
-		Collection<Trajectory> trajectories = Neo4LocationIO.getStreamingCollection(response.getEntityInputStream());
+		Collection<Trajectory> trajectories = Neo4LocationTestsUtils.getStreamingCollection(response);
 
 		//Files.write(Paths.get("./get-%d-%d-%d.json"), json.getBytes());
 
-		assertThat(response.getStatus())
+		assertThat(response.code())
 		.isEqualTo(Response.Status.OK.getStatusCode());
 
 		return trajectories;

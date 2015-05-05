@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4location.domain.Neo4LocationLabels;
@@ -87,7 +88,7 @@ public class Neo4JPoint {
 		
 		for(Neo4LocationLabels label: labels){
 		
-			if(neo4jPoint.hasLabel(label)){
+			if(neo4jPoint.hasLabel(DynamicLabel.label(label.name()))){
 				list.add(label);
 			}
 		}
@@ -156,9 +157,12 @@ public class Neo4JPoint {
 	
 	private void setLabels(Collection<Neo4LocationLabels> labels) {
 		
-		for(Label l: labels){
-			if(!mNeo4JNode.hasLabel(l)){
-				mNeo4JNode.addLabel(l);
+		for(Neo4LocationLabels l: labels){
+			
+			Label neo4JLabel = DynamicLabel.label(l.name());
+			
+ 			if(!mNeo4JNode.hasLabel(neo4JLabel)){
+				mNeo4JNode.addLabel(neo4JLabel);
 			}
 		}
 		

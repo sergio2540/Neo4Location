@@ -1,4 +1,4 @@
-package org.neo4location.domain;
+package org.neo4location.server.plugins;
 
 import java.io.IOException;
 import java.io.InputStream;

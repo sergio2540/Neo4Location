@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4location.domain.Neo4LocationProperties;
@@ -30,7 +31,7 @@ public class Neo4JTrajectory {
 				
 		String trajectoryName  = (String) trajectory.getProperty(Neo4LocationProperties.TRAJNAME);
 		
-		Relationship startA = trajectory.getSingleRelationship(Neo4LocationRelationships.START_A, Direction.INCOMING);
+		Relationship startA = trajectory.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name()), Direction.INCOMING);
 		
 		User user = null;
 		
@@ -38,7 +39,7 @@ public class Neo4JTrajectory {
 			user = new Neo4JPerson(startA.getStartNode()).getPerson();
 		}
 	
-		Relationship from = trajectory.getSingleRelationship(Neo4LocationRelationships.FROM, Direction.OUTGOING);
+		Relationship from = trajectory.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()), Direction.OUTGOING);
 		
 		Collection<Move> moves = null;
 		if(from !=null)
@@ -63,7 +64,7 @@ public class Neo4JTrajectory {
 		
 		while(move != null) {
 		
-			move  = start.getSingleRelationship(Neo4LocationRelationships.MOVE, Direction.OUTGOING);
+			move  = start.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.MOVE.name()), Direction.OUTGOING);
 			if(move != null){
 				
 				//move.getEndNode();

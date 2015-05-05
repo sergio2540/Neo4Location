@@ -2,9 +2,9 @@ package org.neo4location.domain;
 
 import java.io.Serializable;
 
-import org.neo4j.graphdb.RelationshipType;
 
-public enum Neo4LocationRelationships implements RelationshipType, Serializable, Comparable<Neo4LocationRelationships> {
+//@DefaultSerializer(EnumSerializer.class)
+public enum Neo4LocationRelationships implements Serializable {
 	
 	//User START_A TRAJECTORY
 	START_A,

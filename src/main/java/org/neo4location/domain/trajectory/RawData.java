@@ -8,9 +8,7 @@ import java.util.StringTokenizer;
 import org.neo4location.domain.Neo4LocationProperties;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spatial4j.core.context.SpatialContext;
-import com.spatial4j.core.distance.GeodesicSphereDistCalc;
-import com.spatial4j.core.shape.impl.PointImpl;
+
 
 public class RawData { 
 
@@ -32,30 +30,30 @@ public class RawData {
 	private boolean mHasAccuracy = false;
 	private float mAccuracy = 0.0f;
 
-	public enum FORMAT { 
-
-		/**
-		 * Constant used to specify formatting of a latitude or longitude
-		 * in the form "[+-]DDD.DDDDD where D indicates degrees.
-		 */
-		DEGREES, 
-
-		/**
-		 * Constant used to specify formatting of a latitude or longitude
-		 * in the form "[+-]DDD:MM.MMMMM" where D indicates degrees and
-		 * M indicates minutes of arc (1 minute = 1/60th of a degree).
-		 */
-		MINUTES, 
-
-		/**
-		 * Constant used to specify formatting of a latitude or longitude
-		 * in the form "DDD:MM:SS.SSSSS" where D indicates degrees, M
-		 * indicates minutes of arc, and S indicates seconds of arc (1
-		 * minute = 1/60th of a degree, 1 second = 1/3600th of a degree).
-		 */
-		SECONDS
-
-	}
+//	public enum FORMAT { 
+//
+//		/**
+//		 * Constant used to specify formatting of a latitude or longitude
+//		 * in the form "[+-]DDD.DDDDD where D indicates degrees.
+//		 */
+//		DEGREES, 
+//
+//		/**
+//		 * Constant used to specify formatting of a latitude or longitude
+//		 * in the form "[+-]DDD:MM.MMMMM" where D indicates degrees and
+//		 * M indicates minutes of arc (1 minute = 1/60th of a degree).
+//		 */
+//		MINUTES, 
+//
+//		/**
+//		 * Constant used to specify formatting of a latitude or longitude
+//		 * in the form "DDD:MM:SS.SSSSS" where D indicates degrees, M
+//		 * indicates minutes of arc, and S indicates seconds of arc (1
+//		 * minute = 1/60th of a degree, 1 second = 1/3600th of a degree).
+//		 */
+//		SECONDS
+//
+//	}
 
 	public RawData(){
 
@@ -165,52 +163,52 @@ public class RawData {
 		}
 	}
 
-	/**
-	 * Converts a coordinate to a String representation.
-	 * @param coordinate
-	 * @param outputType
-	 * @return
-	 * 
-	 * @throws IllegalArgumentException if coordinate is less than
-	 * -180.0, greater than 180.0, or is not a number.
-	 * @throws NullPointerException if outputType is null
-	 */
-	public static String convert(double coordinate, RawData.FORMAT outputType){
-
-		if (outputType == null) {
-			throw new NullPointerException("outputType");
-		}
-
-		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
-			throw new IllegalArgumentException("coordinate=" + coordinate);
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		// Handle negative values
-		if (coordinate < 0) {
-			sb.append('-');
-			coordinate = -coordinate;
-		}
-
-		DecimalFormat df = new DecimalFormat("###.#####");
-		if (outputType == FORMAT.MINUTES || outputType == FORMAT.SECONDS) {
-			int degrees = (int) Math.floor(coordinate);
-			sb.append(degrees);
-			sb.append(':');
-			coordinate -= degrees;
-			coordinate *= 60.0;
-			if (outputType == FORMAT.SECONDS) {
-				int minutes = (int) Math.floor(coordinate);
-				sb.append(minutes);
-				sb.append(':');
-				coordinate -= minutes;
-				coordinate *= 60.0;
-			}
-		}
-		sb.append(df.format(coordinate));
-		return sb.toString();
-	}
+//	/**
+//	 * Converts a coordinate to a String representation.
+//	 * @param coordinate
+//	 * @param outputType
+//	 * @return
+//	 * 
+//	 * @throws IllegalArgumentException if coordinate is less than
+//	 * -180.0, greater than 180.0, or is not a number.
+//	 * @throws NullPointerException if outputType is null
+//	 */
+//	public static String convert(double coordinate, RawData.FORMAT outputType){
+//
+//		if (outputType == null) {
+//			throw new NullPointerException("outputType");
+//		}
+//
+//		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
+//			throw new IllegalArgumentException("coordinate=" + coordinate);
+//		}
+//
+//		StringBuilder sb = new StringBuilder();
+//
+//		// Handle negative values
+//		if (coordinate < 0) {
+//			sb.append('-');
+//			coordinate = -coordinate;
+//		}
+//
+//		DecimalFormat df = new DecimalFormat("###.#####");
+//		if (outputType == FORMAT.MINUTES || outputType == FORMAT.SECONDS) {
+//			int degrees = (int) Math.floor(coordinate);
+//			sb.append(degrees);
+//			sb.append(':');
+//			coordinate -= degrees;
+//			coordinate *= 60.0;
+//			if (outputType == FORMAT.SECONDS) {
+//				int minutes = (int) Math.floor(coordinate);
+//				sb.append(minutes);
+//				sb.append(':');
+//				coordinate -= minutes;
+//				coordinate *= 60.0;
+//			}
+//		}
+//		sb.append(df.format(coordinate));
+//		return sb.toString();
+//	}
 
 	/**
 	 * Computes the approximate DISTANCE in meters between two locations, 
@@ -241,10 +239,11 @@ public class RawData {
 
 		RawData raw = dest.getRawData();
 
-		GeodesicSphereDistCalc gdv = new GeodesicSphereDistCalc.Vincenty();
-		PointImpl p = new PointImpl(raw.getLongitude(), raw.getLatitude(), SpatialContext.GEO);
+//		GeodesicSphereDistCalc gdv = new GeodesicSphereDistCalc.Vincenty();
+//		PointImpl p = new PointImpl(raw.getLongitude(), raw.getLatitude(), SpatialContext.GEO);
 
-		return gdv.distance(p, raw.getLongitude(), raw.getLatitude());
+		//return gdv.distance(p, raw.getLongitude(), raw.getLatitude());
+		return 0;
 
 	}
 

@@ -1,57 +1,1027 @@
-02-05-2015 03:01:01 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314552, 116.316551]') , end=node:points('bbox:[40.009499, 40.011497, 40.009521, 40.011520]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.lat) AS lat 
-02-05-2015 03:01:09 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314552, 116.316551]') , end=node:points('bbox:[40.009499, 40.011497, 40.009521, 40.011520]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:01:15 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314568, 116.316566]') , end=node:points('bbox:[40.009499, 40.011497, 40.009499, 40.011497]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.lat) AS lat 
-02-05-2015 03:01:20 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314568, 116.316566]') , end=node:points('bbox:[40.009499, 40.011497, 40.009499, 40.011497]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:01:24 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314003, 116.316002]') , end=node:points('bbox:[40.009499, 40.011497, 40.008648, 40.010651]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.lat) AS lat 
-02-05-2015 03:01:27 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314003, 116.316002]') , end=node:points('bbox:[40.009499, 40.011497, 40.008648, 40.010651]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:01:31 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314056, 116.316055]') , end=node:points('bbox:[40.009499, 40.011497, 40.008732, 40.010731]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.lat) AS lat 
-02-05-2015 03:01:34 ERROR Neo4LocationService:713 - START start=node:points('bbox:[116.314568, 116.316566, 116.314056, 116.316055]') , end=node:points('bbox:[40.009499, 40.011497, 40.008732, 40.010731]') WITH start , end  MATCH (user)-[:START_A]->(trajectory),p=(start)-[:MOVE*0..100]->(end) WHERE true AND start.lon >= 116.314568 AND start.lon <= 116.316568 AND end.lon >= 116.314568 AND end.lon <= 116.316568 AND start.lat >= 40.009497 AND start.lat <= 40.011497 AND end.lat >= 40.009497 AND end.lat <= 40.011497  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:02 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:10 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:02:12 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:12 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:16 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:20 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:02:24 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:02:28 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:32 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:02:32 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:32 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:35 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:39 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:02:43 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:02:47 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:49 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:02:50 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:50 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:02:55 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:02:58 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:03:01 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:03:04 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:06 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:03:06 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:06 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:08 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:11 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:03:14 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:03:16 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:20 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:03:20 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:20 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:24 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:26 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:03:29 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:03:31 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:34 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:03:34 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:34 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:36 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:39 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:03:41 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
-02-05-2015 03:03:44 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true AND start.TIMESTAMP >= 0  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:46 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels , reduce(c = 0, n IN nodes(p) | c + n.degree) AS degree  ORDER BY degree  SKIP 1  LIMIT 2 
-02-05-2015 03:03:46 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:46 ERROR Neo4LocationService:794 - degree
-02-05-2015 03:03:48 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels 
-02-05-2015 03:03:50 ERROR Neo4LocationService:713 - MATCH (user)-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 1  LIMIT 2 
-02-05-2015 03:03:52 ERROR Neo4LocationService:713 - MATCH (user { USERNAME : {username}})-[:START_A]->(trajectory)-[:FROM]->(start),p=(start)-[:MOVE*0..100]->(end),(end)<-[:TO]-(traj) WHERE true  RETURN user, trajectory, relationships(p) AS rels  SKIP 2 
+04-05-2015 05:42:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:04 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 05:42:04 ERROR Neo4LocationService:571 - 4424
+04-05-2015 05:42:11 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:11 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:11 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 05:42:11 ERROR Neo4LocationService:571 - 1938
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:42:15 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 05:42:15 ERROR Neo4LocationService:571 - 33663
+04-05-2015 05:43:46 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:46 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:46 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:46 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:46 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:46 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 05:43:46 ERROR Neo4LocationService:571 - 4424
+04-05-2015 05:43:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:51 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 05:43:51 ERROR Neo4LocationService:571 - 1938
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:55 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 05:43:55 ERROR Neo4LocationService:571 - 33663
+04-05-2015 05:43:59 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:59 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:43:59 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 05:43:59 ERROR Neo4LocationService:571 - 1922
+04-05-2015 05:44:02 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:02 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:02 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:02 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 05:44:02 ERROR Neo4LocationService:571 - 2756
+04-05-2015 05:44:05 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:05 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:05 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:05 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:05 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:05 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 05:44:05 ERROR Neo4LocationService:571 - 4424
+04-05-2015 05:44:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 05:44:08 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 05:44:08 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:26:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:08 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:08 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:26:08 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:26:14 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:14 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:14 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:14 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:19 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:26:19 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:26:23 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:23 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:23 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:23 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:26:26 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:26 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:26 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:26 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:26:26 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:26:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:29 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:26:29 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:26:33 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:33 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:33 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:33 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:26:35 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:36 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:26:36 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:26:39 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:39 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:39 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:39 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:26:42 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:42 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:42 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:42 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:26:42 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:26:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:45 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:26:45 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:26:48 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:48 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:48 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:48 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:51 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:26:51 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:26:54 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:54 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:54 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:26:54 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:26:57 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:57 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:57 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:26:57 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:26:57 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:27:00 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:00 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:00 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:00 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:00 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:00 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:27:00 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:27:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:04 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:04 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:04 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:27:06 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:07 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:27:07 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:27:09 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:09 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:09 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:09 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:27:12 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:12 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:12 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:12 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:27:12 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:27:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:15 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:15 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:27:15 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:27:17 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:17 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:17 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:17 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:18 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:19 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:27:19 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:27:21 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:21 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:21 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:21 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:27:22 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:22 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:22 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:22 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:27:22 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:27:24 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:24 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:24 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:24 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:24 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:24 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:27:24 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:27:27 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:27 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:27 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:27 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:29 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:27:29 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:27:31 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:31 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:31 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:31 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:27:33 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:33 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:33 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:33 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:27:33 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:27:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:36 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:36 ERROR Neo4LocationService:560 - Traj Size5
+04-05-2015 16:27:36 ERROR Neo4LocationService:571 - 4424
+04-05-2015 16:27:38 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:38 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:38 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:38 ERROR Neo4LocationService:571 - 1938
+04-05-2015 16:27:40 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:40 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:40 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:41 ERROR Neo4LocationService:560 - Traj Size40
+04-05-2015 16:27:41 ERROR Neo4LocationService:571 - 33663
+04-05-2015 16:27:43 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:43 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:43 ERROR Neo4LocationService:560 - Traj Size2
+04-05-2015 16:27:43 ERROR Neo4LocationService:571 - 1922
+04-05-2015 16:27:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:45 ERROR Neo4LocationService:548 - mvs 6
+04-05-2015 16:27:45 ERROR Neo4LocationService:560 - Traj Size3
+04-05-2015 16:27:45 ERROR Neo4LocationService:571 - 2756
+04-05-2015 16:34:09 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:34:14 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:34:19 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:34:24 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:34:26 ERROR Neo4LocationService:181 - java.nio.channels.ClosedChannelException
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.IteratingCallback.close(IteratingCallback.java:459)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.server.HttpConnection.onClose(HttpConnection.java:429)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager.connectionClosed(SelectorManager.java:330)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.destroyEndPoint(SelectorManager.java:749)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectChannelEndPoint.close(SelectChannelEndPoint.java:169)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.AbstractConnection.close(AbstractConnection.java:225)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.closeNoExceptions(SelectorManager.java:713)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.access$1100(SelectorManager.java:406)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector$EndPointCloser.run(SelectorManager.java:1020)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:34:26 ERROR Neo4LocationService:183 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:34:29 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:34:32 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:34:34 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:34:36 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:34:38 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:34:40 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:34:42 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:34:45 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:34:48 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:34:51 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:34:54 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:34:57 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:34:59 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:35:01 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:35:03 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:35:05 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:35:07 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:35:09 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:35:12 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:35:14 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:35:16 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:35:18 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:35:20 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:35:22 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:35:24 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:35:26 ERROR Neo4LocationService:173 - 4424
+04-05-2015 16:35:28 ERROR Neo4LocationService:173 - 1938
+04-05-2015 16:35:29 ERROR Neo4LocationService:173 - 33663
+04-05-2015 16:35:30 ERROR Neo4LocationService:173 - 1922
+04-05-2015 16:35:32 ERROR Neo4LocationService:173 - 2756
+04-05-2015 16:38:39 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:43 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:46 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:49 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:52 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:54 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:57 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:38:59 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:20 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:33 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:37 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:41 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:44 ERROR Neo4LocationService:181 - java.nio.channels.ClosedChannelException
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.IteratingCallback.close(IteratingCallback.java:459)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.server.HttpConnection.onClose(HttpConnection.java:429)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager.connectionClosed(SelectorManager.java:330)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.destroyEndPoint(SelectorManager.java:749)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectChannelEndPoint.close(SelectChannelEndPoint.java:169)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.AbstractConnection.close(AbstractConnection.java:225)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.closeNoExceptions(SelectorManager.java:713)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector.access$1100(SelectorManager.java:406)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.io.SelectorManager$ManagedSelector$EndPointCloser.run(SelectorManager.java:1020)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:46:44 ERROR Neo4LocationService:183 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:46:47 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:49 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:52 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:46:55 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:47:59 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:04 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:07 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:10 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:13 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:16 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:18 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:48:20 ERROR Neo4LocationService:173 - 23
+04-05-2015 16:58:26 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:26 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:58:30 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:30 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:58:34 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:34 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:58:36 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:36 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:58:39 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:39 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:58:41 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:58:41 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:58:42 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:59:31 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:59:31 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:59:35 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:59:35 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 16:59:38 ERROR Neo4LocationService:200 - java.lang.NullPointerException
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.neo4location.domain.Neo4LocationOutputStreamKryo.write(Neo4LocationOutputStreamKryo.java:179)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:540)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:715)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:800)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:587)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1125)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1059)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.Server.handle(Server.java:497)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:248)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:620)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:540)
+04-05-2015 16:59:38 ERROR Neo4LocationService:202 - java.lang.Thread.run(Thread.java:745)
+04-05-2015 17:05:38 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:42 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:45 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:48 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:51 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:54 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:56 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:05:58 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:38 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:42 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:45 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:48 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:50 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:54 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:56 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:14:58 ERROR Neo4LocationService:100 - 23
+04-05-2015 17:29:09 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:29:18 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:29:22 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:29:27 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:29:34 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:29:39 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:29:43 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:29:45 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:29:48 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:29:50 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:29:53 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:29:56 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:29:58 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:30:00 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:30:08 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:30:12 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:30:19 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:30:22 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:30:29 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:30:33 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:30:35 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:30:38 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:30:40 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:30:42 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:30:45 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:30:47 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:30:49 ERROR Neo4LocationService:100 - 4424
+04-05-2015 17:30:51 ERROR Neo4LocationService:100 - 1938
+04-05-2015 17:30:53 ERROR Neo4LocationService:100 - 33663
+04-05-2015 17:30:55 ERROR Neo4LocationService:100 - 1922
+04-05-2015 17:30:56 ERROR Neo4LocationService:100 - 2756
+04-05-2015 17:34:44 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:34:49 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:34:52 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:34:55 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:34:58 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:01 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:35:04 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:35:06 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:35:09 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:35:11 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:14 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:35:16 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:35:18 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:35:21 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:35:23 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:25 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:35:27 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:35:30 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:35:32 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:35:34 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:36 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:35:38 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:35:41 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:35:43 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:35:46 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:48 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:35:50 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:35:52 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:35:54 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:35:56 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:35:58 ERROR Neo4LocationService:104 - 4424
+04-05-2015 17:36:00 ERROR Neo4LocationService:104 - 1938
+04-05-2015 17:36:02 ERROR Neo4LocationService:104 - 33663
+04-05-2015 17:36:04 ERROR Neo4LocationService:104 - 1922
+04-05-2015 17:36:06 ERROR Neo4LocationService:104 - 2756
+04-05-2015 17:37:23 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:37:28 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:37:32 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:37:35 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:37:38 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:37:41 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:37:44 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:37:47 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:37:50 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:37:52 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:37:55 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:38:00 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:38:02 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:38:05 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:38:08 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:38:11 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:38:14 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:38:16 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:38:20 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:38:24 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:38:28 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:38:31 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:38:33 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:38:36 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:38:38 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:38:41 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:38:44 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:38:46 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:38:49 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:38:52 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:38:56 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:38:58 ERROR Neo4LocationService:105 - 1938
+04-05-2015 17:39:00 ERROR Neo4LocationService:105 - 33663
+04-05-2015 17:39:02 ERROR Neo4LocationService:105 - 1922
+04-05-2015 17:39:04 ERROR Neo4LocationService:105 - 2756
+04-05-2015 17:44:47 ERROR Neo4LocationService:105 - 4424
+04-05-2015 17:44:52 ERROR Neo4LocationService:105 - 1938
+04-05-2015 18:00:47 ERROR Neo4LocationService:105 - 4424
+04-05-2015 18:00:53 ERROR Neo4LocationService:105 - 1938
+04-05-2015 18:00:57 ERROR Neo4LocationService:105 - 33663

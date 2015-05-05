@@ -1,7 +1,5 @@
 package org.neo4location.server.plugins;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,18 +8,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -30,19 +22,12 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.sun.jersey.spi.inject.Inject;
-
-import org.neo4j.gis.spatial.SpatialDatabaseRecord;
 import org.neo4j.gis.spatial.SpatialDatabaseService;
 import org.neo4j.gis.spatial.indexprovider.LayerNodeIndex;
 import org.neo4j.gis.spatial.indexprovider.SpatialIndexProvider;
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.DynamicLabel;
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -53,18 +38,16 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
 import org.neo4j.graphdb.index.IndexManager;
-import org.neo4location.domain.Compress;
 import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
-import org.neo4location.domain.trajectory.SemanticData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.domain.trajectory.User;
 import org.neo4location.graphdb.Neo4JMove;
-import org.neo4location.graphdb.Neo4JPoint;
+import org.objenesis.strategy.StdInstantiatorStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,6 +55,14 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.Slf4jReporter.LoggingLevel;
 import com.codahale.metrics.Timer;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Output;
+import com.esotericsoftware.kryo.serializers.CollectionSerializer;
+import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
+import com.esotericsoftware.kryo.serializers.FieldSerializer;
+import com.esotericsoftware.minlog.Log;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 //@Singleton
 @Path("")
@@ -82,8 +73,8 @@ public class Neo4LocationService {
 	private Index<Node> mIndex;
 	private double mAccuracyInKm = 0.1;
 	private Status status = Status.OK;
-	
-	
+
+
 	private Logger logger = LoggerFactory.getLogger(Neo4LocationService.class);
 	private MetricRegistry metrics = new MetricRegistry();
 	private final Timer tIndex;
@@ -104,6 +95,7 @@ public class Neo4LocationService {
 	//UserResource, TrajectoryResource, 
 	public Neo4LocationService(@Context GraphDatabaseService db)
 	{
+
 
 		mDb = db;
 		mSpatialService = new SpatialDatabaseService(mDb);
@@ -136,80 +128,79 @@ public class Neo4LocationService {
 
 			trajectories = mapper.readValue(_trajectories, TypeFactory.defaultInstance().constructParametricType(Collection.class, Trajectory.class));
 
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-		} 
 
-		Map<String, String> config = SpatialIndexProvider.SIMPLE_POINT_CONFIG;
-		IndexManager indexMan = mDb.index();
 
-		try (Transaction tx = mDb.beginTx()){
+			Map<String, String> config = SpatialIndexProvider.SIMPLE_POINT_CONFIG;
+			IndexManager indexMan = mDb.index();
 
-			mIndex = indexMan.forNodes("points", config);
+			try (Transaction tx = mDb.beginTx()){
 
-			//logger.error(String.valueOf(trajectories.size()));
+				mIndex = indexMan.forNodes("points", config);
 
-			for(Trajectory trajectory : trajectories){
+				//logger.error(String.valueOf(trajectories.size()));
 
-				mAccuracyInKm = 0.1;
+				for(Trajectory trajectory : trajectories){
 
-				//Devia remover trajectoryName
-				String trajectoryName = trajectory.getTrajectoryName();
-				Map<String, Object> props = trajectory.getSemanticData();
+					mAccuracyInKm = 0.1;
 
-				String personName = trajectory.getUser().getUsername();
+					//Devia remover trajectoryName
+					String trajectoryName = trajectory.getTrajectoryName();
+					Map<String, Object> props = trajectory.getSemanticData();
 
-				List<Move> moves = new ArrayList<>(trajectory.getMoves());
+					String personName = trajectory.getUser().getUsername();
 
-				//				logger.error("---------------------------------");
-				//				logger.error(String.format("user: %s", personName));
-				//				logger.error(String.format("traj: %s", trajectoryName));
-				//				logger.error("----------------------------------");
+					List<Move> moves = new ArrayList<>(trajectory.getMoves());
 
-				//logger.error(String.format("traj size: %s", String.valueOf(moves.size())));
+					//				logger.error("---------------------------------");
+					//				logger.error(String.format("user: %s", personName));
+					//				logger.error(String.format("traj: %s", trajectoryName));
+					//				logger.error("----------------------------------");
 
-				Node person = getOrCreatePerson(personName);
-				Node traj = getOrCreateTrajectory(trajectoryName,props);
-				Node nLast;
+					//logger.error(String.format("traj size: %s", String.valueOf(moves.size())));
 
-				if(!traj.hasRelationship(Neo4LocationRelationships.FROM, Direction.OUTGOING)){
-					//logger.error("first time");
-					//FIRST TIME WE SEE THIS TRAJ
-					person.createRelationshipTo(traj, Neo4LocationRelationships.START_A);	
-					nLast = getOrCreatePoint(moves.get(0), false);
-					traj.createRelationshipTo(nLast, Neo4LocationRelationships.FROM);
+					Node person = getOrCreatePerson(personName);
+					Node traj = getOrCreateTrajectory(trajectoryName,props);
+					Node nLast;
 
-				} 
-				else {
-					//FIRST + N TIME WE SEE THIS TRAJ
-					Relationship rTo = traj.getSingleRelationship(Neo4LocationRelationships.TO, Direction.OUTGOING);		
-					nLast = rTo.getEndNode();
-					rTo.delete();
+					if(!traj.hasRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()), Direction.OUTGOING)){
+						//logger.error("first time");
+						//FIRST TIME WE SEE THIS TRAJ
+						person.createRelationshipTo(traj, DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name()));	
+						nLast = getOrCreatePoint(moves.get(0), false);
+						traj.createRelationshipTo(nLast, DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()));
+
+					} 
+					else {
+						//FIRST + N TIME WE SEE THIS TRAJ
+						Relationship rTo = traj.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.TO.name()), Direction.OUTGOING);		
+						nLast = rTo.getEndNode();
+						rTo.delete();
+
+					}
+
+					append(traj,nLast,moves);
 
 				}
 
-				append(traj,nLast,moves);
+				tx.success();	
+				tx.close();
+
+			} catch (Exception e) {
+
+				logger.error(e.toString());
+				for(StackTraceElement st :e.getStackTrace()){
+					logger.error(st.toString());
+				}
 
 			}
 
-			tx.success();	
-			tx.close();
 
+			//Timer.Context context = tIndex.time();
+
+			//context.close();
 		} catch (Exception e) {
-
-			logger.error(e.toString());
-			for(StackTraceElement st :e.getStackTrace()){
-				logger.error(st.toString());
-			}
-
-		}
-
-
-		//Timer.Context context = tIndex.time();
-
-		//context.close();
-
-
+			logger.error(e.getMessage());
+		} 
 
 		if(status.equals(Status.CREATED)){
 			return Response.status(Response.Status.CREATED).build();
@@ -218,6 +209,8 @@ public class Neo4LocationService {
 			status = Status.OK;
 			return Response.status(Response.Status.OK).build();
 		}
+
+
 
 	}
 
@@ -229,10 +222,10 @@ public class Neo4LocationService {
 
 			Node nTo = getOrCreatePoint(m, true);
 
-			cursor.createRelationshipTo(nTo, m.getRelationship());
+			cursor.createRelationshipTo(nTo, DynamicRelationshipType.withName(m.getRelationship().name()));
 			status = Status.CREATED;
 
-			Relationship r = nLast.getSingleRelationship(m.getRelationship(), Direction.OUTGOING);
+			Relationship r = nLast.getSingleRelationship(DynamicRelationshipType.withName(m.getRelationship().name()), Direction.OUTGOING);
 
 			//Devia retornar SemanticData ou Map
 			Map<String, Object> sd = m.getSemanticData();
@@ -252,7 +245,7 @@ public class Neo4LocationService {
 
 		}
 
-		traj.createRelationshipTo(cursor, Neo4LocationRelationships.TO);
+		traj.createRelationshipTo(cursor, DynamicRelationshipType.withName(Neo4LocationRelationships.TO.name()));
 
 	}
 
@@ -347,12 +340,12 @@ public class Neo4LocationService {
 
 	private Node getOrCreateTrajectory(String trajectoryName, Map<String,Object> props) {
 		//logger.error("getTraj");
-		Node traj =  mDb.findNode(Neo4LocationLabels.TRAJECTORY, Neo4LocationProperties.TRAJNAME, trajectoryName);
+		Node traj =  mDb.findNode(DynamicLabel.label(Neo4LocationLabels.TRAJECTORY.name()), Neo4LocationProperties.TRAJNAME, trajectoryName);
 
 
 		if(traj == null){
 			status = Status.CREATED;
-			traj = mDb.createNode(Neo4LocationLabels.TRAJECTORY);
+			traj = mDb.createNode(DynamicLabel.label(Neo4LocationLabels.TRAJECTORY.name()));
 		}
 
 		traj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
@@ -374,11 +367,13 @@ public class Neo4LocationService {
 
 	private Node getOrCreatePerson(String personName) {
 
-		Node person =  mDb.findNode(Neo4LocationLabels.USER, Neo4LocationProperties.USERNAME, personName);
+		Label user = DynamicLabel.label(Neo4LocationLabels.USER.name());
+
+		Node person =  mDb.findNode(user, Neo4LocationProperties.USERNAME, personName);
 
 		if(person == null){
 			status = Status.CREATED;
-			person = mDb.createNode(Neo4LocationLabels.USER);
+			person = mDb.createNode(user);
 
 		}
 
@@ -386,19 +381,56 @@ public class Neo4LocationService {
 		return person;
 
 	}
+	
+	private static final String MEDIATYPE_KRYO = "application/x-kryo";
 
-
+//	@GET
+//	@Path("/trajectories")
+//	@Produces(MEDIATYPE_KRYO)
+//	public Response getTrajectoryKryo(@Context UriInfo ui){
+//		
+//		final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+//		//MultivaluedMap<String, String> pathParams = ui.getPathParameters();
+//	
+//		final Map<String, Object> params = new HashMap<String, Object>();		
+//		final String cypherQuery  =  buildCypherQuery(queryParams, params);
+//		
+//		Neo4LocationOutputStreamKryo.logger = logger;
+//		final StreamingOutput so = new Neo4LocationOutputStreamKryo(mDb, cypherQuery, params);
+//		
+//		Response response = Response.status(Response.Status.OK).entity(so).build();
+//		
+//		return response;
+//	}
+	
 	@GET
-	@Compress
+	//@Compress
 	@Path("/trajectories")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getRawTrajectory(@Context UriInfo ui){
-
+	public Response getTrajectoryJSON(@Context UriInfo ui){
 		
-		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+		final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 		//MultivaluedMap<String, String> pathParams = ui.getPathParameters();
+	
+		final Map<String, Object> params = new HashMap<String, Object>();		
+		final String cypherQuery  =  buildCypherQuery(queryParams, params);
+		
+		Neo4LocationOutputStreamJSON.logger = logger;
+		final StreamingOutput so = new Neo4LocationOutputStreamJSON(mDb, cypherQuery, params);
+		
+		Response response = Response.status(Response.Status.OK).entity(so).build();
+		
+		return response;
+	}
 
-		Map<String, Object> params = new HashMap<String, Object>();
+
+
+
+
+	private String buildCypherQuery(final MultivaluedMap<String, String> queryParams, final Map<String, Object> params) {
+
+		//final Map<String, Object> params = new HashMap<String, Object>();
+
 		final StringBuilder cypherQuery = new StringBuilder();
 
 		try {
@@ -646,7 +678,7 @@ public class Neo4LocationService {
 			//#########################RETURN##########################
 
 			cypherQuery.append(" RETURN user, trajectory, relationships(p) AS rels ");
-			
+
 			//#########################SUM##########################
 
 
@@ -716,149 +748,11 @@ public class Neo4LocationService {
 
 		}
 
-		//logger.error(cypherQuery.toString());
 
-		//String r = "";
-
-		final StreamingOutput stream = new StreamingOutput(){
-			@Override
-			public void write(OutputStream os) throws IOException, WebApplicationException
-			{
-				try (Transaction tx = mDb.beginTx()){
-
-					Result result = mDb.execute(cypherQuery.toString(), params);
-
-					JsonFactory jsonfactory = new JsonFactory();
-					JsonGenerator jg = jsonfactory.createGenerator(os);
-					jg.setCodec(new ObjectMapper());
-
-					jg.writeStartArray();
-					//logger.error("start array");
-					
-					while (result.hasNext())
-					{
-
-						User user = null;
-						String trajName = null;
-						//Collection<Move> mvs = new ArrayList<>();
-						Collection<Relationship> rels = new ArrayList<>();
-						//Map<String,Object> props = new HashMap<>();
-
-						Map<String,Object> row = result.next();
-						
-						jg.writeStartObject();
-						for (String key : result.columns())
-						{
-
-							Object value = row.get(key);
-
-							if(value instanceof Node){
-
-								Node t = (Node) value;
-
-								if(t.hasLabel(Neo4LocationLabels.USER)){
-									String personName = (String) t.getProperty(Neo4LocationProperties.USERNAME);
-									user = new User(personName);
-									jg.writeObjectField("user", user);
-
-								} else {
-									trajName = (String) t.getProperty(Neo4LocationProperties.TRAJNAME);
-
-									jg.writeStringField("trajectoryName", trajName);
-									
-									
-								}
-
-							}
-							//							else if(value instanceof Relationship){
-							//								rel.add((Relationship) value);
-							//							}
-							else if(value instanceof List<?>){
-
-								jg.writeArrayFieldStart("moves");
-
-								rels = (List<Relationship>) value;
-								for(Relationship rel :rels){
-									Move m = new Neo4JMove(rel).getMove();
-									//mvs.add(m);
-									jg.writeObject(m);
-								}
-
-								jg.writeEndArray();
-
-							} else {
-								//props.put(key, value.toString());
-								
-								
-								jg.writeObjectFieldStart("semanticData");
-								
-								//Aglomerar todas as props de trajectoria e colocar um for
-								//para iterar sobre elas
-								jg.writeStringField(key, value.toString()); 
-								
-								jg.writeEndObject();
-								///logger.error(key,value.toString());
-							}
-
-						}
-
-						jg.writeEndObject();
-						//jg.writeObject(new Trajectory(trajName, user, mvs, props));
-
-					}
-
-					//logger.error("end array");
-					jg.writeEndArray();
-					jg.flush();
-					jg.close();
-
-					tx.success();
-
-
-				} catch (Exception e) {
-
-					logger.error(e.toString());
-					for(StackTraceElement st :e.getStackTrace()){
-						logger.error(st.toString());
-					}
-
-
-				}
-
-			}
-		};
-		
-		
-		//			ObjectWriter mapper = new ObjectMapper().writerWithDefaultPrettyPrinter();
-		//			Collection<Trajectory> trajectories = toTrajectories(result);
-		//			r = mapper.writeValueAsString(trajectories);
-
-		
-		return Response.status(Response.Status.OK).entity(stream).type(MediaType.APPLICATION_JSON).build();
-	}
-
-	private Collection<Trajectory> toTrajectories(Result result){
-
-		//		Collection<Trajectory> trajs = new HashSet<>();
-		//
-		//		
-		//
-		//
-		//			for(Relationship t : rel){
-		//
-		//				Move m = new Neo4JMove(t).getMove();
-		//				mvs.add(m);
-		//			}	
-		//
-		//			trajs.add(new Trajectory(trajName, person, mvs, props));
-		//
-		//		}
-		//
-		//
-		//		return trajs;
-		return null;
+		return cypherQuery.toString();
 
 	}
+
 
 	private int putInParameters(String key, List<String> values, Map<String,Object> params, int minSize, int maxSize){
 
