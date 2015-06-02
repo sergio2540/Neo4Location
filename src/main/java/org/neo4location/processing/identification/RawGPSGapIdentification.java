@@ -5,9 +5,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.event.TransactionData;
@@ -22,40 +24,30 @@ import org.neo4location.utils.Neo4LocationProcessingUtils;
 
 public class RawGPSGapIdentification implements Identification {
 
+	
 	private Duration mDuration;
 	private double mDistance;
-	private Collection<Trajectory> mTrajectories;
 
 
 	public RawGPSGapIdentification(double distance, long duration){
-
-		this.mDuration = Duration.ofMillis(duration);
-		this.mDistance = distance;
-
-	}
-
-	public void setTrajectories(Collection<Trajectory> trajectories){
-
-		mTrajectories = trajectories;
+		
+		mDuration = Duration.ofMillis(duration);
+		mDistance = distance;
 
 	}
 
-	public Collection<Trajectory> getTrajectory(){
-
-		return mTrajectories;
-
-	}
-
-	public void rawGPSGapIdentification(Trajectory trajectory){
+	public Collection<Trajectory> rawGPSGapIdentification(Trajectory trajectory){
 
 		//TODO:
 
-		Collection<Move> moves = trajectory.getMoves();
+		Iterable<Move> moves = trajectory.getMoves();
 		if(moves == null)
-			return;
+			return Collections.emptyList();
 
-		List<Point> tempTrajectory = new ArrayList<Point>();
-
+		List<Move> tempMoves = new ArrayList<Move>();
+		Collection<Trajectory> tempTrajectories = new ArrayList<Trajectory>();
+		
+		
 		//Nao ha garantia de ordem no tempo
 		//Devo fazer sort de moves
 
@@ -67,23 +59,23 @@ public class RawGPSGapIdentification implements Identification {
 			Point pFrom = m.getFrom();
 
 			if(pFrom == null){
-				return;
+				return Collections.emptyList();
 			}
 
 			Point pTo = m.getTo();
 
 			if(pTo == null){
-				return;
+				return Collections.emptyList();
 			}
 
 			RawData rFrom = pFrom.getRawData();
 			RawData rTo = pFrom.getRawData();
 
-			
+
 			distance = Neo4LocationProcessingUtils.distance(m,rFrom, rTo);
 			duration = Neo4LocationProcessingUtils.interval(m, rFrom, rTo);
 
-			
+
 			//duration > mDuration
 			if (duration.compareTo(mDuration) == 1){
 
@@ -94,34 +86,52 @@ public class RawGPSGapIdentification implements Identification {
 				//SUCESS
 				//end of trajectory, create temp trajectory 
 				//and prepare for a new trajectory
-				createSemanticTrajectory(tempTrajectory);
-				tempTrajectory = new ArrayList<Point>();
+
+				String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
+				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
+				
+				
+				tempTrajectories.add(tempTrajectory);
+
+				tempMoves = new ArrayList<Move>();
 			}
 
-			tempTrajectory.add(pFrom);
+			tempMoves.add(m);
 
 			//first = second;
 
 		}
+		
+		return tempTrajectories;
 
 	}
-
+	
+	
 	
 
-	private void createSemanticTrajectory(List<Point> tempTrajectory2) {
-		// TODO Auto-generated method stub
+	
+	@Override
+	public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
 
+
+		if(trajectories == null){
+			//Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
+			return Collections.emptyList();
+
+		}
+		
+		
+		return trajectories.stream()
+				    	   .map((trajectory) -> rawGPSGapIdentification(trajectory))
+						   .flatMap((col) -> col.stream())
+						   .collect(Collectors.toList());
+		
 	}
 
+
 	@Override
-	public Void call() throws Exception {
-
-		for(Trajectory trajectory : mTrajectories){
-			rawGPSGapIdentification(trajectory);
-		}
-
-		//SAVE OR SEND
-
+	public String getName() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

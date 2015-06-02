@@ -11,21 +11,16 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
-import org.neo4location.domain.trajectory.User;
-import org.neo4location.domain.trajectory.Point;
+import org.neo4location.domain.trajectory.Person;
 import org.neo4location.domain.trajectory.Trajectory;
 
 
 public class Neo4JTrajectory {
 	
-
 	
-	private Node mNode;
-	private Trajectory mTrajectory;
+	private final Trajectory mTrajectory;
 	
-//	private Collection<Point> mPoints;
-//	private Collection<Move> mMoves;
-
+	
 	public Neo4JTrajectory(Node trajectory){
 		
 				
@@ -33,21 +28,22 @@ public class Neo4JTrajectory {
 		
 		Relationship startA = trajectory.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name()), Direction.INCOMING);
 		
-		User user = null;
+		Person person = null;
 		
 		if(startA != null){
-			user = new Neo4JPerson(startA.getStartNode()).getPerson();
+			person = new Neo4JPerson(startA.getStartNode()).getPerson();
 		}
 	
 		Relationship from = trajectory.getSingleRelationship(DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()), Direction.OUTGOING);
 		
-		Collection<Move> moves = null;
-		if(from !=null)
+		Collection<Move> moves = new ArrayList<>();
+		if(from != null)
 			moves = createPointsAndMoves(from);
 		
 		
 		Map<String,Object> props = new HashMap<String, Object>(); 
-		mTrajectory = new Trajectory(trajectoryName, user, moves, props);
+		
+		mTrajectory = new Trajectory(trajectoryName, person, moves, props);
 		
 	}
 	
@@ -82,28 +78,5 @@ public class Neo4JTrajectory {
 	public Trajectory getTrajectory(){
 		return mTrajectory;
 	}
-	
-	
-	public void setTrajectory(Trajectory trajectory){
-		mTrajectory = trajectory;
-	}
-
-
-	//public Point getFrom();
-	//	public Point getTo();
-	//
-	//	public long getStart();
-	//	public long getEnd();
-	//or getLocations()
-	
-	
-//	public Collection<Point> getPoints(){
-//		return mPoints;
-//	}
-//	
-//
-//	public Collection<Move> getMoves(){
-//		return mMoves;
-//	}
 	
 }

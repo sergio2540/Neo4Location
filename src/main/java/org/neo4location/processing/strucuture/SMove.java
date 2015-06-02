@@ -1,20 +1,15 @@
 package org.neo4location.processing.strucuture;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.graphdb.Label;
-import org.neo4location.domain.Neo4LocationRelationships;
-import org.neo4location.domain.trajectory.Move;
-import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.SemanticData;
 
 public class SMove  {
 
-	public SMove(long instantFrom, long instantTo, Duration duration) {
+	public SMove(String trajname, long instantFrom, long instantTo) {
 		
 		
 		Map<String,Object> prop = new HashMap<String,Object>();
@@ -24,7 +19,7 @@ public class SMove  {
 
 		Map<String,Object> _sd = new HashMap<String,Object>(); 
 
-		_sd.put("", duration);
+		//_sd.put("", duration);
 		
 		SemanticData sd = new SemanticData(_sd);
 		Iterable<Label> labels = null;

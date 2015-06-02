@@ -1,60 +1,78 @@
 package org.neo4location.domain.trajectory;
 
-import java.util.HashMap;
+
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class SemanticData {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-	Map<String,Object> mSemanticData = new HashMap<>();
 
-	public SemanticData(){
+
+public final class SemanticData implements Serializable {
+
+	
+  private static final long serialVersionUID = 1L;
+  
+  final Map<String,Object> mSemanticData;
+
+	//	public SemanticData(){
+	//	}
+
+	@JsonCreator
+	public SemanticData(@JsonProperty("semanticData") Map<String,Object> semanticData){
+		mSemanticData = new ConcurrentHashMap<String, Object>(semanticData);
 	}
-	
-	public SemanticData(Map<String,Object> semanticData){
-		mSemanticData = semanticData;
-	}
-	
-	
+
+
 	public  Map<String,Object> getSemanticData(){
 		return mSemanticData;
 	}
-	
+
+	/*
 	public void setSemanticData(Map<String,Object> semanticData){
-		
+
 		mSemanticData = semanticData;
-		//for(Entry<String, Object> kv: kvs){
-			//mSemanticData.put(kv.getKey(), kv.getValue());
-		//}
+
+	}
+	 */
+
+
+	@Override
+	public int hashCode()
+	{
+		//TODO: Hash Code
+		return Objects.hashCode(mSemanticData);
 	}
 
-//	public Object getSemanticValue(String key){
-//		return mSemanticData.get(key);
-//	}
-//
-//	public void setSemanticValue(String key, Object semanticValue){
-//		mSemanticData.put(key, semanticValue);
-//	}
+
+	@Override
+	public boolean equals(final Object obj) {
+
+		return Objects.nonNull(obj) &&
+				obj instanceof SemanticData &&
+				Objects.equals(mSemanticData, ((SemanticData) obj).getSemanticData());	
+
+	}
 
 	@Override
 	public String toString() {
-		
+
 		StringBuilder s = new StringBuilder();
-	
-		getSemanticData()
-		.forEach((k,v) -> s.append(String.format("%s= %s ", k, v.toString())));
+
+		for(Entry<String, Object> kv: mSemanticData.entrySet()){
+			
+			s.append(String.format("%s= %s ", kv.getKey(), kv.getValue().toString()));
 		
+		}
+
 		return s.toString();
 	}
 
-	public Map<String, String> toMap() {
-		
-		final Map<String,String> map = new HashMap<String, String>();
-		
-		getSemanticData().forEach((k,v) -> map.put(k, v.toString()));
-		
-		return map;
-	}
+
+ 
 
 }

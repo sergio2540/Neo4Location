@@ -1,60 +1,43 @@
 package org.neo4location.domain.trajectory;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.neo4location.domain.Neo4LocationLabels;
-
-import com.esotericsoftware.kryo.serializers.BeanSerializer;
-import com.esotericsoftware.kryo.serializers.CollectionSerializer;
-import com.esotericsoftware.kryo.serializers.CollectionSerializer.BindCollection;
-import com.esotericsoftware.kryo.serializers.CompatibleFieldSerializer;
-import com.esotericsoftware.kryo.serializers.DefaultSerializers.StringSerializer;
-import com.esotericsoftware.kryo.serializers.FieldSerializer;
-import com.esotericsoftware.kryo.serializers.FieldSerializer.Bind;
-import com.esotericsoftware.kryo.serializers.MapSerializer.BindMap;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class Trajectory implements Serializable {
+public final class Trajectory implements Serializable, Comparable<Trajectory> {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
-	//@Bind(StringSerializer.class)
-	private String mTrajectoryName;
+	private final String mTrajectoryName;
+	
+	private final Person mUser;
+	
+	private final Iterable<Move> mMoves;
+	
+	private final Map<String,Object> mSemanticData;
 
-	//@Bind(BeanSerializer.class)
-	private User mUser;
+	//	public Trajectory(){
+	//
+	//	}
 
-//	@BindCollection(
-//			elementSerializer = FieldSerializer.class,
-//			elementClass = ArrayList.class, 
-//			elementsCanBeNull = true) 
-	private Collection<Move> mMoves = new ArrayList<Move>();
-
-	//	@BindMap(valueSerializer = StringSerializer.class, 
-	//			keySerializer = FieldSerializer.class, 
-	//			valueClass = Object.class, 
-	//			keyClass = String.class, 
-	//			keysCanBeNull = true)
-	private Map<String,Object> mSemanticData = new HashMap<>();
-
-
-	public Trajectory(){
-
-	}
-
-	public Trajectory(String trajectoryName, User user, Collection<Move> moves, Map<String,Object> semanticData){
+	@JsonCreator
+	public Trajectory(@JsonProperty("trajectoryName") String trajectoryName, 
+					  @JsonProperty("user") Person user, 
+					  @JsonProperty("moves") Collection<Move> moves, 
+					  @JsonProperty("semanticData") Map<String,Object> semanticData){
 
 		mTrajectoryName = trajectoryName;
 		mUser = user;
-		mMoves = moves;
-		mSemanticData = semanticData;
+		mMoves = new ConcurrentLinkedQueue<Move>(moves);
+		mSemanticData = new ConcurrentHashMap<String, Object>(semanticData);
 
 	}
 
@@ -63,36 +46,60 @@ public class Trajectory implements Serializable {
 		return mTrajectoryName;	
 	}
 
+
+	public Person getUser(){
+		return mUser;	
+	}
+
+
+	public Iterable<Move> getMoves(){
+		return mMoves;
+
+	}
+	
+	public Map<String, Object> getSemanticData() {
+		return mSemanticData;
+	}
+	
+	/*
 	public void setTrajectoryName(String trajectoryName){
 		mTrajectoryName = trajectoryName;	
 	}
 
-	public User getUser(){
-		return mUser;	
+	public void setUser(Person person){
+		mUser = person;	
 	}
-
-	public void setUser(User user){
-		mUser = user;	
-	}
-
-
-	public Collection<Move> getMoves(){
-		return mMoves;
-
-	}
-
+	
 	public void setMoves(Collection<Move> moves){
 		mMoves = moves;
-	}
-
-	public Map<String, Object> getSemanticData() {
-		return mSemanticData;
 	}
 
 	public void setSemanticData(Map<String, Object> semanticData) {
 		this.mSemanticData = semanticData;
 	}
+	*/
+	
+	@Override
+	public int hashCode()
+	{
+		//TODO: Hash Code
+		return Objects.hash(mTrajectoryName,mUser, mSemanticData, mMoves);
+	}
 
+
+	@Override
+	public boolean equals(final Object obj) {
+		
+		return Objects.nonNull(obj) &&
+			   obj instanceof Trajectory &&
+			   Objects.equals(mTrajectoryName, ((Trajectory)obj).getTrajectoryName()) &&
+			   Objects.equals(mUser, ((Trajectory)obj).getUser()) &&
+			   Objects.equals(mSemanticData, ((Trajectory)obj).getSemanticData()) &&
+			   Objects.equals(mMoves, ((Trajectory)obj).getMoves())
+			   ;	
+	
+	}
+	
 	@Override
 	public String toString(){
 
@@ -108,5 +115,13 @@ public class Trajectory implements Serializable {
 
 		return sb.toString();
 	}
+
+
+  @Override
+  public int compareTo(Trajectory o) {
+    
+    return  mTrajectoryName.compareTo(o.getTrajectoryName());
+  
+  }
 
 }

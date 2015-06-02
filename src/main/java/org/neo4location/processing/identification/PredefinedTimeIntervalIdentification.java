@@ -4,9 +4,12 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -20,43 +23,33 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 	 * Divide the stream of GPS feed into several subsequences contained in given time intervals,
 	 *  e.g., hourly trajectory, daily trajectory, weekly trajectory, monthly trajectory.
 	 */
-
-	private Collection<Trajectory> mTrajectories;
-	private Duration mDuration;
 	
+	
+	private long mMinStopTime;
+
 
 	public PredefinedTimeIntervalIdentification(long minStopTime) {
+
 		
-		mDuration = Duration.ofMillis(minStopTime);
-	
-	}
-	
-	public void setTrajectories(Collection<Trajectory> trajectories){
-		
-		mTrajectories = trajectories;
-	
-	}
-	
-	public Collection<Trajectory> getTrajectory(){
-		
-		return mTrajectories;
-		
+		mMinStopTime = minStopTime;
+
 	}
 
+	public Collection<Trajectory> predefinedTimeIntervalIdentification(Trajectory trajectory) {
 
-	public void predefinedTimeIntervalIdentification(Trajectory trajectory) {
-		
-		Collection<Move> moves = trajectory.getMoves();
+		Iterable<Move> moves = trajectory.getMoves();
 		if(moves == null)
-			return;
+			return Collections.emptyList();
 
-		List<Point> tempTrajectory = new ArrayList<Point>();
+		List<Move> tempMoves = new ArrayList<Move>();
 
 		//Nao ha garantia de ordem no tempo
 		//Devo fazer sort de moves
-		
-		Duration sumDuration = Duration.ZERO;
 
+		Duration sumDuration = Duration.ZERO;
+		
+		Collection<Trajectory> tempTrajectories = new ArrayList<Trajectory>();
+		
 		for(Move m: moves){
 
 			Duration duration;
@@ -64,52 +57,74 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 			Point pFrom = m.getFrom();
 
 			if(pFrom == null){
-				return;
+				return Collections.emptyList();
 			}
 
 			Point pTo = m.getTo();
 
 			if(pTo == null){
-				return;
+				return Collections.emptyList();
 			}
 
 			RawData rFrom = pFrom.getRawData();
 			RawData rTo = pFrom.getRawData();
-			
-			
+
+
 			duration = Neo4LocationProcessingUtils.interval(m, rFrom, rTo);
 			sumDuration.plus(duration);
 
-			
-			if (sumDuration.equals(duration)){
+
+			if (sumDuration.equals(Duration.ofMillis(mMinStopTime))){
 				//end of trajectory, create temp trajectory 
 				//and prepare for a new trajectory
-				createSemanticTrajectory(tempTrajectory);
-				tempTrajectory = new ArrayList<Point>();
+				
+				
+				String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
+				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
+				
+		
+				tempTrajectories.add(tempTrajectory);
+
+			
+				
+				tempMoves = new ArrayList<Move>();
 			}
 
-			tempTrajectory.add(pFrom);
+			tempMoves.add(m);
+		
 
-			//first = second;
+			
 
 		}
 		
+		return tempTrajectories;
+
 	}	
+
+
 	
 
-	private void createSemanticTrajectory(List<Point> tempTrajectory2) {
-		// TODO Auto-generated method stub
+	@Override
+	public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
+
+
+		if(trajectories == null){
+			//Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
+			return Collections.emptyList();
+
+		}
+		
+		
+		return trajectories.stream()
+				    	   .map((trajectory) -> predefinedTimeIntervalIdentification(trajectory))
+						   .flatMap((col) -> col.stream())
+						   .collect(Collectors.toList());
 		
 	}
 
 	@Override
-	public Void call() throws Exception {
-
-		for(Trajectory trajectory : mTrajectories){
-			predefinedTimeIntervalIdentification(trajectory);
-		}
-		
-		//SAVE OR SEND
+	public String getName() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

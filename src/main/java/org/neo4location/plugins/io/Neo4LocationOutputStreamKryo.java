@@ -1,4 +1,4 @@
-package org.neo4location.server.plugins;
+package org.neo4location.plugins.io;
 
 
 import java.io.IOException;
@@ -22,9 +22,11 @@ import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Trajectory;
-import org.neo4location.domain.trajectory.User;
+import org.neo4location.domain.trajectory.Person;
 import org.neo4location.graphdb.Neo4JMove;
+import org.neo4location.server.plugins.Neo4LocationRESTService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xerial.snappy.SnappyFramedOutputStream;
 import org.xerial.snappy.SnappyOutputStream;
 
@@ -39,44 +41,28 @@ import com.esotericsoftware.kryo.serializers.FieldSerializer;
 
 public class Neo4LocationOutputStreamKryo implements StreamingOutput {
 
-	public static Logger logger;
+	public final static Logger logger = LoggerFactory.getLogger(Neo4LocationRESTService.class);
+	
 	private GraphDatabaseService mDb;
 	private String mCypherQuery;
 	private Map<String,Object> mParams;
-
-	private KryoPool mPool;
-
-
-	//	BeanSerializer<Trajectory> trajectorySerializer;
-	//
-	//	CollectionSerializer trajectoriesSerializer;
-
-
+	
+	private final static KryoFactory factory = new KryoFactory() {
+		public Kryo create () {
+			Kryo kryo = new Kryo();
+			// configure kryo instance, customize settings
+			return kryo;
+		}
+	};
+	
+	private static final KryoPool mPool = new KryoPool.Builder(factory).softReferences().build();;
+	
 	public Neo4LocationOutputStreamKryo(GraphDatabaseService db, String cypherQuery, Map<String,Object> params) {
 
 		mDb = db;
 		mCypherQuery = cypherQuery;
 		mParams = params;
-
-
-		KryoFactory factory = new KryoFactory() {
-			public Kryo create () {
-				Kryo kryo = new Kryo();
-				// configure kryo instance, customize settings
-				return kryo;
-			}
-		};
-
-		// Build pool with SoftReferences enabled (optional)
-		mPool = new KryoPool.Builder(factory).softReferences().build();
-
-
-		//mKryo = new Kryo();
 		
-		
-		
-
-
 	}
 
 
@@ -88,9 +74,9 @@ public class Neo4LocationOutputStreamKryo implements StreamingOutput {
 		//OutputStream snappyOs = os;
 		OutputStream snappyOs = new SnappyFramedOutputStream(os);
 		
-		Output out = new Output(snappyOs);
+		final Output out = new Output(snappyOs);
 
-		Collection<Trajectory> trajs = query();
+		final Collection<Trajectory> trajs = query();
 		
 		
 		mPool.run(new KryoCallback<Void>() {
@@ -123,7 +109,7 @@ public class Neo4LocationOutputStreamKryo implements StreamingOutput {
 			while (result.hasNext())
 			{
 
-				User user = null;
+				Person person = null;
 				String trajName = null;
 				Collection<Move> mvs = new ArrayList<>();
 				Collection<Relationship> rels = new ArrayList<>();
@@ -147,11 +133,11 @@ public class Neo4LocationOutputStreamKryo implements StreamingOutput {
 						{
 
 							String personName = (String) t.getProperty(Neo4LocationProperties.USERNAME);
-							user = new User(personName);
+							person = new Person(personName);
 
 							//jg.writeObjectField("user", user);
 
-							//							BeanSerializer<User> buser = new BeanSerializer<User>(mKryo, User.class);
+							//							BeanSerializer<Person> buser = new BeanSerializer<Person>(mKryo, Person.class);
 							//
 							//							buser.write(mKryo, out,  user);
 
@@ -197,7 +183,7 @@ public class Neo4LocationOutputStreamKryo implements StreamingOutput {
 				}
 
 
-				trajs.add(new Trajectory(trajName, user, mvs, props));
+				trajs.add(new Trajectory(trajName, person, mvs, props));
 
 
 

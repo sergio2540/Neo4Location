@@ -1,16 +1,17 @@
 package org.neo4location.domain;
 
+//@Imutable
 public interface Neo4LocationProperties {
 
 
-	public interface Point {
-
-	}
-
-
-	public interface Move {
-
-	}
+//	public interface Point {
+//
+//	}
+//
+//
+//	public interface Move {
+//
+//	}
 
 
 	public final String USERNAME = "USERNAME";

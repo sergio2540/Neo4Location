@@ -1,12 +1,8 @@
 package org.neo4location.domain;
 
-import java.io.Serializable;
-
-
-//@DefaultSerializer(EnumSerializer.class)
-public enum Neo4LocationRelationships implements Serializable {
+public enum Neo4LocationRelationships {
 	
-	//User START_A TRAJECTORY
+	//Person START_A TRAJECTORY
 	START_A,
 
 	//FROM UK TO LISBON

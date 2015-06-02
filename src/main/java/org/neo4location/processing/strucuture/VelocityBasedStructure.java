@@ -4,9 +4,14 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.neo4location.domain.Neo4LocationProperties;
+import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
+import org.neo4location.domain.trajectory.RawData;
 //import org.neo4location.domain.trajectory.SemanticTrajectory;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Structure;
@@ -18,52 +23,39 @@ public class VelocityBasedStructure implements Structure {
 
 	//We analyze sensitivity of the coefficients δ1 and δ2 (e.g., δ1 = δ2 = δ = 30%) through experiments.
 	//pag. 13
-	
-	
-	private double delta1 = 0.3;
-	private double delta2 = 0.3;
-
-	private double mSpeedThreshold;
-	private Duration mMinStopTime;
-	
-	
-	private Collection<Trajectory> mTrajectories;
 
 	
-	private List<Point> tempStopPoints;
-	private List<Point> tempMovePoints;
+
+	private double mDelta1 = 0.3;
+	private double mDelta2 = 0.3;
+
+	private float mSpeedThreshold;
+	private long mMinStopTime;
 
 
-	public VelocityBasedStructure(double speedThreshold, long minStopTime, double delta1, double delta2){
+	private List<Move> tempStopPoints;
+	private List<Move> tempMovePoints;
 
-		this.mSpeedThreshold = speedThreshold;
-		this.mMinStopTime = Duration.ofMillis(minStopTime);
 
-		this.delta1 = delta1;
-		this.delta2 = delta2;
+	public VelocityBasedStructure(float speedThreshold, long minStopTime, double delta1, double delta2){
+
+		
+
+		mSpeedThreshold = speedThreshold;
+		mMinStopTime = minStopTime;
+
+		mDelta1 = delta1;
+		mDelta2 = delta2;
 
 	}
-	
-	public void setTrajectories(Collection<Trajectory> trajectories){
-		
-		mTrajectories = trajectories;
-	
-	}
-	
-	public Collection<Trajectory> getTrajectory(){
-		
-		return mTrajectories;
-		
-	}
 
-
-	public void velocityBased(Trajectory trajectory){
+	public Collection<Trajectory> velocityBased(Trajectory trajectory){
 
 		//this.trajectory = trajectory;
 
 		/* initialize: calculate GPS instant SPEED if needed */
 		if(mSpeedThreshold == 0){
-			mSpeedThreshold = getDynamicSpeedThreshold(null,null,delta1,delta2);
+			mSpeedThreshold = getDynamicSpeedThreshold(null,null,mDelta1,mDelta2);
 		}
 
 
@@ -72,43 +64,71 @@ public class VelocityBasedStructure implements Structure {
 
 		//Collection<Point> rawPoints = trajectory.getPoints();
 
-		Collection<Point> rawPoints = null;
-		tempStopPoints = new ArrayList<Point>();
-		tempMovePoints = new ArrayList<Point>();
+		Iterable<Move> mvs = trajectory.getMoves();
 
-		for(Point point : rawPoints){
+		tempStopPoints = new ArrayList<Move>();
+		tempMovePoints = new ArrayList<Move>();
 
-			double instantSpeed = point.getRawData().getSpeed();
+		for(Move move : mvs){
+
+			Point pFrom = move.getFrom();
+			Point pTo = move.getTo();
+
+			RawData rdFrom = pFrom.getRawData();
+			
+			//TODO: So From na velocity???
+			if(rdFrom == null || rdFrom.getSpeed() == null){
+				//Nao tem informação raw ou velocidade
+				continue;
+			}
+				
+			float instantSpeed = rdFrom.getSpeed();
+
 			if (instantSpeed < mSpeedThreshold){
 
-				computeMovePoints(tempMovePoints);
+				SMove smove = computeMovePoints(tempMovePoints);
 
-				tempStopPoints.add(point);
+				if(smove != null){
+
+				}
+
+				tempStopPoints.add(move);
 
 			} else {
 
-				computeStopPoints(tempStopPoints);
+				Stop stop = computeStopPoints(tempStopPoints);
+				
+				if(stop != null){
 
-				tempMovePoints.add(point);
+				}
+
+
+				tempMovePoints.add(move);
 			}
 		}
-
-		return;	
+		
+		
+		//Return trajectorias criadas
+		return null;
 	}
 
-	private void computeStopPoints(List<Point> groupOfStopPoints) {
-
-		//		double interval = groupOfMovePoints
-		//						  .stream()
-		//						  .mapToDouble(RawPoint::getInterval)
-		//						  .sum();
+	private Stop computeStopPoints(List<Move> groupOfStopPoints) {
 
 
 		int last = groupOfStopPoints.size()-1;
 		int first = 0;
 
-		Instant instantFrom = Instant.ofEpochMilli(groupOfStopPoints.get(first).getRawData().getTime());
-		Instant instantTo = Instant.ofEpochMilli(groupOfStopPoints.get(last).getRawData().getTime());
+		Move mFirst = groupOfStopPoints.get(first);
+		Move mLast = groupOfStopPoints.get(last);
+
+		String trajname = (String) mFirst.getFrom().getSemanticData().get(Neo4LocationProperties.TRAJNAME);
+
+		Point pFrom = mFirst.getFrom();
+		Point pTo = mLast.getTo();
+
+		Instant instantFrom = Instant.ofEpochMilli(pFrom.getRawData().getTime());
+
+		Instant instantTo = Instant.ofEpochMilli(pTo.getRawData().getTime());
 
 		//TODO:
 		//minStopTime == Duration.ofSeconds(sec,nano)
@@ -116,7 +136,7 @@ public class VelocityBasedStructure implements Structure {
 		Duration duration = Duration.between(instantFrom, instantTo);
 
 
-		if (duration.compareTo(mMinStopTime) == 1){
+		if (duration.compareTo(Duration.ofMillis(mMinStopTime)) == 1){
 
 			//TODO: Spatial
 			double center = 0;
@@ -124,34 +144,45 @@ public class VelocityBasedStructure implements Structure {
 
 			//stop : (timefrom, timeto, center, boundingRectangle);
 			// add the stop episode
-			Stop stop = 
-					new Stop(groupOfStopPoints.get(first), 
-							groupOfStopPoints.get(last) ,
-							instantFrom.toEpochMilli(), 
-							instantTo.toEpochMilli(), center, mbr);
+			return new Stop(trajname,
+					instantFrom.toEpochMilli(), 
+					instantTo.toEpochMilli(), center, mbr);
 
 
 		} else {
 
 			tempMovePoints.addAll(groupOfStopPoints);
+			return null;
 
 		}
 
 	}
 
 
-	private void computeMovePoints(List<Point> groupOfMovePoints) {
+	private SMove computeMovePoints(List<Move> groupOfMovePoints) {
 
 		int last = groupOfMovePoints.size()-1;
 		int first = 0;
 
-		Instant instantFrom = Instant.ofEpochMilli(groupOfMovePoints.get(first).getRawData().getTime());
-		Instant instantTo = Instant.ofEpochMilli(groupOfMovePoints.get(last).getRawData().getTime());
 
-		Duration duration = Duration.between(instantFrom, instantTo);
+		Move mFirst = groupOfMovePoints.get(first);
+		Move mLast = groupOfMovePoints.get(last);
+
+		String trajname = (String) mFirst.getFrom().getSemanticData().get(Neo4LocationProperties.TRAJNAME);
+
+		Point pFrom = mFirst.getFrom();
+		Point pTo = mLast.getTo();
+
+		Instant instantFrom = Instant.ofEpochMilli(pFrom.getRawData().getTime());
+
+		Instant instantTo = Instant.ofEpochMilli(pTo.getRawData().getTime());
+
+		//Duration duration = Duration.between(instantFrom, instantTo);
 
 		// create a move episode
-		SMove move = new SMove(instantFrom.toEpochMilli() , instantTo.toEpochMilli(), duration);
+		SMove move = new SMove(trajname, instantFrom.toEpochMilli() , instantTo.toEpochMilli());
+
+		return move;
 
 		// add the move episode
 		//trajectory.setMoves(move);
@@ -168,32 +199,46 @@ public class VelocityBasedStructure implements Structure {
 	 */
 
 	//TODO: 
-	private double getDynamicSpeedThreshold(Object p, Object obj, double delta1, double delta2){
+	private float getDynamicSpeedThreshold(Object p, Object obj, double delta1, double delta2){
 
 		//p - ponto x,y,z
 		//obj_id - objeto -> car, bus
 
-		double velocityThreshold = 0;
+		float velocityThreshold = 0;
 		//objectAvgSpeed – the average SPEED of this moving object
-		double objectAvgSpeed = 0;
+		float objectAvgSpeed = 0;
 		//positionAvgSpeed – the average SPEED of most moving objects in this position ⟨x, y⟩
-		double positionAvgSpeed = 0;
+		float positionAvgSpeed = 0;
 
 
-		velocityThreshold = Math.min(delta1*objectAvgSpeed, delta2*positionAvgSpeed);
+		velocityThreshold = (float) Math.min(delta1*objectAvgSpeed, delta2*positionAvgSpeed);
 		return velocityThreshold;
 	}
 
 
 	@Override
-	public Void call() throws Exception {
+	public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
 		
-		for(Trajectory trajectory : mTrajectories){
+		
+		if(trajectories == null){
+			//Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
+			return Collections.emptyList();
 
-			velocityBased(trajectory);
 		}
 		
-		return null;
+		
+		return trajectories.stream()
+				    	   .map((trajectory) -> velocityBased(trajectory))
+						   .flatMap((col) -> col.stream())
+						   .collect(Collectors.toList());
+	
+	}
+
+	@Override
+	public String getName() {
+
+		return "VelocityBased";
+
 	}
 
 }

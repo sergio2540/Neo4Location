@@ -4,69 +4,46 @@ package org.neo4location.graphdb;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.neo4j.graphdb.Relationship;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
+import org.neo4location.domain.trajectory.Point;
 
 
 public class Neo4JMove {
-
-//	Neo4LocationRelationships mRel;
-//
-//	Point mFrom;
-//	Point mTo;
-
-	Neo4LocationRelationships mRel;
-	Move mMove;
 	
-	//Map<String,Object> mProperties;
-
-	public Neo4JMove(){
-
-	}
-
-//	private Neo4JMove(Neo4LocationRelationships rel, Point from, Point to, Map<String,Object> properties)
-//	{
-//		if(from == null && to == null && properties == null)
-//			throw new IllegalArgumentException();
-//
-//  		mRel = rel;
-//  		mFrom = from;
-//  		mTo = to;
-//	    	mProperties = properties;
-//
-//	}
-
-	public Neo4JMove(Relationship move)
+	//Imutable
+	private final Move mMove;
+	
+	//Imutable
+	private final static EnumSet<Neo4LocationRelationships> rels = EnumSet.allOf(Neo4LocationRelationships.class);
+	
+	public Neo4JMove(final Relationship move)
 	{
-		mMove = new Move();
 		
-		Set<Neo4LocationRelationships> rels = EnumSet.allOf(Neo4LocationRelationships.class);
-
-		for(Neo4LocationRelationships rel: rels){
-
-			if(move.getType().equals(rel)){
-				mMove.setRelationship(rel);
-				break;
-			}
-		}
-
-		mMove.setFrom(new Neo4JPoint(move.getStartNode()).getPoint());
-		mMove.setTo(new Neo4JPoint(move.getEndNode()).getPoint());
-
-		Map<String,Object> temp = new HashMap<>();
-
+		//TODO: Verificar
+		final Neo4LocationRelationships rel = Neo4LocationRelationships.MOVE;
+		
+		//Ineficiente
+//		for(Neo4LocationRelationships tempRelationship: rels){
+//			if(move.getType().name().equals(tempRelationship.name())){
+//				rel = tempRelationship;
+//				break;
+//			}
+//		}
+		
+		
+		final Point from = new Neo4JPoint(move.getStartNode()).getPoint();
+		final Point to = new Neo4JPoint(move.getEndNode()).getPoint();
+		
+		
+		final Map<String,Object> sd = new HashMap<>();
 		for(String k : move.getPropertyKeys()){
-			temp.put(k, move.getProperty(k));
-		}
-
-		mMove.setSemanticData(temp);
-
-
-		//mMove = Move.create(mRel, mFrom, mTo, mProperties);
-
+			sd.put(k, move.getProperty(k));
+		}	
+		
+		mMove = new Move(rel, from, to, sd);
 	}
 
 
@@ -75,16 +52,12 @@ public class Neo4JMove {
 		return mMove;
 	}
 
-	//Remover manter apenas getMove
-
-
+	
 	@Override
 	public String toString(){
 
 		return mMove.toString();
 
 	}
-
 	
-
 }
