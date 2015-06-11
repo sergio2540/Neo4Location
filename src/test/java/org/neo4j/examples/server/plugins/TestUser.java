@@ -32,12 +32,15 @@ import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
 import org.neo4location.utils.Neo4LocationTestsUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 
 @RunWith(Parameterized.class)
 public class TestUser {
 
   //Max Person = 7
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 3;
 
   //Max 8
   private static final int START_USERS = 8;
@@ -59,7 +62,7 @@ public class TestUser {
 
       Collection<Object> objs = new ConcurrentLinkedQueue<>();
 
-      objs.add(0);
+      objs.add(i);
       objs.add((START_USERS + INC_USERS*i));
       objs.add((START_TRAJECTORIES_PER_USER + INC_TRAJECTORIES_PER_USER*i));
       objs.add((START_MOVES_PER_TRAJECTORY + INC_MOVES_PER_TRAJECTORY*i));
@@ -132,7 +135,9 @@ public class TestUser {
 
   }
 
-
+  private static ObjectMapper objectMapper = new ObjectMapper();
+  //private static ObjectWriter mObjectWriter = objectMapper.writerFor(TestParams.class);
+  
   @Test
   public void shouldReturnTrajectories() throws JsonParseException, IOException
   {
@@ -140,14 +145,17 @@ public class TestUser {
 
     String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getPersonName();
 
-
-
+    
     url.append(String.format("username=%s", username));
 
-    //		long timestamp = 0;
-    //		url.append(String.format("&timestamp=%d", timestamp));
+    
+    TestParams testParams = new TestParams();
+    testParams.setUsername(username);
+    Path filename = Paths.get(String.format("./datasets/tests/shouldReturnTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
 
-
+    
     Iterable<Trajectory> trajectories = httpGET(url.toString());
     assertTrajectoriesGivenUser(trajectories, 1);
     assertTrajectoriesGivenOnlyOneUser(trajectories);
@@ -162,6 +170,11 @@ public class TestUser {
     StringBuilder url = new StringBuilder("neo4location/trajectories");
 
     Iterable<Trajectory> trajectories = httpGET(url.toString());
+    
+    TestParams testParams = new TestParams();
+    Path filename = Paths.get(String.format("./datasets/tests/shouldReturnAllTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
 
     assertTrajectoriesGivenUser(trajectories, mNumberOfUsers);
 
@@ -180,6 +193,14 @@ public class TestUser {
 
     url.append(String.format("&skip=%d", skip));
     Iterable<Trajectory> trajectories = httpGET(url.toString());
+    
+    TestParams testParams = new TestParams();
+    testParams.setUsername(username);
+    testParams.setSkip(String.valueOf(skip));
+    
+    Path filename = Paths.get(String.format("./datasets/tests/shouldSkipTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
 
     assertThat(trajectories)
     .hasSize(mTrajectoriesPerUser-skip)
@@ -190,14 +211,21 @@ public class TestUser {
   @Test
   public void shouldSkipAndLimitTrajectories() throws JsonParseException, IOException
   {
-
-
+    
     int skip =  1;
     int limit = 2;
 
     StringBuilder url = new StringBuilder("neo4location/trajectories?");
     url.append(String.format("skip=%d&limit=%d",skip,limit));
     Iterable<Trajectory> trajectories = httpGET(url.toString());
+    
+    
+    TestParams testParams = new TestParams();
+    testParams.setSkip(String.valueOf(skip));
+    testParams.setLimit(String.valueOf(limit));
+    Path filename = Paths.get(String.format("./datasets/tests/shouldSkipAndLimitTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
 
     assertThat(trajectories)
     .hasSize(limit)
@@ -205,10 +233,7 @@ public class TestUser {
 
   }
 
-  private int compare(Trajectory traj1, Trajectory traj2){
-    return 0;
-
-  }
+  
 
   @Test
   public void shouldSkipLimitAndOrderByTrajectories() throws JsonParseException, IOException
@@ -226,6 +251,16 @@ public class TestUser {
 
     Iterable<Trajectory> trajectories = httpGET(url.toString());
 
+    TestParams testParams = new TestParams();
+    testParams.setSkip(String.valueOf(skip));
+    testParams.setLimit(String.valueOf(limit));
+    testParams.setOrderBy(orderBy);
+    testParams.setSum(orderBy);
+    
+    Path filename = Paths.get(String.format("./datasets/tests/shouldSkipLimitAndOrderByTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
+    
 
     assertThat(trajectories)
     .hasSize(limit)
@@ -259,9 +294,8 @@ public class TestUser {
         continue;
       }
 
+      
       int prev = Integer.parseInt(((String) prevTraj.getSemanticData().get("degree")));
-
-
       int current = Integer.parseInt(((String) traj.getSemanticData().get("degree")));
 
 
@@ -339,33 +373,6 @@ public class TestUser {
 
     }
 
-    //		for(Trajectory trajectory : trajectories){
-    //
-    //			assertThat(trajectory.getTrajectoryName())
-    //			.isNotNull()
-    //			.isNotEmpty()
-    //			.matches("\\d+");
-    //
-    //
-    //			assertThat(trajectory.getUser())
-    //			.isNotNull();
-    //
-    //			String username = mTrajectories[mUser*mTrajectoriesPerUser].getUser().getUsername();
-    //
-    //			assertThat(trajectory.getUser().getUsername())
-    //			.isNotNull()
-    //			.isNotEmpty()
-    //			.matches("\\d+")
-    //			.isEqualTo(username);
-    //
-    //
-    //			Collection<Move> moves = trajectory.getMoves();
-    //			assertThat(moves)
-    //			.hasSize(mMovesPerTrajectory)
-    //			.doesNotContainNull();
-    //
-    //			//Falta testar retorno de latitude e longitude
-    //
-    //		}
+   
   }
 }

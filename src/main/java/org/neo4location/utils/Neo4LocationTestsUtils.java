@@ -123,7 +123,6 @@ public class Neo4LocationTestsUtils {
 						line.startsWith("W") || 
 						line.startsWith("A") ||
 						line.startsWith("R") ||
-						//line.startsWith("0,2,255,My") ||
 						line.startsWith("0")){
 
 					skip = true;

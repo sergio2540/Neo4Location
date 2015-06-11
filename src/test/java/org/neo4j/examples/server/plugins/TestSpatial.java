@@ -288,8 +288,7 @@ public class TestSpatial {
     //B
     sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()-e, b.getLongitude()-e));
     sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()+e, b.getLongitude()+e));
-
-
+    
     return sb.toString();
   }
 

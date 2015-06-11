@@ -146,8 +146,6 @@
 		</dependency>
 
 
-
-
 		<!-- Http -->
 
 		<dependency>
@@ -221,6 +219,7 @@
 	</dependencies>
 
 	<licenses>
+
 		<license>
 			<name>Apache License Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
@@ -230,6 +229,7 @@
         file for further details.
         </comments>
 		</license>
+
 	</licenses>
 
 	<build>
@@ -275,6 +275,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 
 	<repositories>
