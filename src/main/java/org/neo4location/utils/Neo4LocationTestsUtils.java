@@ -65,7 +65,7 @@ import com.squareup.okhttp.Response;
 public class Neo4LocationTestsUtils {
 
 
-	private static final String DATA_DIR = "./Data/";
+	private static final String DATA_DIR = "./datasets/data/";
 	private static final String TRAJECTORY_DIR = "/Trajectory/";
 
 	//Registo e iniciação so precisa de ser feita uma vez

@@ -35,7 +35,6 @@ import org.neo4location.utils.Neo4LocationTestsUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-
 @RunWith(Parameterized.class)
 public class TestUser {
 

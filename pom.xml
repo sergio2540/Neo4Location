@@ -5,7 +5,7 @@
 	<groupId>org.neo4location.plugin</groupId>
 	<artifactId>neo4location-plugin</artifactId>
 	<name>Neo4Location Plugin</name>
-	<version>2.3.0-M01</version>
+	<version>2.2.0</version>
 
 	<description>Neo4Location</description>
 
@@ -347,8 +347,6 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-
-
 
 	</repositories>
 </project>

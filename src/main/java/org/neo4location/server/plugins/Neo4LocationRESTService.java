@@ -246,7 +246,7 @@ public class Neo4LocationRESTService {
   
 
   @GET
-  @Compress
+  //@Compress
   @Path("/trajectories")
   //@Produces(MediaType.APPLICATION_JSON)
   public Response getTrajectoryJSON(@Context UriInfo ui, @Context GraphDatabaseService db) throws Exception {
