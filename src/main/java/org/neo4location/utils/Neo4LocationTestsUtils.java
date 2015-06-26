@@ -183,7 +183,6 @@ public class Neo4LocationTestsUtils {
 			RawData rd = new RawData(lat, lon, timestamp, alt, accuracy, speed, bearing);
 
 			Map<String, Object> props = new HashMap<>();
-			//SemanticData sd = new SemanticData(props);
 			List<Neo4LocationLabels> labels = new ArrayList<>();
 
 			Neo4LocationRelationships rel = Neo4LocationRelationships.MOVE;

@@ -2,19 +2,12 @@ package org.neo4location.processing.identification;
 
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.event.TransactionData;
-import org.neo4location.domain.Neo4LocationProperties;
-import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -22,9 +15,9 @@ import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Identification;
 import org.neo4location.utils.Neo4LocationProcessingUtils;
 
+
 public class RawGPSGapIdentification implements Identification {
 
-	
 	private Duration mDuration;
 	private double mDistance;
 
@@ -36,10 +29,10 @@ public class RawGPSGapIdentification implements Identification {
 
 	}
 
-	public Collection<Trajectory> rawGPSGapIdentification(Trajectory trajectory){
+	private Collection<Trajectory> rawGPSGapIdentification(Trajectory trajectory){
 
+	  
 		//TODO:
-
 		Iterable<Move> moves = trajectory.getMoves();
 		if(moves == null)
 			return Collections.emptyList();
@@ -69,19 +62,15 @@ public class RawGPSGapIdentification implements Identification {
 			}
 
 			RawData rFrom = pFrom.getRawData();
-			RawData rTo = pFrom.getRawData();
+			RawData rTo = pTo.getRawData();
 
 
-			distance = Neo4LocationProcessingUtils.distance(m,rFrom, rTo);
-			duration = Neo4LocationProcessingUtils.interval(m, rFrom, rTo);
+			distance = Neo4LocationProcessingUtils.distance(m);
+			duration = Neo4LocationProcessingUtils.interval(m);
 
 
 			//duration > mDuration
-			if (duration.compareTo(mDuration) == 1){
-
-				if(mDistance > 0 && distance < mDistance){
-					continue;
-				}
+			if (duration.compareTo(mDuration) == 1 && mDistance > 0 && distance < mDistance){
 
 				//SUCESS
 				//end of trajectory, create temp trajectory 
@@ -94,6 +83,9 @@ public class RawGPSGapIdentification implements Identification {
 				tempTrajectories.add(tempTrajectory);
 
 				tempMoves = new ArrayList<Move>();
+				
+				//DEVO METER CONTINUE????????
+			
 			}
 
 			tempMoves.add(m);
@@ -131,8 +123,10 @@ public class RawGPSGapIdentification implements Identification {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	  
+	  //Falta UID
+	  
+		return this.getClass().getSimpleName();
 	}
 
 }

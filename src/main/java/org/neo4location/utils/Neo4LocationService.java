@@ -72,6 +72,7 @@ public final class Neo4LocationService {
     for(Trajectory trajectory : trajectories){
 
       writeTrajectory(trajectory);
+    
     }
 
   }
@@ -106,11 +107,13 @@ public final class Neo4LocationService {
 
       final Node person = (optionalPerson != null) ? optionalPerson : createPerson(trajectory,db);
 
+      final String trajectoryName = trajectory.getTrajectoryName();
+      
       if(optionalTraj != null) {
 
         created.set(false);
 
-        final String trajectoryName = trajectory.getTrajectoryName();
+       
         final Map<String,Object> props = trajectory.getSemanticData();
 
         optionalTraj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
@@ -131,9 +134,9 @@ public final class Neo4LocationService {
       final Node traj = (optionalTraj != null) ? optionalTraj : createTrajectory(trajectory,db);
 
 
-      final Node nLast = getLastPosition(moves, person,traj,db);
+      final Node nLast = getLastPosition(trajectoryName, moves, person,traj,db);
 
-      append(traj,nLast,moves,db);
+      append(trajectoryName,traj,nLast,moves,db);
 
 
       tx.success();	
@@ -174,7 +177,7 @@ public final class Neo4LocationService {
   private static DynamicRelationshipType TO = DynamicRelationshipType.withName(Neo4LocationRelationships.TO.name());
   private static DynamicRelationshipType START_A = DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name());
 
-  private Node getLastPosition(Iterable<Move> moves, Node person, Node traj, GraphDatabaseService db) {
+  private Node getLastPosition(final String trajName, Iterable<Move> moves, Node person, Node traj, GraphDatabaseService db) {
 
     if(!traj.hasRelationship(FROM, Direction.OUTGOING)){
       //logger.error("first time");
@@ -182,7 +185,7 @@ public final class Neo4LocationService {
       Relationship startA = person.createRelationshipTo(traj, START_A);	
 
       Move m = moves.iterator().next();
-      final Node nLast = createPoint(m.getFrom(),db);
+      final Node nLast = createPoint(trajName, m.getFrom(),db);
       traj.createRelationshipTo(nLast, FROM);
 
       return nLast;
@@ -199,7 +202,7 @@ public final class Neo4LocationService {
 
   }
 
-  private void append(final Node traj, final Node nLast, final Iterable<Move> moves, GraphDatabaseService db) {
+  private void append(final String trajName, final Node traj, final Node nLast, final Iterable<Move> moves, GraphDatabaseService db) {
 
     final AtomicReference<Node> from =  new AtomicReference<Node>(nLast);
 
@@ -207,7 +210,7 @@ public final class Neo4LocationService {
 
       final AtomicReference<Point> pTo = new AtomicReference<>(m.getTo());
 
-      final AtomicReference<Node> to = new AtomicReference<>(createPoint(pTo.get(),db));
+      final AtomicReference<Node> to = new AtomicReference<>(createPoint(trajName, pTo.get(),db));
 
       final Relationship r = from.getAndSet(to.get()).createRelationshipTo(to.get(), DynamicRelationshipType.withName(m.getRelationship().name()));
 
@@ -296,7 +299,7 @@ public final class Neo4LocationService {
 
   }
 
-  private synchronized Node createPoint(final Point point, GraphDatabaseService db) {
+  private synchronized Node createPoint(final String trajName, final Point point, GraphDatabaseService db) {
 
     //por enquanto cria sempre
     //TODO: Rever .toArray
@@ -349,7 +352,10 @@ public final class Neo4LocationService {
 
     }
 
+    //Set TrajName
+    p.setProperty(Neo4LocationProperties.TRAJNAME, trajName);
 
+    //Set Degree
     p.setProperty("degree", 1);
 
     final Index<Node> index =  db.index().forNodes("points", SpatialIndexProvider.SIMPLE_POINT_CONFIG);
@@ -363,7 +369,7 @@ public final class Neo4LocationService {
     //Node point = getPoint(p);
     Node point = null;
     if(point == null) {
-      return createPoint(p,db);
+      return createPoint("",p,db);
     }
 
 

@@ -78,20 +78,27 @@ public class Neo4LocationRESTService {
   }
 
   //Talvez PUT
+  //Em vez de usar queries parameteres usar JSON
+
   @POST
-  //@Compress
   @Path("/processing/velocityBasedStructure")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addVelocityBasedStructure(@Context UriInfo ui,  @Context GraphDatabaseService db){
 
-    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    double delta1 = Double.parseDouble(queryParams.getFirst("delta1"));
+    //    double delta2 =  Double.parseDouble(queryParams.getFirst("delta2"));
+    //    float speedThreshold =  Float.parseFloat(queryParams.getFirst("speedThreshold"));
+    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
 
-
-    double delta1 = Double.parseDouble(queryParams.getFirst("delta1"));
-    double delta2 =  Double.parseDouble(queryParams.getFirst("delta2"));
-    float speedThreshold =  Float.parseFloat(queryParams.getFirst("speedThreshold"));
-    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-
+    double delta1 = 0.3;
+    double delta2 = 0.5;
+    
+    float speedThreshold = 20;
+    long minStopTime = 10;
+    
+    
+    
     VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
     db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
 
@@ -100,16 +107,16 @@ public class Neo4LocationRESTService {
   }
 
   @POST
-  //@Compress
   @Path("/processing/densityBasedStructure")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addDensityBasedStructure(@Context UriInfo ui, @Context GraphDatabaseService db){
 
-    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
+    //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));
 
-    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));
-
+    long minStopTime = 100;
+    double maxDistance = 20;
 
     DensityBasedStructureF str = new DensityBasedStructureF(maxDistance, minStopTime);
     db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
@@ -119,18 +126,14 @@ public class Neo4LocationRESTService {
   }
 
   @POST
-  //@Compress
   @Path("/processing/predefinedTimeInterval")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addPredefinedTimeInterval(@Context UriInfo ui, @Context GraphDatabaseService db){
 
-    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
 
-
-
-    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-
-
+    long minStopTime = 100;
 
     PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(minStopTime);
     db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
@@ -141,17 +144,17 @@ public class Neo4LocationRESTService {
 
 
   @POST
-  //	//@Compress
   @Path("/processing/rawGPSGapIdentification")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addRawGPSGapIdentification(@Context UriInfo ui, @Context GraphDatabaseService db){
 
-    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
+    //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));  
 
 
-
-    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));
+    long minStopTime = 100;
+    double maxDistance = 20;
 
     RawGPSGapIdentification id = new RawGPSGapIdentification(maxDistance, minStopTime);
     db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
@@ -173,12 +176,12 @@ public class Neo4LocationRESTService {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response addTrajectories(final InputStream stream, @Context GraphDatabaseService db)
   {
-    
+
     boolean created = false;
 
     //Processa Collection Trajectory
     Collection<Trajectory> trajectories = new ArrayList<>();
-    
+
     try {
 
       JsonParser jParser = JSON_FACTORY.createParser(stream);
@@ -186,9 +189,9 @@ public class Neo4LocationRESTService {
 
       while (jParser.nextToken() != JsonToken.END_ARRAY){
 
-        
+
         jParser.nextToken();
-        
+
         Trajectory trajectory = OBJECT_READER.readValue(jParser);
 
         //mNeo4LocationService.appendTrajectory(trajectory, db);
@@ -197,7 +200,7 @@ public class Neo4LocationRESTService {
       }
 
       jParser.close();
-    
+
     } catch (IOException e) {
       logger.error(e.toString());
       for(StackTraceElement st :e.getStackTrace()){
@@ -224,26 +227,26 @@ public class Neo4LocationRESTService {
 
 
 
-//  	@GET
-//  	@Path("/trajectories")
-//  	@Produces(MEDIATYPE_KRYO)
-//  	public Response getTrajectoryKryo(@Context UriInfo ui){
-//  		
-//  		final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
-//  		//MultivaluedMap<String, String> pathParams = ui.getPathParameters();
-//  	
-//  		final Map<String, Object> params = new HashMap<String, Object>();		
-//  		final String cypherQuery  =  buildCypherQuery(queryParams, params);
-//  		
-//  		
-//  		final StreamingOutput so = new Neo4LocationOutputStreamKryo(mDb, cypherQuery, params);
-//  		
-//  		Response response = Response.status(Response.Status.OK).entity(so).build();
-//  		
-//  		return response;
-//  	}
-  
-  
+  //  	@GET
+  //  	@Path("/trajectories")
+  //  	@Produces(MEDIATYPE_KRYO)
+  //  	public Response getTrajectoryKryo(@Context UriInfo ui){
+  //  		
+  //  		final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+  //  		//MultivaluedMap<String, String> pathParams = ui.getPathParameters();
+  //  	
+  //  		final Map<String, Object> params = new HashMap<String, Object>();		
+  //  		final String cypherQuery  =  buildCypherQuery(queryParams, params);
+  //  		
+  //  		
+  //  		final StreamingOutput so = new Neo4LocationOutputStreamKryo(mDb, cypherQuery, params);
+  //  		
+  //  		Response response = Response.status(Response.Status.OK).entity(so).build();
+  //  		
+  //  		return response;
+  //  	}
+
+
 
   @GET
   //@Compress
@@ -259,11 +262,11 @@ public class Neo4LocationRESTService {
     final String cypherQuery  =  buildCypherQuery(queryParams, params);
 
 
-    
+
     final StreamingOutput so = new Neo4LocationOutputStreamJSON(db, cypherQuery, params);
-   
+
     Response response = Response.status(Response.Status.OK).entity(so).build();
-   
+
 
 
     return response;

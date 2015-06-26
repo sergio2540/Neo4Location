@@ -47,12 +47,11 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 		//Devo fazer sort de moves
 
 		Duration sumDuration = Duration.ZERO;
+		Duration minStop = Duration.ofMillis(mMinStopTime);
 		
 		Collection<Trajectory> tempTrajectories = new ArrayList<Trajectory>();
 		
 		for(Move m: moves){
-
-			Duration duration;
 
 			Point pFrom = m.getFrom();
 
@@ -67,27 +66,29 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 			}
 
 			RawData rFrom = pFrom.getRawData();
-			RawData rTo = pFrom.getRawData();
+			RawData rTo = pTo.getRawData();
 
 
-			duration = Neo4LocationProcessingUtils.interval(m, rFrom, rTo);
-			sumDuration.plus(duration);
+			Duration  delta_t = Neo4LocationProcessingUtils.interval(m);
+			sumDuration = sumDuration.plus(delta_t);
 
-
-			if (sumDuration.equals(Duration.ofMillis(mMinStopTime))){
+			Duration t = minStop.minus(sumDuration);
+			
+			if (t.isZero() || t.isNegative()){
 				//end of trajectory, create temp trajectory 
 				//and prepare for a new trajectory
 				
 				
 				String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
-				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
 				
-		
+				
+				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
 				tempTrajectories.add(tempTrajectory);
 
 			
-				
 				tempMoves = new ArrayList<Move>();
+				sumDuration = Duration.ZERO;
+				
 			}
 
 			tempMoves.add(m);
@@ -124,8 +125,9 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	  
+		return this.getClass().getSimpleName();
+	
 	}
 
 }

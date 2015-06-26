@@ -71,9 +71,7 @@ public final class Point implements Serializable, Comparable<Point> {
 
   @Override
   public int hashCode()
-  {
-    //TODO: Hash Code
-    
+  { 
     return Objects.hashCode(mRawData);
   }
 
@@ -89,7 +87,9 @@ public final class Point implements Serializable, Comparable<Point> {
 
   @Override
   public String toString() {
-    return String.format("[rawData= %s SemanticData= %s", getRawData().toString(), getSemanticData().toString());
+    
+    return String.format("[rawData= %s SemanticData= %s", getRawData(), getSemanticData());
+  
   }
 
   //Define a natural ordering

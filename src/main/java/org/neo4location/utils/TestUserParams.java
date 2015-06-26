@@ -1,4 +1,4 @@
-package org.neo4j.examples.server.plugins;
+package org.neo4location.utils;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class TestParams implements Serializable {
+public class TestUserParams implements Serializable {
 
   /**
    * 
@@ -21,11 +21,11 @@ public class TestParams implements Serializable {
   private String mSum;
 
   
-  public TestParams(){  
+  public TestUserParams(){  
   }
 
 
-  public TestParams(String username, String skip, String limit, String orderBy, String sum){
+  public TestUserParams(String username, String skip, String limit, String orderBy, String sum){
 
     setUsername(username);
     setSkip(skip);

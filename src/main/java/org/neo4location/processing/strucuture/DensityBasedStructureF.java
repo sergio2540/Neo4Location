@@ -1,6 +1,7 @@
 package org.neo4location.processing.strucuture;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class DensityBasedStructureF implements Structure {
 
 	public Collection<Trajectory> densityBased(Trajectory trajectory){
 		
-		return null;
+		return new ArrayList<Trajectory>();
 
 	}
 
@@ -54,8 +55,9 @@ public class DensityBasedStructureF implements Structure {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.getClass().getSimpleName();
+
 	}
 	
 

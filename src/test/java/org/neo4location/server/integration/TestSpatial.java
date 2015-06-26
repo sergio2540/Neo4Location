@@ -1,4 +1,4 @@
-package org.neo4j.examples.server.plugins;
+package org.neo4location.server.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -31,6 +31,9 @@ import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
 import org.neo4location.utils.Neo4LocationTestsUtils;
+import org.neo4location.utils.TestSpatialParams;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(Parameterized.class)
 public class TestSpatial {
@@ -73,7 +76,7 @@ public class TestSpatial {
 
       Collection<Object> objs = new ConcurrentLinkedQueue<>();
 
-      objs.add(0);
+      objs.add(i);
       objs.add((START_USERS + INC_USERS*i));
       objs.add((START_TRAJECTORIES_PER_USER + INC_TRAJECTORIES_PER_USER*i));
       objs.add((START_MOVES_PER_TRAJECTORY + INC_MOVES_PER_TRAJECTORY*i));
@@ -153,17 +156,17 @@ public class TestSpatial {
 
     com.squareup.okhttp.Response response = Neo4LocationTestsUtils.GET(mNeo4j.httpsURI(), url);
 
-//    assertThat(response.code())
-//    .isEqualTo(Response.Status.OK.getStatusCode());
+    //    assertThat(response.code())
+    //    .isEqualTo(Response.Status.OK.getStatusCode());
 
     Iterable<Trajectory> trajectories = Neo4LocationTestsUtils.getStreamingCollection(response);
 
     //TEST
     Path filename = Paths.get(String.format("./datasets/tests/get-spatial-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
-    
+
     if(!Files.exists(filename))
       Files.write(filename,"".getBytes(), StandardOpenOption.CREATE_NEW);
-    
+
     Files.write(filename, (url + "\n").getBytes(), StandardOpenOption.APPEND);
 
     return trajectories;
@@ -216,40 +219,99 @@ public class TestSpatial {
 
   }
 
-
+  private static ObjectMapper objectMapper = new ObjectMapper();
 
   @Test
   public void shouldReturnTrajectoryAtoB() throws JsonParseException, IOException
   {
 
+
     StringBuilder url = new StringBuilder("neo4location/trajectories?");
 
-    url.append(getBbox(mTrajectories));
+    double e = 0.001; 
 
-//    String getFilename = String.format("./get-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
-//    Files.write(Paths.get(getFilename), (url.toString() + "\n").getBytes(), StandardOpenOption.APPEND);
+    RawData[] ab = getBbox(mTrajectories);
+
+    RawData a = ab[0];
+    RawData b = ab[1];
+
+    StringBuilder sb = new StringBuilder();
+    //A
+    sb.append(String.format(Locale.ENGLISH, "lat=%f&lon=%f", a.getLatitude()-e, a.getLongitude()-e ));
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", a.getLatitude()+e, a.getLongitude()+e ));
+    //B
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()-e, b.getLongitude()-e));
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()+e, b.getLongitude()+e));
+    url.append(sb);
+
+    
+
 
     Iterable<Trajectory> trajectories  = httpGET(url.toString());
-
     assertTrajectoriesGivenABSize(trajectories);
 
 
   }
 
+  @Test
+  public void shouldReturnMostPopularTrajectories() throws JsonParseException, IOException
+  {
+    //Given A = (bbox,radius, lat,lon), B = (bbox,radius, lat,lon)  ,rel + (n.indegree  return sum
+
+    // (node) -> n.
+    // (relationship) -> r.
+
+    //Brevemente n.indegree, n.outdegree
+
+    StringBuilder url = new StringBuilder("neo4location/trajectories?");
+
+    double e = 0.001; 
+
+    RawData[] ab = getBbox(mTrajectories);
+
+    RawData a = ab[0];
+    RawData b = ab[1];
+
+    StringBuilder sb = new StringBuilder();
+    //A
+    sb.append(String.format(Locale.ENGLISH, "lat=%f&lon=%f", a.getLatitude()-e, a.getLongitude()-e ));
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", a.getLatitude()+e, a.getLongitude()+e ));
+    //B
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()-e, b.getLongitude()-e));
+    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()+e, b.getLongitude()+e));
+    url.append(sb);
+
+
+    //SUM=n.indegree
+    String property = "n.lat";
+    url.append(String.format("&sum=%s", property));
+
+    TestSpatialParams testSpatialParams = new TestSpatialParams();
+    testSpatialParams.setA(new double[]{a.getLatitude()-e, a.getLongitude()-e, a.getLatitude()+e, a.getLongitude()+e});
+    testSpatialParams.setB(new double[]{b.getLatitude()-e, b.getLongitude()-e, b.getLatitude()+e, b.getLongitude()+e});   
+    
+    Path filename = Paths.get(String.format("./datasets/tests/shouldReturnMostPopularTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    byte[] json = objectMapper.writeValueAsBytes(testSpatialParams);
+    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
+
+
+    Iterable<Trajectory> trajectories  = httpGET(url.toString());
+    assertTrajectoriesGivenABSize(trajectories);
+  
+  }
 
   private String getLatLonDistance(Trajectory[] trajectories) {
 
     StringBuilder sb = new StringBuilder();
-
     return sb.toString();
 
   }
 
 
-  private String getBbox(Trajectory[] trajectories) {
+  private RawData[] getBbox(Trajectory[] trajectories) {
 
     RawData[] ab = new RawData[2];
-    StringBuilder sb = new StringBuilder();
+
 
     boolean first = true;
 
@@ -275,21 +337,8 @@ public class TestSpatial {
       break;
     }
 
-    double e = 0.001; 
+    return ab;
 
-
-    RawData a = ab[0];
-    RawData b = ab[1];
-
-    //A
-    sb.append(String.format(Locale.ENGLISH, "lat=%f&lon=%f", a.getLatitude()-e, a.getLongitude()-e ));
-    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", a.getLatitude()+e, a.getLongitude()+e ));
-
-    //B
-    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()-e, b.getLongitude()-e));
-    sb.append(String.format(Locale.ENGLISH, "&lat=%f&lon=%f", b.getLatitude()+e, b.getLongitude()+e));
-    
-    return sb.toString();
   }
 
   private void assertTrajectoriesGivenABSize(
@@ -315,53 +364,24 @@ public class TestSpatial {
 
     }
 
-    //		for(Trajectory trajectory : trajectories){
+    //    for(Trajectory trajectory : trajectories){
     //
-    //			assertThat(trajectory.getTrajectoryName())
-    //			.isNotNull()
-    //			.isNotEmpty()
-    //			.matches("\\d+");
+    //      assertThat(trajectory.getTrajectoryName())
+    //      .isNotNull()
+    //      .isNotEmpty()
+    //      .matches("\\d+");
     //
-    //			assertThat(trajectory.getUser())
-    //			.isNotNull();
+    //      assertThat(trajectory.getUser())
+    //      .isNotNull();
     //
-    //			Collection<Move> moves = trajectory.getMoves();
-    //			assertThat(moves)
-    //			.hasSize(mSize)
-    //			.doesNotContainNull();
+    //      Collection<Move> moves = trajectory.getMoves();
+    //      assertThat(moves)
+    //      .hasSize(mSize)
+    //      .doesNotContainNull();
     //
-    //			//Falta testar retorno de latitude e longitude
+    //      //Falta testar retorno de latitude e longitude
     //
-    //		}
-
-  }
-
-
-  @Test
-  public void shouldReturnMostPopularTrajectories() throws JsonParseException, IOException
-  {
-    //Given A = (bbox,radius, lat,lon), B = (bbox,radius, lat,lon)  ,rel + (n.indegree  return sum
-
-    // (node) -> n.
-    // (relationship) -> r.
-
-    //Brevemente n.indegree, n.outdegree
-
-    StringBuilder url = new StringBuilder("neo4location/trajectories?");
-
-    url.append(getBbox(mTrajectories));
-
-    //SUM=n.indegree
-    String property = "n.lat";
-    url.append(String.format("&sum=%s", property));
-
-
-//    String getFilename = String.format("./get-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory);
-//    Files.write(Paths.get(getFilename), (url.toString() + "\n").getBytes(), StandardOpenOption.CREATE_NEW);
-
-    Iterable<Trajectory> trajectories  = httpGET(url.toString());
-    assertTrajectoriesGivenABSize(trajectories);
-
+    //    }
 
   }
 
