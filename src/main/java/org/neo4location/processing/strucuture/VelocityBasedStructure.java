@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.neo4j.gis.spatial.pipes.GeoPipeline;
+import org.neo4j.gis.spatial.server.plugin.SpatialPlugin;
 import org.neo4location.domain.Neo4LocationLabels;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
@@ -20,6 +22,14 @@ import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Structure;
 import org.neo4location.utils.Neo4LocationProcessingUtils;
+
+import com.spatial4j.core.context.SpatialContext;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateSequence;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.impl.CoordinateArraySequence;
+import com.vividsolutions.jts.io.WKTWriter;
 
 public class VelocityBasedStructure implements Structure {
 
@@ -57,16 +67,14 @@ public class VelocityBasedStructure implements Structure {
 
     /* initialize: calculate GPS instant SPEED if needed */
     if(mSpeedThreshold == 0){
-      mSpeedThreshold = getDynamicSpeedThreshold(null,null,mDelta1,mDelta2);
+      mSpeedThreshold = getDynamicSpeedThreshold(null, null, mDelta1, mDelta2);
     }
 
     /* episode annotation: tag each GPS point with ‘S’ or ‘M’ */
-
     Iterable<Move> mvs = trajectory.getMoves();
 
     List<Move> stopPoints = new ArrayList<Move>();
     List<Move> movePoints = new ArrayList<Move>();
-
     List<Move> tempMoves = new ArrayList<Move>();
 
     mFrom = null;
@@ -77,7 +85,7 @@ public class VelocityBasedStructure implements Structure {
 
 
     for(Move move : mvs){
-
+      
       
       float instantSpeed = Neo4LocationProcessingUtils.speed(move);
       
@@ -123,10 +131,8 @@ public class VelocityBasedStructure implements Structure {
           }
         
         }
-
-
-
       }
+    
     }
 
     if(stopPoints.size() != 0){
@@ -150,19 +156,31 @@ public class VelocityBasedStructure implements Structure {
     //TODO:
     //minStopTime == Duration.ofSeconds(sec,nano)
     //REVER
-    if(groupOfStopPoints.size() == 0)
+    int groupSize = groupOfStopPoints.size();
+    
+    if(groupSize == 0)
       return null;
           
     Duration totalTime = Neo4LocationProcessingUtils.totalTime(groupOfStopPoints);
 
 
-    if (totalTime.compareTo(Duration.ofMillis(mMinStopTime)) == 1){
-
+    if(totalTime.compareTo(Duration.ofMillis(mMinStopTime)) == 1){
       
-      //TODO: Spatial and start instant
-      double center = 0;
-      double mbr = 0;
-      long start_instant = 0;
+      
+      Coordinate[] coordinateArray = new Coordinate[groupSize];
+      int i=0;
+      for(Move m : groupOfStopPoints){
+        Point p = m.getFrom();
+        RawData rd = p.getRawData();
+        Coordinate co = new Coordinate(rd.getLatitude(),rd.getLongitude(),rd.getAltitude());
+        coordinateArray[i++] = co;
+      }
+      CoordinateSequence points = new CoordinateArraySequence(coordinateArray, 3);
+  
+      String wkt = WKTWriter.toLineString(points);
+      
+      long startInstant = groupOfStopPoints.get(0).getFrom().getRawData().getTime();
+      long endInstant = groupOfStopPoints.get(groupOfStopPoints.size()-1).getFrom().getRawData().getTime();
 
       //stop : (timefrom, timeto, center, boundingRectangle);
       // add the stop episode
@@ -171,19 +189,23 @@ public class VelocityBasedStructure implements Structure {
       
       Map<String, Object> semanticData = new HashMap<String, Object>();
       
-      semanticData.put(Neo4LocationProperties.START_INSTANT, "?");
-
-      semanticData.put(Neo4LocationProperties.DURATION, totalTime.toMillis());
-      semanticData.put(Neo4LocationProperties.CENTER, "?");
-      semanticData.put(Neo4LocationProperties.MBR, "?");
+      semanticData.put(Neo4LocationProperties.START_INSTANT, startInstant);
+      semanticData.put(Neo4LocationProperties.END_INSTANT, endInstant);
+      
+//      semanticData.put(Neo4LocationProperties.CENTER, center);
+//      semanticData.put(Neo4LocationProperties.MBR, mbr);
+      semanticData.put(Neo4LocationProperties.WKT, wkt);
       
       Collection<Neo4LocationLabels> labels = new ArrayList<Neo4LocationLabels>();
+      labels.add(Neo4LocationLabels.EPISODE);
 
+      
       Point p = new Point(rawData, semanticData, labels);
 
+      
       return p;
-
-
+      
+      
     } else {
 
       tempMovePoints.addAll(groupOfStopPoints);
@@ -254,15 +276,14 @@ public class VelocityBasedStructure implements Structure {
 
   @Override
   public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
-
-
+    
     if(trajectories == null){
       //Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
       return Collections.emptyList();
 
     }
-
-
+    
+    
     return trajectories.stream()
         .map((trajectory) -> velocityBased(trajectory))
         .collect(Collectors.toList());

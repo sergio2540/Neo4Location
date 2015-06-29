@@ -25,7 +25,11 @@ import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
+import org.neo4location.utils.IntegrationParams;
 import org.neo4location.utils.Neo4LocationTestsUtils;
+import org.neo4location.utils.StructureParams;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(Parameterized.class)
 public class TestTrajectoryStructure {
@@ -116,6 +120,8 @@ public class TestTrajectoryStructure {
     assertEquals(Response.Status.OK.getStatusCode(), response.code());
 
   }
+  
+  private static ObjectMapper objectMapper = new ObjectMapper();
 
   @Test
   public void shouldProcessVelocityBasedStructure() throws JsonParseException, IOException
@@ -123,22 +129,24 @@ public class TestTrajectoryStructure {
 
     StringBuilder url = new StringBuilder("neo4location/processing/velocityBasedStructure");  
 
-    float speedThreshold = 2;
-    long minStopTime = 10;
     double delta1 = 0.3;
     double delta2 = 0.2;
+    float speedThreshold = 2;
     
-
-
+    //long minStopTime = 10;
+   
 
 //    url.append(String.format("delta1=%f", delta1));
 //    url.append(String.format("&delta2=%f", delta2));
     
 //    url.append(String.format("&speedThreshold=%f",speedThreshold));
 //    url.append(String.format("&minStopTime=%d", minStopTime));
-  
+    
+    StructureParams sp = new StructureParams(speedThreshold,delta1,delta2);
+    byte[] json = objectMapper.writeValueAsBytes(sp);
+    
     com.squareup.okhttp.Response response = 
-        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
 
@@ -150,12 +158,17 @@ public class TestTrajectoryStructure {
 
     StringBuilder url = new StringBuilder("neo4location/processing/densityBasedStructure");  
 
-    long minStopTime = 1000;
+    long minStopTimeInMiliseconds = 1000;
+    //meters
+    double maxDistance = 2;
 
     //url.append(String.format("minStopTime=%d",minStopTime));
     
+    StructureParams sp = new StructureParams(minStopTimeInMiliseconds,maxDistance);
+    byte[] json = objectMapper.writeValueAsBytes(sp);
+    
     com.squareup.okhttp.Response response = 
-        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
 

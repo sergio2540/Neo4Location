@@ -34,7 +34,9 @@ import org.neo4location.processing.identification.PredefinedTimeIntervalIdentifi
 import org.neo4location.processing.identification.RawGPSGapIdentification;
 import org.neo4location.processing.strucuture.DensityBasedStructureF;
 import org.neo4location.processing.strucuture.VelocityBasedStructure;
+import org.neo4location.utils.IntegrationParams;
 import org.neo4location.utils.Neo4LocationService;
+import org.neo4location.utils.StructureParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +44,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -53,8 +56,9 @@ public class Neo4LocationRESTService {
   //private GraphDatabaseService mDb;
   private static final Neo4LocationService mNeo4LocationService = new Neo4LocationService();;
 
-
-  private static final ObjectReader OBJECT_READER = new ObjectMapper().reader(Trajectory.class);
+  private static final ObjectReader OBJECT_READER_TRAJECTORY = new ObjectMapper().reader(Trajectory.class);
+  private static final ObjectReader OBJECT_READER_INTEGRATION = new ObjectMapper().reader(IntegrationParams.class);
+  private static final ObjectReader OBJECT_READER_STRUCTURE = new ObjectMapper().reader(StructureParams.class);
 
   private static final JsonFactory JSON_FACTORY =  new JsonFactory();
 
@@ -83,25 +87,28 @@ public class Neo4LocationRESTService {
   @POST
   @Path("/processing/velocityBasedStructure")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response addVelocityBasedStructure(@Context UriInfo ui,  @Context GraphDatabaseService db){
+  public Response addVelocityBasedStructure(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
     //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
     //    double delta1 = Double.parseDouble(queryParams.getFirst("delta1"));
     //    double delta2 =  Double.parseDouble(queryParams.getFirst("delta2"));
     //    float speedThreshold =  Float.parseFloat(queryParams.getFirst("speedThreshold"));
     //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
+    try{
+    StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
 
-    double delta1 = 0.3;
-    double delta2 = 0.5;
-    
-    float speedThreshold = 20;
-    long minStopTime = 10;
-    
-    
-    
+    long minStopTime = structure.getMinStopTime();
+    double delta1 = structure.getDelta1();
+    double delta2 = structure.getDelta2();
+    float speedThreshold = structure.getSpeedThreshold();
+   
+
+
     VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
     db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
-
+  }catch(Exception e){
+    logger.error(e.getMessage());
+  }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -109,18 +116,23 @@ public class Neo4LocationRESTService {
   @POST
   @Path("/processing/densityBasedStructure")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response addDensityBasedStructure(@Context UriInfo ui, @Context GraphDatabaseService db){
+  public Response addDensityBasedStructure(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
     //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
     //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
     //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));
+try{
+    StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
 
-    long minStopTime = 100;
-    double maxDistance = 20;
+    long minStopTime = structure.getMinStopTime();
+    double maxDistance = structure.getMaxDistance();
+
 
     DensityBasedStructureF str = new DensityBasedStructureF(maxDistance, minStopTime);
     db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
-
+  }catch(Exception e){
+    logger.error(e.getMessage());
+  }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -128,16 +140,22 @@ public class Neo4LocationRESTService {
   @POST
   @Path("/processing/predefinedTimeInterval")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response addPredefinedTimeInterval(@Context UriInfo ui, @Context GraphDatabaseService db){
+  public Response addPredefinedTimeInterval(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
     //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
     //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
 
-    long minStopTime = 100;
+    try{
+    IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
+    
+    long minStopTime = integration.getMinStopTime();
 
     PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(minStopTime);
     db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
-
+    
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -146,19 +164,23 @@ public class Neo4LocationRESTService {
   @POST
   @Path("/processing/rawGPSGapIdentification")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response addRawGPSGapIdentification(@Context UriInfo ui, @Context GraphDatabaseService db){
+  public Response addRawGPSGapIdentification(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
     //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
     //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
     //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));  
 
-
-    long minStopTime = 100;
-    double maxDistance = 20;
+    try{
+    IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
+    long minStopTime = integration.getMinStopTime();
+    double maxDistance = integration.getMaxDistance();
 
     RawGPSGapIdentification id = new RawGPSGapIdentification(maxDistance, minStopTime);
     db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
-
+  
+    }catch(Exception e){
+    logger.error(e.getMessage());
+  }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -192,7 +214,7 @@ public class Neo4LocationRESTService {
 
         jParser.nextToken();
 
-        Trajectory trajectory = OBJECT_READER.readValue(jParser);
+        Trajectory trajectory = OBJECT_READER_TRAJECTORY.readValue(jParser);
 
         //mNeo4LocationService.appendTrajectory(trajectory, db);
         trajectories.add(trajectory);

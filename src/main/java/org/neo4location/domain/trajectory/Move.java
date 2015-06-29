@@ -124,7 +124,7 @@ public final class Move implements Serializable, Comparable<Move>  {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(String.format("Move:  rel: %s from: %s to: %s", mRelationship, mFrom, mTo));
+		sb.append(String.format("[:%s] from: %s to: %s", mRelationship, mFrom, mTo));
 
 		for(Entry<String, Object> kv : mSemanticData.entrySet())
 			sb.append(String.format("%s: %s", kv.getKey(), kv.getValue()));

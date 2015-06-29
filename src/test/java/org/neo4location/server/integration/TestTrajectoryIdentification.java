@@ -24,7 +24,10 @@ import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
+import org.neo4location.utils.IntegrationParams;
 import org.neo4location.utils.Neo4LocationTestsUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(Parameterized.class)
 public class TestTrajectoryIdentification {
@@ -116,20 +119,26 @@ public class TestTrajectoryIdentification {
 
   }
 
+  private static ObjectMapper objectMapper = new ObjectMapper();
+  
   @Test
   public void shouldProcessRawGPSGapIdentification() throws JsonParseException, IOException
   {
 
     StringBuilder url = new StringBuilder("neo4location/processing/rawGPSGapIdentification");  
 
-    long minStopTime = 1000;
+    long minStopTimeInMiliseconds = 1000;
     double maxDistance = 100;
 
 //    url.append(String.format("minStopTime=%d",minStopTime));
 //    url.append(String.format("&maxDistance=%f", maxDistance));
+    
+    IntegrationParams ip = new IntegrationParams(minStopTimeInMiliseconds,maxDistance);
+    byte[] json = objectMapper.writeValueAsBytes(ip);
+    
 
     com.squareup.okhttp.Response response = 
-        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
 
@@ -141,12 +150,16 @@ public class TestTrajectoryIdentification {
 
     StringBuilder url = new StringBuilder("neo4location/processing/predefinedTimeInterval");  
 
-    long minStopTime = 1000;
+    long minStopTimeInMiliseconds = 1000;
 
 //    url.append(String.format("minStopTime=%d",minStopTime));
+    
+    IntegrationParams ip = new IntegrationParams(minStopTimeInMiliseconds);
+    byte[] json = objectMapper.writeValueAsBytes(ip);
+    
   
     com.squareup.okhttp.Response response = 
-        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
 

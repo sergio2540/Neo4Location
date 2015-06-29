@@ -1,17 +1,13 @@
 package org.neo4location.domain;
 
-//@Imutable
+
 public interface Neo4LocationProperties {
 
-
-  //	public interface Point {
-  //
-  //	}
-  //
-  //
-  //	public interface Move {
-  //
-  //	}
+  //public interface Point {
+  //}
+  
+  //public interface Move {
+  //}
   
   public final String USERNAME = "USERNAME";
   public final String TRAJNAME = "TRAJNAME";
@@ -46,7 +42,7 @@ public interface Neo4LocationProperties {
   public final String MBR = "MBR";
   
   public final String START_INSTANT = "START_INSTANT";
-  //public final String START_INSTANT = "START_INSTANT";
-
-
+  public final String END_INSTANT = "END_INSTANT";
+  public final String WKT = "WKT";
+  
 }

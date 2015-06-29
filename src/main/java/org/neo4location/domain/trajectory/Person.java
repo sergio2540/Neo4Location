@@ -59,7 +59,7 @@ public final class Person implements Serializable, Comparable<Person> {
 	public String toString()
 	{
 
-		return String.format("Person: %s", mPersonName);
+		return String.format("User: %s", mPersonName);
 
 	}
 

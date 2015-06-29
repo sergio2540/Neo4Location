@@ -105,7 +105,7 @@ public final class Trajectory implements Serializable, Comparable<Trajectory> {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(String.format("[Trajectory %s %s", mTrajectoryName, mUser));
+		sb.append(String.format("[%s %s", mTrajectoryName, mUser));
 
 		for(Move move : mMoves){
 			sb.append(String.format(" %s", move));
