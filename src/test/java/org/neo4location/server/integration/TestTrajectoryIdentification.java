@@ -91,7 +91,8 @@ public class TestTrajectoryIdentification {
   .withExtension("/neo4location", Neo4LocationRESTService.class);
 
   //Mudar para BeforeClass
-  @Before
+  //@Before
+  
   public void shouldCreateTrajectory() throws Exception
   {
 
@@ -122,7 +123,7 @@ public class TestTrajectoryIdentification {
   private static ObjectMapper objectMapper = new ObjectMapper();
   
   @Test
-  public void shouldProcessRawGPSGapIdentification() throws JsonParseException, IOException
+  public void shouldProcessRawGPSGapIdentification() throws Exception
   {
 
     StringBuilder url = new StringBuilder("neo4location/processing/rawGPSGapIdentification");  
@@ -141,11 +142,13 @@ public class TestTrajectoryIdentification {
         Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
+    
+    shouldCreateTrajectory();
 
   }
 
-  @Test
-  public void shouldProcessPredefinedTimeInterval() throws JsonParseException, IOException
+ // @Test
+  public void shouldProcessPredefinedTimeInterval() throws Exception
   {
 
     StringBuilder url = new StringBuilder("neo4location/processing/predefinedTimeInterval");  
@@ -162,6 +165,8 @@ public class TestTrajectoryIdentification {
         Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), json);
 
     assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
+    
+    shouldCreateTrajectory();
 
   }
 

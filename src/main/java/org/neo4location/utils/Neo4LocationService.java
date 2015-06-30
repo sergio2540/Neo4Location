@@ -34,28 +34,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class Neo4LocationService {
-  
-  
+
+
   private Logger logger = LoggerFactory.getLogger(Neo4LocationService.class);
 
 
   public synchronized void writeTrajectory(final Trajectory trajectory){
 
     //REMOVER
-//    final Iterable<Move> moves = trajectory.getMoves();
-//
-//    final Node person = getOrCreatePerson(trajectory);
-//
-//    final Node traj = createTrajectory(trajectory);
-//    person.createRelationshipTo(traj, DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name()));	
-//
-//    //first move
-//    final Move m = moves.iterator().next();
-//
-//    final Node nLast = createPoint(m.getFrom());
-//    traj.createRelationshipTo(nLast, DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()));
-//    append(traj,nLast,moves);
-    
+    //    final Iterable<Move> moves = trajectory.getMoves();
+    //
+    //    final Node person = getOrCreatePerson(trajectory);
+    //
+    //    final Node traj = createTrajectory(trajectory);
+    //    person.createRelationshipTo(traj, DynamicRelationshipType.withName(Neo4LocationRelationships.START_A.name()));	
+    //
+    //    //first move
+    //    final Move m = moves.iterator().next();
+    //
+    //    final Node nLast = createPoint(m.getFrom());
+    //    traj.createRelationshipTo(nLast, DynamicRelationshipType.withName(Neo4LocationRelationships.FROM.name()));
+    //    append(traj,nLast,moves);
+
   }
 
 
@@ -72,7 +72,7 @@ public final class Neo4LocationService {
     for(Trajectory trajectory : trajectories){
 
       writeTrajectory(trajectory);
-    
+
     }
 
   }
@@ -92,63 +92,54 @@ public final class Neo4LocationService {
     final AtomicBoolean created = new AtomicBoolean(true);
     final Iterable<Move> moves = trajectory.getMoves();
 
-    try (Transaction tx = db.beginTx()){
-
-      final Node optionalPerson = getPerson(trajectory,db);
-      final Node optionalTraj = getTrajectory(trajectory,db);
 
 
-      if(optionalPerson != null) {
-        created.set(false);
-        final String personName = trajectory.getUser().getPersonName();
-        //Update personName
-        optionalPerson.setProperty(Neo4LocationProperties.USERNAME, personName);
-      }
-
-      final Node person = (optionalPerson != null) ? optionalPerson : createPerson(trajectory,db);
-
-      final String trajectoryName = trajectory.getTrajectoryName();
-      
-      if(optionalTraj != null) {
-
-        created.set(false);
-
-       
-        final Map<String,Object> props = trajectory.getSemanticData();
-
-        optionalTraj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
-
-        for(Entry<String, Object> prop: props.entrySet()){
-
-          optionalTraj.setProperty(prop.getKey(),prop.getValue());
-
-          //			if(prop.getKey().equals("error")){
-          //				mAccuracyInKm = (double) prop.getValue();
-          //			}
-
-        }
+    final Node optionalPerson = getPerson(trajectory,db);
+    final Node optionalTraj = getTrajectory(trajectory,db);
 
 
-      }
-
-      final Node traj = (optionalTraj != null) ? optionalTraj : createTrajectory(trajectory,db);
-
-
-      final Node nLast = getLastPosition(trajectoryName, moves, person,traj,db);
-
-      append(trajectoryName,traj,nLast,moves,db);
-
-
-      tx.success();	
-      tx.close();
-
-    } catch(Exception e){
-      //REVER TRANSACTIONS NEO4J
-      logger.error("APPEND: " + e.toString());
-      for(StackTraceElement st :e.getStackTrace()){
-        logger.error("APPEND: " + st.toString());
-      }
+    if(optionalPerson != null) {
+      created.set(false);
+      final String personName = trajectory.getUser().getPersonName();
+      //Update personName
+      optionalPerson.setProperty(Neo4LocationProperties.USERNAME, personName);
     }
+
+    final Node person = (optionalPerson != null) ? optionalPerson : createPerson(trajectory,db);
+
+    final String trajectoryName = trajectory.getTrajectoryName();
+
+    if(optionalTraj != null) {
+
+      created.set(false);
+
+
+      final Map<String,Object> props = trajectory.getSemanticData();
+
+      optionalTraj.setProperty(Neo4LocationProperties.TRAJNAME, trajectoryName);
+
+      for(Entry<String, Object> prop: props.entrySet()){
+
+        optionalTraj.setProperty(prop.getKey(),prop.getValue());
+
+        //			if(prop.getKey().equals("error")){
+        //				mAccuracyInKm = (double) prop.getValue();
+        //			}
+
+      }
+
+
+    }
+
+    final Node traj = (optionalTraj != null) ? optionalTraj : createTrajectory(trajectory,db);
+
+
+    final Node nLast = getLastPosition(trajectoryName, moves, person,traj,db);
+
+    append(trajectoryName,traj,nLast,moves,db);
+
+
+
 
     return created.get();
 
@@ -160,13 +151,24 @@ public final class Neo4LocationService {
     //TODO: created
     boolean created = false;
 
+    try (Transaction tx = db.beginTx()){
 
-    trajectories.stream().forEach((trajectory) -> {
+      for(Trajectory trajectory : trajectories) {
+        appendTrajectory(trajectory,db);
+      }
 
-      appendTrajectory(trajectory,db);
 
-    });
 
+      tx.success();  
+      //tx.close();
+
+    } catch(Exception e){
+      //REVER TRANSACTIONS NEO4J
+      logger.error("APPEND: " + e.toString());
+      for(StackTraceElement st :e.getStackTrace()){
+        logger.error("APPEND: " + st.toString());
+      }
+    }
 
 
     return created;
@@ -185,7 +187,7 @@ public final class Neo4LocationService {
       Relationship startA = person.createRelationshipTo(traj, START_A);	
 
       Move m = moves.iterator().next();
-      final Node nLast = createPoint(trajName, m.getFrom(),db);
+      final Node nLast = createPoint(m.getFrom(),db);
       traj.createRelationshipTo(nLast, FROM);
 
       return nLast;
@@ -210,7 +212,7 @@ public final class Neo4LocationService {
 
       final AtomicReference<Point> pTo = new AtomicReference<>(m.getTo());
 
-      final AtomicReference<Node> to = new AtomicReference<>(createPoint(trajName, pTo.get(),db));
+      final AtomicReference<Node> to = new AtomicReference<>(createPoint(pTo.get(),db));
 
       final Relationship r = from.getAndSet(to.get()).createRelationshipTo(to.get(), DynamicRelationshipType.withName(m.getRelationship().name()));
 
@@ -230,6 +232,8 @@ public final class Neo4LocationService {
 
       }
 
+      //SET TRAJNAME
+      r.setProperty(Neo4LocationProperties.TRAJNAME, trajName);
       //from = to;
 
 
@@ -299,7 +303,7 @@ public final class Neo4LocationService {
 
   }
 
-  private synchronized Node createPoint(final String trajName, final Point point, GraphDatabaseService db) {
+  private synchronized Node createPoint(final Point point, GraphDatabaseService db) {
 
     //por enquanto cria sempre
     //TODO: Rever .toArray
@@ -308,9 +312,9 @@ public final class Neo4LocationService {
 
 
     point.getLabels().forEach((label) -> {
-    
+
       p.addLabel(DynamicLabel.label(label.name()));
-    
+
     });
 
 
@@ -352,9 +356,6 @@ public final class Neo4LocationService {
 
     }
 
-    //Set TrajName
-    p.setProperty(Neo4LocationProperties.TRAJNAME, trajName);
-
     //Set Degree
     p.setProperty("degree", 1);
 
@@ -369,7 +370,7 @@ public final class Neo4LocationService {
     //Node point = getPoint(p);
     Node point = null;
     if(point == null) {
-      return createPoint("",p,db);
+      return createPoint(p,db);
     }
 
 
@@ -479,7 +480,7 @@ public final class Neo4LocationService {
 
   }
 
-  
+
 
   //DELETE
   //	public void delete(Collection<Trajectory> trajectories){

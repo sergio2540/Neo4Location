@@ -4,13 +4,20 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.event.LabelEntry;
 import org.neo4j.graphdb.event.TransactionData;
 import org.neo4location.domain.Neo4LocationProperties;
+import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Move;
+import org.neo4location.domain.trajectory.Person;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
@@ -115,30 +122,30 @@ public class Neo4LocationProcessingUtils {
 
   //unidade m/s
   public static float speed(Move mv){
-    
-    
+
+
     //TODO: Rever e fazer calculo com info semantica dos arcos. 
     //Calcula com base em rawData dos nodes.
     float speed = speedBasedOnPointInfo(mv);
-    
+
     if(speed == -1){
       return speedBasedOnMoveInfo(mv);
     }
-   
-    
+
+
     return speed;
-    
-  
+
+
   }
 
   private static float speedBasedOnMoveInfo(Move mv) {
-    
+
     Map<String, Object> semanticData = mv.getSemanticData();
-   
+
     if(semanticData != null){
-      
+
       if(semanticData.get(Neo4LocationProperties.SPEED) != null) {
-          return (float) semanticData.get(Neo4LocationProperties.SPEED);
+        return (float) semanticData.get(Neo4LocationProperties.SPEED);
       }
 
 
@@ -149,13 +156,13 @@ public class Neo4LocationProcessingUtils {
 
       return distance/duration;
     } 
-     
+
     return -1;
-   
+
   }
 
   private static float speedBasedOnPointInfo(Move mv) {
-    
+
     Point pFrom = mv.getFrom();
     Point pTo = mv.getTo();
 
@@ -163,7 +170,7 @@ public class Neo4LocationProcessingUtils {
     RawData rTo = pTo.getRawData();
 
     if(rFrom != null  && rTo != null ){
-      
+
       if(rFrom.getSpeed() != null || rTo.getSpeed() != null){
 
         if(rFrom.getSpeed() != null)
@@ -182,9 +189,9 @@ public class Neo4LocationProcessingUtils {
 
       return distance/interval;
     } 
-     
+
     return -1;
-  
+
   }
 
 
@@ -207,43 +214,76 @@ public class Neo4LocationProcessingUtils {
   }
 
 
-  public static Collection<Trajectory> toCollectionTrajectory(TransactionData data){
+  public static Collection<Trajectory> toCollectionTrajectory(GraphDatabaseService db, TransactionData data){
 
     Collection<Trajectory> trajs = new ArrayList<>();
 
     //adicionar property to all relationships with Neo4LocationProperties.TRAJNAME
+    Iterable<Node> nodes = data.createdNodes();
     Iterable<Relationship> rels = data.createdRelationships();
 
     String trajectoryName;
     String lastTrajectoryName = null;
     boolean first = true;
 
+    Person user = new Person("");
+    Map<String,Object> semanticData = new HashMap<String, Object>();
+    
     Collection<Move> mvs = new ArrayList<>();
 
-    for(Relationship rel : rels){
+    //try (Transaction tx = db.beginTx()){
+    try{
 
-      trajectoryName = (String) rel.getProperty(Neo4LocationProperties.TRAJNAME);
+      for(Relationship rel : rels){
 
-      if(first){
+        String relationshipType = rel.getType().name();
+        
+        if(!Neo4LocationRelationships.START_A.name().equals(relationshipType)){
+          
+          Node userNode = rel.getStartNode();
+          String username  = (String) userNode.getProperty(Neo4LocationProperties.USERNAME);
+          user = new Person(username);
+          
+          Node trajectory = rel.getEndNode();
+          for(String key : rel.getPropertyKeys()){
+            Object property = trajectory.getProperty(key);
+            semanticData.put(key, property);
+          }
+        
+        }
+        
+        if(!Neo4LocationRelationships.MOVE.name().equals(relationshipType)){
+          continue;
+        }
+        
+        trajectoryName = (String) rel.getProperty(Neo4LocationProperties.TRAJNAME);
+
+        if(first){
+          lastTrajectoryName = trajectoryName;
+          first = false;
+        }
+
+        if(trajectoryName.equals(lastTrajectoryName)){
+          Move mv = new Neo4JMove(rel).getMove();
+          mvs.add(mv);
+        } else {
+
+          mvs = new ArrayList<>();
+          
+          //Criar varios construtores
+          Trajectory traj = new Trajectory(lastTrajectoryName, user, mvs, semanticData);
+          trajs.add(traj);
+
+        }
+
         lastTrajectoryName = trajectoryName;
-        first = false;
       }
 
-      if(trajectoryName.equals(lastTrajectoryName)){
-        Move mv = new Neo4JMove(rel).getMove();
-        mvs.add(mv);
-      } else {
-
-        mvs = new ArrayList<>();
-        //Criar varios construtores
-        Trajectory traj = new Trajectory(lastTrajectoryName, null, mvs, null);
-        trajs.add(traj);
-
-      }
-
-      lastTrajectoryName = trajectoryName;
+      //tx.success();  
+    } catch(Exception e){
+      //TODO:
+      System.out.println(e.getMessage());
     }
-
 
     return trajs;
 
