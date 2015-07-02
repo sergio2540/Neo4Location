@@ -1,4 +1,4 @@
-package org.neo4location.server.integration;
+package org.neo4location.server.integration.queries;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -29,9 +29,9 @@ import org.neo4j.test.Mute;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
+import org.neo4location.parameters.TestSpatialParams;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
 import org.neo4location.utils.Neo4LocationTestsUtils;
-import org.neo4location.utils.TestSpatialParams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

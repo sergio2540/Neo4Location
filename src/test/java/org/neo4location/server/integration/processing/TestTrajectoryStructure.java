@@ -1,4 +1,4 @@
-package org.neo4location.server.integration;
+package org.neo4location.server.integration.processing;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,10 +24,10 @@ import org.neo4j.harness.junit.Neo4jRule;
 import org.neo4j.server.rest.domain.JsonParseException;
 import org.neo4j.test.Mute;
 import org.neo4location.domain.trajectory.Trajectory;
+import org.neo4location.parameters.IntegrationParams;
+import org.neo4location.parameters.StructureParams;
 import org.neo4location.server.plugins.Neo4LocationRESTService;
-import org.neo4location.utils.IntegrationParams;
 import org.neo4location.utils.Neo4LocationTestsUtils;
-import org.neo4location.utils.StructureParams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -228,7 +228,6 @@ public class Neo4LocationProcessingUtils {
 
     Person user = new Person("");
     Map<String,Object> semanticData = new HashMap<String, Object>();
-    
     Collection<Move> mvs = new ArrayList<>();
 
     //try (Transaction tx = db.beginTx()){
@@ -238,16 +237,18 @@ public class Neo4LocationProcessingUtils {
 
         String relationshipType = rel.getType().name();
         
-        if(!Neo4LocationRelationships.START_A.name().equals(relationshipType)){
+        if(Neo4LocationRelationships.START_A.name().equals(relationshipType)){
           
-          Node userNode = rel.getStartNode();
-          String username  = (String) userNode.getProperty(Neo4LocationProperties.USERNAME);
-          user = new Person(username);
+            Node userNode = rel.getStartNode();
+            String username  = (String) userNode.getProperty(Neo4LocationProperties.USERNAME);
+            user = new Person(username);
           
           Node trajectory = rel.getEndNode();
           for(String key : rel.getPropertyKeys()){
+            
             Object property = trajectory.getProperty(key);
             semanticData.put(key, property);
+          
           }
         
         }
@@ -258,21 +259,22 @@ public class Neo4LocationProcessingUtils {
         
         trajectoryName = (String) rel.getProperty(Neo4LocationProperties.TRAJNAME);
 
-        if(first){
+        if(lastTrajectoryName == null){
           lastTrajectoryName = trajectoryName;
-          first = false;
+          //first = false;
         }
 
         if(trajectoryName.equals(lastTrajectoryName)){
           Move mv = new Neo4JMove(rel).getMove();
           mvs.add(mv);
         } else {
-
-          mvs = new ArrayList<>();
           
-          //Criar varios construtores
           Trajectory traj = new Trajectory(lastTrajectoryName, user, mvs, semanticData);
           trajs.add(traj);
+          
+          user = new Person("");
+          semanticData = new HashMap<String, Object>();
+          mvs = new ArrayList<>();
 
         }
 

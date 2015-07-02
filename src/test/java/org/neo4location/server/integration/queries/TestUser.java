@@ -1,4 +1,4 @@
-package org.neo4location.server.integration;
+package org.neo4location.server.integration.queries;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

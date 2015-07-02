@@ -45,4 +45,6 @@ public interface Neo4LocationProperties {
   public final String END_INSTANT = "END_INSTANT";
   public final String WKT = "WKT";
   
+  public final Object ADDRESS = "ADDRESS";
+  
 }

@@ -1,19 +1,19 @@
 package org.neo4location.processing;
 
-import java.util.concurrent.Callable;
+import java.util.Collection;
+
+import org.neo4location.domain.trajectory.Trajectory;
 
 //https://code.google.com/p/geocoder-java/
 
-public class Annotation implements Callable<Void> {
+public interface Annotation {
 
-	public void fill_missing_props(String ... properties){
-		return;	
-	}
+//	public void fill_missing_props(String ... properties){
+//	}
 
-	@Override
-	public Void call() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getName();
+
+  public Collection<Trajectory> process(Collection<Trajectory> trajectories);
+  
 	
 }

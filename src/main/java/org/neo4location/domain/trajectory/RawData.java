@@ -30,7 +30,7 @@ public final class RawData implements Serializable, Comparable<RawData> {
 	private final Float mAccuracy;
 
 
-	//	public RawData(){
+	//public RawData(){
 	//
 	//	}
 

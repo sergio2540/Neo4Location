@@ -1,4 +1,4 @@
-package org.neo4location.utils;
+package org.neo4location.parameters;
 
 import java.io.Serializable;
 

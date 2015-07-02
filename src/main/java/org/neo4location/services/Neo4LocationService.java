@@ -1,4 +1,4 @@
-package org.neo4location.utils;
+package org.neo4location.services;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -67,22 +67,38 @@ public final class Neo4LocationService {
 
 
   //PUT TRAJECTORY
-  public void write(final Collection<Trajectory> trajectories){
+  public boolean write(final GraphDatabaseService db, final Collection<Trajectory> trajectories){
 
-    for(Trajectory trajectory : trajectories){
+    boolean created = false;
 
-      writeTrajectory(trajectory);
+    try (Transaction tx = db.beginTx()){
 
+      for(Trajectory trajectory : trajectories) {
+        appendTrajectory(trajectory,db);
+      }
+
+
+
+      tx.success();  
+      //tx.close();
+
+    } catch(Exception e){
+      //REVER TRANSACTIONS NEO4J
+      logger.error("APPEND: " + e.toString());
+      for(StackTraceElement st :e.getStackTrace()){
+        logger.error("APPEND: " + st.toString());
+      }
     }
+
+
+    return created;
 
   }
 
 
 
 
-  //Pode ser executado por varias threads 
-  //com diferentes objectos trajectory
-  //sync trajectory com lock
+
   public boolean appendTrajectory(final Trajectory trajectory, GraphDatabaseService db) {
 
     //Sync mGraphDatabaseService
@@ -90,7 +106,7 @@ public final class Neo4LocationService {
 
 
     final AtomicBoolean created = new AtomicBoolean(true);
-    final Iterable<Move> moves = trajectory.getMoves();
+
 
 
 
@@ -133,6 +149,7 @@ public final class Neo4LocationService {
 
     final Node traj = (optionalTraj != null) ? optionalTraj : createTrajectory(trajectory,db);
 
+    final Iterable<Move> moves = trajectory.getMoves();
 
     final Node nLast = getLastPosition(trajectoryName, moves, person,traj,db);
 
@@ -186,9 +203,14 @@ public final class Neo4LocationService {
       //FIRST TIME WE SEE THIS TRAJ
       Relationship startA = person.createRelationshipTo(traj, START_A);	
 
-      Move m = moves.iterator().next();
-      final Node nLast = createPoint(m.getFrom(),db);
-      traj.createRelationshipTo(nLast, FROM);
+      Node nLast = null;
+
+      for(Move move : moves){
+        //Move m = moves.iterator().next();
+        nLast = createPoint(move.getFrom(),db);
+        traj.createRelationshipTo(nLast, FROM);
+        break;
+      }
 
       return nLast;
 
@@ -239,6 +261,9 @@ public final class Neo4LocationService {
 
     }
 
+    if(from.get() == null)
+      return;
+    
     traj.createRelationshipTo(from.get(), TO);
 
   }

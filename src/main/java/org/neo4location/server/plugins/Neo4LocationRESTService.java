@@ -28,15 +28,15 @@ import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.handlers.IdentificationTransactionEventHandler;
 import org.neo4location.handlers.StructureTransactionEventHandler;
+import org.neo4location.parameters.IntegrationParams;
+import org.neo4location.parameters.StructureParams;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamJSON;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamKryo;
 import org.neo4location.processing.identification.PredefinedTimeIntervalIdentification;
 import org.neo4location.processing.identification.RawGPSGapIdentification;
 import org.neo4location.processing.strucuture.DensityBasedStructureF;
 import org.neo4location.processing.strucuture.VelocityBasedStructure;
-import org.neo4location.utils.IntegrationParams;
-import org.neo4location.utils.Neo4LocationService;
-import org.neo4location.utils.StructureParams;
+import org.neo4location.services.Neo4LocationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

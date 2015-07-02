@@ -31,12 +31,12 @@ public final class Trajectory implements Serializable, Comparable<Trajectory> {
 	@JsonCreator
 	public Trajectory(@JsonProperty("trajectoryName") String trajectoryName, 
 					  @JsonProperty("user") Person user, 
-					  @JsonProperty("moves") Collection<Move> moves, 
+					  @JsonProperty("moves") Iterable<Move> moves, 
 					  @JsonProperty("semanticData") Map<String,Object> semanticData){
 
 		mTrajectoryName = trajectoryName;
 		mUser = user;
-		mMoves = new ConcurrentLinkedQueue<Move>(moves);
+		mMoves = moves;
 		mSemanticData = new ConcurrentHashMap<String, Object>(semanticData);
 
 	}

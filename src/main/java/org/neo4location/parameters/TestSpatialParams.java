@@ -1,4 +1,4 @@
-package org.neo4location.utils;
+package org.neo4location.parameters;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class TestUserParams implements Serializable {
+public class TestSpatialParams implements Serializable {
 
   /**
    * 
@@ -20,18 +20,23 @@ public class TestUserParams implements Serializable {
   private String mOrderBy;
   private String mSum;
 
+
+  private double[] mA;
+  private double[] mB;
+
   
-  public TestUserParams(){  
+  public TestSpatialParams(){  
   }
 
 
-  public TestUserParams(String username, String skip, String limit, String orderBy, String sum){
+  public TestSpatialParams(String username, String skip, String limit, String orderBy, String sum){
 
     setUsername(username);
     setSkip(skip);
     setLimit(limit);
     setOrderBy(orderBy);
     setSum(sum);
+    //setBbox(bbox);
 
   }
 
@@ -75,15 +80,28 @@ public class TestUserParams implements Serializable {
     mOrderBy = orderBy;
   }
 
-
   public String getSum() {
     return mSum;
   }
-
-
+  
   public void setSum(String sum) {
     mSum = sum;
   }
-
-
+  
+  public double[] getA(){
+    return mA;
+  }
+  
+  public double[] getB(){
+    return mB;
+  }
+  
+  public void setA(double[] a){
+    mA = a;
+  }
+  
+  public void setB(double[] b){
+    mB = b;
+  }
+  
 }
