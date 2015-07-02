@@ -26,15 +26,18 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Trajectory;
+import org.neo4location.handlers.AnnotationTransactionEventHandler;
 import org.neo4location.handlers.IdentificationTransactionEventHandler;
 import org.neo4location.handlers.StructureTransactionEventHandler;
 import org.neo4location.parameters.IntegrationParams;
 import org.neo4location.parameters.StructureParams;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamJSON;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamKryo;
+import org.neo4location.processing.Annotation;
+import org.neo4location.processing.annotation.GeoCodingAnnotation;
 import org.neo4location.processing.identification.PredefinedTimeIntervalIdentification;
 import org.neo4location.processing.identification.RawGPSGapIdentification;
-import org.neo4location.processing.strucuture.DensityBasedStructureF;
+import org.neo4location.processing.strucuture.DensityBasedStructure;
 import org.neo4location.processing.strucuture.VelocityBasedStructure;
 import org.neo4location.services.Neo4LocationService;
 import org.slf4j.Logger;
@@ -82,33 +85,45 @@ public class Neo4LocationRESTService {
   }
 
   //Talvez PUT
-  //Em vez de usar queries parameteres usar JSON
+  @POST
+  @Path("/processing/geocodingAnnotation")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response addGeocodingAnnotation(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
+
+
+    try{
+
+      Annotation an = new GeoCodingAnnotation();
+      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
+    return Response.status(Response.Status.CREATED).build();
+
+  }
 
   @POST
   @Path("/processing/velocityBasedStructure")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addVelocityBasedStructure(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
-    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
-    //    double delta1 = Double.parseDouble(queryParams.getFirst("delta1"));
-    //    double delta2 =  Double.parseDouble(queryParams.getFirst("delta2"));
-    //    float speedThreshold =  Float.parseFloat(queryParams.getFirst("speedThreshold"));
-    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-    try{
-    StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
-
-    long minStopTime = structure.getMinStopTime();
-    double delta1 = structure.getDelta1();
-    double delta2 = structure.getDelta2();
-    float speedThreshold = structure.getSpeedThreshold();
    
+    try{
+      StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
+
+      long minStopTime = structure.getMinStopTime();
+      double delta1 = structure.getDelta1();
+      double delta2 = structure.getDelta2();
+      float speedThreshold = structure.getSpeedThreshold();
 
 
-    VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
-    db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
-  }catch(Exception e){
-    logger.error(e.getMessage());
-  }
+
+      VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
+      db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -118,21 +133,19 @@ public class Neo4LocationRESTService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response addDensityBasedStructure(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
-    //    final MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
-    //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
-    //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));
-try{
-    StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
+   
+    try{
+      StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
 
-    long minStopTime = structure.getMinStopTime();
-    double maxDistance = structure.getMaxDistance();
+      long minStopTime = structure.getMinStopTime();
+      double maxDistance = structure.getMaxDistance();
 
 
-    DensityBasedStructureF str = new DensityBasedStructureF(maxDistance, minStopTime);
-    db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
-  }catch(Exception e){
-    logger.error(e.getMessage());
-  }
+      DensityBasedStructure str = new DensityBasedStructure(maxDistance, minStopTime);
+      db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -146,13 +159,13 @@ try{
     //    long minStopTime =  Long.parseLong(queryParams.getFirst("minStopTime"));
 
     try{
-    IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
-    
-    long minStopTime = integration.getMinStopTime();
+      IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
 
-    PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(minStopTime);
-    db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
-    
+      long minStopTime = integration.getMinStopTime();
+
+      PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(minStopTime);
+      db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
+
     }catch(Exception e){
       logger.error(e.getMessage());
     }
@@ -171,16 +184,16 @@ try{
     //    double maxDistance = Double.parseDouble(queryParams.getFirst("maxDistance"));  
 
     try{
-    IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
-    long minStopTime = integration.getMinStopTime();
-    double maxDistance = integration.getMaxDistance();
+      IntegrationParams integration = OBJECT_READER_INTEGRATION.readValue(stream); 
+      long minStopTime = integration.getMinStopTime();
+      double maxDistance = integration.getMaxDistance();
 
-    RawGPSGapIdentification id = new RawGPSGapIdentification(maxDistance, minStopTime);
-    db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
-  
+      RawGPSGapIdentification id = new RawGPSGapIdentification(maxDistance, minStopTime);
+      db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
+
     }catch(Exception e){
-    logger.error(e.getMessage());
-  }
+      logger.error(e.getMessage());
+    }
     return Response.status(Response.Status.CREATED).build();
 
   }

@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.identification.PredefinedTimeIntervalIdentification;
 import org.neo4location.processing.identification.RawGPSGapIdentification;
-import org.neo4location.processing.strucuture.DensityBasedStructureF;
+import org.neo4location.processing.strucuture.DensityBasedStructure;
 import org.neo4location.processing.strucuture.VelocityBasedStructure;
 import org.neo4location.utils.Neo4LocationTestsUtils;
 
@@ -104,7 +104,7 @@ public class TestTrajectoryStructure {
     long mMinStopTime = 10;
     double mMaxDistance = 10;
 
-    DensityBasedStructureF ri = new DensityBasedStructureF(mMaxDistance,  mMinStopTime);
+    DensityBasedStructure ri = new DensityBasedStructure(mMaxDistance,  mMinStopTime);
 
     int movesPerTrajectory = 10;
     int numberOfUsers = 2;

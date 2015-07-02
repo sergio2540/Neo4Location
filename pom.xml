@@ -7,27 +7,20 @@
 	<name>Neo4Location Plugin</name>
 	<version>2.2.0</version>
 
+
 	<description>Neo4Location</description>
 
 
 	<properties>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<short-name>neo4locations-plugin</short-name>
 		<bundle.namespace>org.neo4locaion.plugin</bundle.namespace>
-
-
 		<license-text.header>ApacheLicense-2.0-header.txt</license-text.header>
 		<licensing.prepend.text>notice-gpl-prefix.txt</licensing.prepend.text>
-
-
 		<jdk.version>1.8</jdk.version>
-
-
 		<slf4j.version>1.7.10</slf4j.version>
 		<metrics.version>3.1.0</metrics.version>
 		<neo4j.version>2.2.0</neo4j.version>
-
 	</properties>
 
 	<scm>
@@ -35,7 +28,6 @@
 	</scm>
 
 	<dependencies>
-
 
 		<dependency>
 			<groupId>org.neo4j</groupId>
@@ -145,15 +137,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<!-- Http -->
-
-		<dependency>
-			<groupId>com.squareup.okhttp</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>net.sf.supercsv</groupId>
 			<artifactId>super-csv</artifactId>
@@ -173,6 +156,17 @@
 			<version>1.0.0</version>
 			<scope>test</scope>
 		</dependency>
+
+
+		<!-- Http -->
+
+		<dependency>
+			<groupId>com.squareup.okhttp</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+
 
 		<!-- JSON/Kryo -->
 		<dependency>
@@ -213,6 +207,20 @@
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
 			<version>${metrics.version}</version>
+		</dependency>
+
+		<!-- Google Maps -->
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.1.7</version>
+		</dependency>
+
+		<!-- Apache Commons Math - DBSCAN -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.5</version>
 		</dependency>
 
 

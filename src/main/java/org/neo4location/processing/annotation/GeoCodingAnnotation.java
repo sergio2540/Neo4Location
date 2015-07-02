@@ -1,6 +1,5 @@
 package org.neo4location.processing.annotation;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class GeoCodingAnnotation implements Annotation {
 
 
   public GeoCodingAnnotation(){
-
+    //TODO: Set API KEY
     mContext = new GeoApiContext().setApiKey("");
 
   }
@@ -40,15 +39,11 @@ public class GeoCodingAnnotation implements Annotation {
 
   //Obter a elevação
   private Trajectory geoCodingAnnotation(Trajectory trajectory){
-
-
+    
     //Collection<Move> moves = new ArrayList<>();
 
     Iterable<Move> moves = trajectory.getMoves();
-
     GeocodingResult[] results = new GeocodingResult[1];
-    String semanticLocation = "";
-    LatLng location = new LatLng(10, 11);
 
     try {
 
@@ -64,18 +59,21 @@ public class GeoCodingAnnotation implements Annotation {
 
 
         if(rdFrom == null && sdFrom != null){ 
-          rdFrom = new RawData(-1.0, -1.0, -1L,null,null,null,null);
+          rdFrom = new RawData(Double.MIN_VALUE, Double.MIN_VALUE, Long.MIN_VALUE, null, null, null, null);
         } 
 
-        if(rdFrom.getLatitude() >= -90 && rdFrom.getLatitude() <= 90
-            &&  rdFrom.getLongitude() >= -180  && rdFrom.getLongitude() <= 180
+        if(rdFrom.getLatitude() < -90 && rdFrom.getLatitude() > 90
+            &&  rdFrom.getLongitude() < -180  && rdFrom.getLongitude() > 180
             && sdFrom.containsKey(Neo4LocationProperties.ADDRESS)){
 
           String address = (String) sdFrom.get(Neo4LocationProperties.ADDRESS);
           results = geocode(address);
+          
           LatLng latLng = results[0].geometry.location;
           
-          //rdFrom = new RawData(latitude, longitude, time, altitude, accuracy, speed, bearing)
+          rdFrom.setLatitude(latLng.lat);
+          rdFrom.setLongitude(latLng.lng);
+          
           continue;
         }
 
@@ -86,26 +84,29 @@ public class GeoCodingAnnotation implements Annotation {
 
         //Se nao contem chave address
         if((!sdFrom.containsKey(Neo4LocationProperties.ADDRESS)) && rdFrom != null){
-          results = geocode(semanticLocation);
+          
+          double lat = rdFrom.getLatitude();
+          double lng = rdFrom.getLongitude();
+          
+          LatLng location = new LatLng(lat, lng);
+          
+          results = reverseGeocode(location);
+          String address = results[0].formattedAddress;
+          sdFrom.put(Neo4LocationProperties.ADDRESS, address);
         }
-
-
-
+      
       }
-      results = geocode(semanticLocation); 
-      results = reverseGeocode(location);
 
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
-    System.out.println(results[0].formattedAddress);
-
 
     Trajectory annotatedTrajectory = new Trajectory(trajectory.getTrajectoryName(), trajectory.getUser(), moves, trajectory.getSemanticData());
 
     return annotatedTrajectory;
+  
   }
 
   private  GeocodingResult[] geocode(String location) throws Exception{

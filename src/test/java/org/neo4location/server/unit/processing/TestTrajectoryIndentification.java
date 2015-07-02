@@ -17,7 +17,7 @@ import org.neo4location.domain.trajectory.Person;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.identification.PredefinedTimeIntervalIdentification;
 import org.neo4location.processing.identification.RawGPSGapIdentification;
-import org.neo4location.processing.strucuture.DensityBasedStructureF;
+import org.neo4location.processing.strucuture.DensityBasedStructure;
 import org.neo4location.utils.Neo4LocationTestsUtils;
 
 
