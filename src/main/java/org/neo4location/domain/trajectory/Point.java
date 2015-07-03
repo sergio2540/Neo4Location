@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.commons.math3.ml.clustering.Clusterable;
 import org.neo4location.domain.Neo4LocationLabels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-public final class Point implements Serializable, Comparable<Point> {
+public final class Point implements Serializable, Comparable<Point>, Clusterable {
 
 
   private static final long serialVersionUID = 1L;
@@ -96,6 +97,24 @@ public final class Point implements Serializable, Comparable<Point> {
   @Override
   public int compareTo(Point o) {
     return 0;
+  }
+
+  @Override
+  public double[] getPoint() {
+    
+    double[] point = new double[4];
+    if(mRawData != null){
+      point[0] = mRawData.getLatitude();
+      point[1] = mRawData.getLongitude();
+      point[2] = mRawData.getTime();
+      
+      if(mRawData.getAltitude() != null)
+        point[3] = mRawData.getAltitude();
+      
+      return point;
+    }
+    
+    return null;
   }
 
 }
