@@ -72,7 +72,7 @@ public class TestTrajectoryStructure {
   }
 
 
-  @Test
+  //@Test
   public void testVelocityBasedStructure() throws Exception { 
     
     float speedThreshold = 2;

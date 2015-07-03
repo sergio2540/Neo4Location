@@ -97,8 +97,8 @@ public class Neo4LocationProcessingUtils {
 
       //https://github.com/spatial4j/spatial4j/blob/master/src/main/java/com/spatial4j/core/shape/impl/PointImpl.java
 
-      PointImpl from = new PointImpl(rFrom.getLongitude(), rFrom.getLatitude(), SpatialContext.GEO);
-      PointImpl to = new PointImpl(rTo.getLongitude(), rTo.getLatitude(), SpatialContext.GEO);
+      PointImpl from = new PointImpl(rFrom.getLatitude(), rFrom.getLongitude(), SpatialContext.GEO);
+      PointImpl to = new PointImpl(rTo.getLatitude(), rTo.getLongitude(), SpatialContext.GEO);
 
 
       //https://github.com/spatial4j/spatial4j/blob/7b28c125e979fa93a0a9ef0de5d42e0c49584dd5/src/test/java/com/spatial4j/core/distance/TestDistances.java

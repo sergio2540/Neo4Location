@@ -23,6 +23,10 @@ import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Structure;
 
+import com.spatial4j.core.context.SpatialContext;
+import com.spatial4j.core.distance.GeodesicSphereDistCalc;
+import com.spatial4j.core.distance.GeodesicSphereDistCalc.Haversine;
+import com.spatial4j.core.shape.impl.PointImpl;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.impl.CoordinateArraySequence;
@@ -59,7 +63,7 @@ public class DensityBasedStructure implements Structure, DistanceMeasure {
     
     //DistanceMeasure dm = new 
     
-    DBSCANClusterer<Point> dbscan = new DBSCANClusterer<Point>(mMaxDist, 50, this);
+    DBSCANClusterer<Point> dbscan = new DBSCANClusterer<Point>(mMaxDist, 1, this);
     
     Iterable<Move> moves = trajectory.getMoves();
     
@@ -198,13 +202,23 @@ public class DensityBasedStructure implements Structure, DistanceMeasure {
     
     double lat1 = p1[0];
     double lon1 = p1[1];
+    
     double time1 = p1[2];
     
     double lat2 = p2[0];
     double lon2 = p2[1];
+    
     double time2 = p2[2];
     
-    return 0;
+    double distance;
+    
+    PointImpl pImpl1 = new PointImpl(lat1, lon1, SpatialContext.GEO);
+    PointImpl pImpl2 = new PointImpl(lat2, lon2, SpatialContext.GEO);
+    Haversine haversine = new GeodesicSphereDistCalc.Haversine();
+    distance = haversine.distance(pImpl1, pImpl2);
+    
+    return distance;
+  
   }
 
 

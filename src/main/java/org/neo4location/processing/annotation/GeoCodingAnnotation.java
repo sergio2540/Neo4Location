@@ -1,5 +1,11 @@
 package org.neo4location.processing.annotation;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,12 +29,33 @@ import com.google.maps.model.LatLng;
 //https://github.com/googlemaps/google-maps-services-java/tree/master/src/test/java/com/google/maps
 public class GeoCodingAnnotation implements Annotation {
 
-  private final GeoApiContext mContext;
+  private GeoApiContext mContext;
 
 
   public GeoCodingAnnotation(){
     //TODO: Set API KEY
-    mContext = new GeoApiContext().setApiKey("");
+    
+   
+    InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
+    System.out.println(stream != null);
+    
+//    stream = this.getClass().getClassLoader().getResourceAsStream("/GOOGLE_API.key");
+//    System.out.println(stream != null);
+    
+    BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+    mContext = null;
+    try {
+      
+      String API_KEY = br.readLine();
+      mContext = new GeoApiContext().setApiKey(API_KEY);
+      
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+   
+    
+   
 
   }
 
