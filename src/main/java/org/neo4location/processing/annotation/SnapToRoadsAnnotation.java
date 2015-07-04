@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import org.neo4location.domain.trajectory.RawData;
 import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Annotation;
 
+import com.google.maps.DirectionsApi;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.ElevationApi;
 import com.google.maps.GeoApiContext;
@@ -27,19 +29,21 @@ import com.google.maps.RoadsApi;
 import com.google.maps.model.ElevationResult;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
+import com.google.maps.model.SnappedPoint;
 
 //https://github.com/googlemaps/google-maps-services-java#api-keys
 //https://github.com/googlemaps/google-maps-services-java#asynchronous-or-synchronous----you-choose
 //https://github.com/googlemaps/google-maps-services-java/tree/master/src/test/java/com/google/maps
-public class GeoCodingAnnotation implements Annotation {
+public class SnapToRoadsAnnotation implements Annotation {
 
   private GeoApiContext mContext;
+  private boolean mInterpolate;
 
 
-  public GeoCodingAnnotation(){
-    //TODO: Set API KEY
-
-
+  public SnapToRoadsAnnotation(boolean interpolate){
+    
+    mInterpolate = interpolate;
+    
     InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
     System.out.println(stream != null);
 
@@ -71,75 +75,38 @@ public class GeoCodingAnnotation implements Annotation {
   //Obter a elevação
   private Trajectory geoCodingAnnotation(Trajectory trajectory){
 
-    //Collection<Move> moves = new ArrayList<>();
+
 
     Iterable<Move> moves = trajectory.getMoves();
-    GeocodingResult[] results = new GeocodingResult[1];
+
 
     try {
 
+      Collection<LatLng> points = new ArrayList<>();
       for(Move move : moves){
 
         Point pFrom = move.getFrom();
-
         RawData rdFrom = pFrom.getRawData();
-        Map<String, Object> sdFrom = pFrom.getSemanticData();
-
-        if(rdFrom == null && sdFrom == null)
+     
+        if(rdFrom == null)
           continue;
-
-
-        LatLng location = null;
-
-        if(rdFrom == null && sdFrom != null){ 
-          rdFrom = new RawData(Double.MIN_VALUE, Double.MIN_VALUE, Long.MIN_VALUE, null, null, null, null);
-        } 
-
-        if(rdFrom.getLatitude() < -90 && rdFrom.getLatitude() > 90
-            &&  rdFrom.getLongitude() < -180  && rdFrom.getLongitude() > 180
-            && sdFrom.containsKey(Neo4LocationProperties.ADDRESS)){
-
-          String address = (String) sdFrom.get(Neo4LocationProperties.ADDRESS);
-          results = geocode(address);
-
-          location = results[0].geometry.location;
-
-          rdFrom.setLatitude(location.lat);
-          rdFrom.setLongitude(location.lng);
-
-          //continue;
-        }
-
-
-        if(sdFrom == null && rdFrom != null){
-          sdFrom = new HashMap<String, Object>();
-        }
-
-        //Se nao contem chave address
-        if((!sdFrom.containsKey(Neo4LocationProperties.ADDRESS)) && rdFrom != null){
-
-          double lat = rdFrom.getLatitude();
-          double lng = rdFrom.getLongitude();
-
-          location = new LatLng(lat, lng);
-
-          results = reverseGeocode(location);
-          String address = results[0].formattedAddress;
-          sdFrom.put(Neo4LocationProperties.ADDRESS, address);
-        }
-
-//        Double alt = rdFrom.getAltitude();
-//
-//        if(alt == null){
-//          ElevationResult el = ElevationApi.getByPoint(mContext, location).await();
-//          double newAlt = el.elevation;
-//          rdFrom.setAltitude(newAlt);
-//        }
         
-       
-        
-    
+        double lat = rdFrom.getLatitude();
+        double lng = rdFrom.getLongitude();
+        LatLng location = new LatLng(lat, lng);
+        points.add(location);  
 
+      }
+      
+      SnappedPoint[] str = RoadsApi.snapToRoads(mContext, mInterpolate, points.toArray(new LatLng[points.size()])).await();
+      
+      for(SnappedPoint p : str){
+        
+        double lat = p.location.lat;
+        double lng = p.location.lng;
+        
+        //TODO: Save in Database
+      
       }
 
     } catch (Exception e) {
@@ -154,19 +121,7 @@ public class GeoCodingAnnotation implements Annotation {
 
   }
 
-  private  GeocodingResult[] geocode(String location) throws Exception{
-
-    //Dada localizacao simbolica retorna lat,lon
-    return GeocodingApi.geocode(mContext, location).await();
-
-  }
-
-  private  GeocodingResult[] reverseGeocode(LatLng location) throws Exception{
-
-    //Dada localizacao fisica retorna localizacao simbolica
-    return GeocodingApi.reverseGeocode(mContext, location).await();
-
-  }
+  
 
   @Override
   public Collection<Trajectory> process(Collection<Trajectory> trajectories) {

@@ -31,12 +31,12 @@ import com.google.maps.model.LatLng;
 //https://github.com/googlemaps/google-maps-services-java#api-keys
 //https://github.com/googlemaps/google-maps-services-java#asynchronous-or-synchronous----you-choose
 //https://github.com/googlemaps/google-maps-services-java/tree/master/src/test/java/com/google/maps
-public class GeoCodingAnnotation implements Annotation {
+public class ElevationAnnotation implements Annotation {
 
   private GeoApiContext mContext;
 
 
-  public GeoCodingAnnotation(){
+  public ElevationAnnotation(){
     //TODO: Set API KEY
 
 
@@ -69,76 +69,43 @@ public class GeoCodingAnnotation implements Annotation {
   }
 
   //Obter a elevação
-  private Trajectory geoCodingAnnotation(Trajectory trajectory){
+  private Trajectory elevationAnnotation(Trajectory trajectory){
 
-    //Collection<Move> moves = new ArrayList<>();
 
+    Trajectory annotatedTrajectory = null;
     Iterable<Move> moves = trajectory.getMoves();
-    GeocodingResult[] results = new GeocodingResult[1];
 
     try {
 
-      for(Move move : moves){
+      for(Move m : moves){
 
-        Point pFrom = move.getFrom();
+        Point pFrom = m.getFrom();
 
         RawData rdFrom = pFrom.getRawData();
-        Map<String, Object> sdFrom = pFrom.getSemanticData();
 
-        if(rdFrom == null && sdFrom == null)
+
+
+        if(rdFrom == null){ 
           continue;
-
-
-        LatLng location = null;
-
-        if(rdFrom == null && sdFrom != null){ 
-          rdFrom = new RawData(Double.MIN_VALUE, Double.MIN_VALUE, Long.MIN_VALUE, null, null, null, null);
         } 
-
-        if(rdFrom.getLatitude() < -90 && rdFrom.getLatitude() > 90
-            &&  rdFrom.getLongitude() < -180  && rdFrom.getLongitude() > 180
-            && sdFrom.containsKey(Neo4LocationProperties.ADDRESS)){
-
-          String address = (String) sdFrom.get(Neo4LocationProperties.ADDRESS);
-          results = geocode(address);
-
-          location = results[0].geometry.location;
-
-          rdFrom.setLatitude(location.lat);
-          rdFrom.setLongitude(location.lng);
-
-          //continue;
-        }
-
-
-        if(sdFrom == null && rdFrom != null){
-          sdFrom = new HashMap<String, Object>();
-        }
-
-        //Se nao contem chave address
-        if((!sdFrom.containsKey(Neo4LocationProperties.ADDRESS)) && rdFrom != null){
-
-          double lat = rdFrom.getLatitude();
-          double lng = rdFrom.getLongitude();
-
-          location = new LatLng(lat, lng);
-
-          results = reverseGeocode(location);
-          String address = results[0].formattedAddress;
-          sdFrom.put(Neo4LocationProperties.ADDRESS, address);
-        }
-
-//        Double alt = rdFrom.getAltitude();
-//
-//        if(alt == null){
-//          ElevationResult el = ElevationApi.getByPoint(mContext, location).await();
-//          double newAlt = el.elevation;
-//          rdFrom.setAltitude(newAlt);
-//        }
         
-       
-        
-    
+        double lat = rdFrom.getLatitude();
+        double lng = rdFrom.getLongitude();
+        LatLng location = new LatLng(lat, lng);
+
+        Double alt = rdFrom.getAltitude();
+
+        if(alt == null){
+          ElevationResult el = ElevationApi.getByPoint(mContext, location).await();
+          double newAlt = el.elevation;
+          rdFrom.setAltitude(newAlt);
+        }
+
+        //RoadsApi.snapToRoads(context, path)
+
+        annotatedTrajectory = new Trajectory(trajectory.getTrajectoryName(), trajectory.getUser(), moves, trajectory.getSemanticData());
+
+
 
       }
 
@@ -147,24 +114,8 @@ public class GeoCodingAnnotation implements Annotation {
       e.printStackTrace();
     }
 
-
-    Trajectory annotatedTrajectory = new Trajectory(trajectory.getTrajectoryName(), trajectory.getUser(), moves, trajectory.getSemanticData());
-
     return annotatedTrajectory;
 
-  }
-
-  private  GeocodingResult[] geocode(String location) throws Exception{
-
-    //Dada localizacao simbolica retorna lat,lon
-    return GeocodingApi.geocode(mContext, location).await();
-
-  }
-
-  private  GeocodingResult[] reverseGeocode(LatLng location) throws Exception{
-
-    //Dada localizacao fisica retorna localizacao simbolica
-    return GeocodingApi.reverseGeocode(mContext, location).await();
 
   }
 
@@ -178,7 +129,7 @@ public class GeoCodingAnnotation implements Annotation {
     }
 
     return trajectories.stream()
-        .map((trajectory) -> geoCodingAnnotation(trajectory))
+        .map((trajectory) -> elevationAnnotation(trajectory))
         .collect(Collectors.toList());
 
   }

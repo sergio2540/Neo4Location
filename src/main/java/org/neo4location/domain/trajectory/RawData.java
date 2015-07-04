@@ -137,7 +137,7 @@ public final class RawData implements Serializable, Comparable<RawData> {
    * Get the altitude if available, in meters above the WGS 84 reference
    * ellipsoid.
    *
-   * <p>If this location does not have an altitude then 0.0 is returned.
+   * <p>If this location does not have an altitude then null is returned.
    */
   public Double getAltitude() {
     return mAltitude;

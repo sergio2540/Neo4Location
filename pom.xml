@@ -216,6 +216,14 @@
 			<version>0.1.7</version>
 		</dependency>
 
+		<!-- Google Places -->
+		<dependency>
+			<groupId>se.walkercrou</groupId>
+			<artifactId>google-places-api-java</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+
 		<!-- Apache Commons Math - DBSCAN -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
