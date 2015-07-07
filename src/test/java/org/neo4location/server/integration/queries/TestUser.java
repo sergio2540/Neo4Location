@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -162,7 +163,8 @@ public class TestUser<TestUserParams> {
   }
 
 
-  //@Test
+  @Ignore
+  @Test
   public void shouldReturnAllTrajectories() throws JsonParseException, IOException
   {
 
@@ -180,7 +182,8 @@ public class TestUser<TestUserParams> {
   }
 
   //Testar melhor skip, limit, orderBy
-  //@Test
+  @Ignore
+  @Test
   public void shouldSkipTrajectories() throws JsonParseException, IOException
   {
     int skip = 2;
@@ -207,7 +210,8 @@ public class TestUser<TestUserParams> {
 
   }
 
-  //@Test
+  @Ignore
+  @Test
   public void shouldSkipAndLimitTrajectories() throws JsonParseException, IOException
   {
 
@@ -233,8 +237,8 @@ public class TestUser<TestUserParams> {
   }
 
 
-
-  //@Test
+  @Ignore
+  @Test
   public void shouldSkipLimitAndOrderByTrajectories() throws JsonParseException, IOException
   {
 

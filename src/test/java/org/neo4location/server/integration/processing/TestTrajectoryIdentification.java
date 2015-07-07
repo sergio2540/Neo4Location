@@ -59,7 +59,7 @@ public class TestTrajectoryIdentification {
       objs.add(i+1);
 
       col.add(objs.toArray());
-      System.out.println(i);
+      
     }
 
     return col;
@@ -149,11 +149,11 @@ public class TestTrajectoryIdentification {
 
   }
 
- // @Test
+  @Test
   public void shouldProcessPredefinedTimeInterval() throws Exception
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/identification/predefinedTimeInterval");  
+    StringBuilder url = new StringBuilder("neo4location/processing/indentification/predefinedTimeInterval");  
 
     long minStopTimeInMiliseconds = 1000;
 

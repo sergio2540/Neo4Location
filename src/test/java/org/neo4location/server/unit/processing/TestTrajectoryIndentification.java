@@ -53,7 +53,7 @@ public class TestTrajectoryIndentification {
 //      objs.add(i+1);
 
       col.add(objs.toArray());
-      System.out.println(i);
+ 
     }
 
     return col;
@@ -96,8 +96,7 @@ public class TestTrajectoryIndentification {
 
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
 
-
-    System.out.println(postProcess);
+    //TODO: Assert
 
 
   }
@@ -119,8 +118,8 @@ public class TestTrajectoryIndentification {
 
     Collection<Trajectory> postProcess = pi.process(Arrays.asList(trajectories));
 
+    //TODO: Assert
 
-    System.out.println(postProcess);
 
 
   }

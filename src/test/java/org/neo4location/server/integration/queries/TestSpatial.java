@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -241,8 +242,8 @@ public class TestSpatial {
 
   }
 
-  //TODO: Remover comentario!!!!!
-  //@Test
+  @Ignore
+  @Test
   public void shouldReturnMostPopularTrajectories() throws JsonParseException, IOException
   {
     //Given A = (bbox,radius, lat,lon), B = (bbox,radius, lat,lon)  ,rel + (n.indegree  return sum

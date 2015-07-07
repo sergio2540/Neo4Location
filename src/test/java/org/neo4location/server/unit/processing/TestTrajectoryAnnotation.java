@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -50,7 +51,8 @@ public class TestTrajectoryAnnotation {
     
   }
   
-  //@Test
+  @Ignore
+  @Test
   public void testGeoCodingAnnotation() throws Exception { 
   
     Annotation ri = new GeoCodingAnnotation();
@@ -59,11 +61,13 @@ public class TestTrajectoryAnnotation {
     int trajectoriesPerUser = 1;
     Trajectory[] trajectories = Neo4LocationTestsUtils.createTrajectory(numberOfUsers, trajectoriesPerUser , movesPerTrajectory);    
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
-    System.out.println(postProcess);
+   
+    //TODO: Assert
   
   }
   
-  //@Test
+  @Ignore
+  @Test
   public void testElevationAnnotation() throws Exception { 
   
     Annotation ri = new ElevationAnnotation();
@@ -72,10 +76,11 @@ public class TestTrajectoryAnnotation {
     int trajectoriesPerUser = 1;
     Trajectory[] trajectories = Neo4LocationTestsUtils.createTrajectory(numberOfUsers, trajectoriesPerUser , movesPerTrajectory);    
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
-    System.out.println(postProcess);
+    //TODO: Assert
   
   }
   
+  @Ignore
   @Test
   public void testPlacesAnnotation() throws Exception { 
   
@@ -85,11 +90,13 @@ public class TestTrajectoryAnnotation {
     int trajectoriesPerUser = 1;
     Trajectory[] trajectories = Neo4LocationTestsUtils.createTrajectory(numberOfUsers, trajectoriesPerUser , movesPerTrajectory);    
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
-    System.out.println(postProcess);
+  
+    //TODO: Assert
   
   }
   
-  //@Test
+  @Ignore
+  @Test
   public void testSnapToRoadAnnotation() throws Exception { 
   
     boolean interpolate = true;
@@ -99,7 +106,8 @@ public class TestTrajectoryAnnotation {
     int trajectoriesPerUser = 1;
     Trajectory[] trajectories = Neo4LocationTestsUtils.createTrajectory(numberOfUsers, trajectoriesPerUser , movesPerTrajectory);    
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
-    System.out.println(postProcess);
+ 
+    //TODO: Assert
   
   }
   

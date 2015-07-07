@@ -90,9 +90,9 @@ public class TestTrajectoryStructure {
 
 
     Collection<Trajectory> postProcess = pi.process(Arrays.asList(trajectories));
+    //TODO: Assert
 
 
-    System.out.println(postProcess);
 
 
   }
@@ -114,9 +114,8 @@ public class TestTrajectoryStructure {
 
 
     Collection<Trajectory> postProcess = ri.process(Arrays.asList(trajectories));
+    //TODO: Assert
 
-
-    System.out.println(postProcess);
 
 
   }

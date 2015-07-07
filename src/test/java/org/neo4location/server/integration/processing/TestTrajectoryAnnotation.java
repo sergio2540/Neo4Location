@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.ws.rs.core.Response;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -116,6 +117,8 @@ public class TestTrajectoryAnnotation {
 
   private static ObjectMapper objectMapper = new ObjectMapper();
   
+  
+  @Ignore
   @Test
   public void shouldGeocodeTrajectories() throws Exception
   {
@@ -133,6 +136,8 @@ public class TestTrajectoryAnnotation {
 
   }
   
+  
+  @Ignore
   @Test
   public void shouldInsertElevationInTrajectories() throws Exception
   {
@@ -150,6 +155,8 @@ public class TestTrajectoryAnnotation {
 
   }
   
+  
+  @Ignore
   @Test
   public void shouldInsertPlacesInformationInTrajectories() throws Exception
   {
@@ -167,6 +174,7 @@ public class TestTrajectoryAnnotation {
 
   }
   
+  @Ignore
   @Test
   public void shoulSnapToRoadsTrajectories() throws Exception
   {
