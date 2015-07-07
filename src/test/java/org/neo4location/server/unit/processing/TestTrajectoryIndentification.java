@@ -27,7 +27,7 @@ import org.neo4location.utils.Neo4LocationTestsUtils;
 public class TestTrajectoryIndentification {
   
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 2;
   //Max 8
   private static final int START_USERS = 3;
   private static final int INC_USERS = 0;
@@ -83,9 +83,9 @@ public class TestTrajectoryIndentification {
     double mMaxDistance = 20;
     
     //unidade = ms
-    long mMinStopTime = 10;
+    long mMaxDeltaT = 10;
 
-    RawGPSGapIdentification ri = new RawGPSGapIdentification(mMaxDistance,  mMinStopTime);
+    RawGPSGapIdentification ri = new RawGPSGapIdentification(mMaxDeltaT , mMaxDistance);
 
     int movesPerTrajectory = 4;
     int numberOfUsers = 2;

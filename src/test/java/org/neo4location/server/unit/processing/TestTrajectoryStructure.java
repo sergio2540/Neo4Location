@@ -23,7 +23,7 @@ import org.neo4location.utils.Neo4LocationTestsUtils;
 public class TestTrajectoryStructure {
 
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 2;
   //Max 8
   private static final int START_USERS = 3;
   private static final int INC_USERS = 0;
@@ -77,8 +77,8 @@ public class TestTrajectoryStructure {
     
     float speedThreshold = 2;
     long minStopTime = 10;
-    double delta1 = 0.3;
-    double delta2 = 0.2;
+    float delta1 = 0.3f;
+    float delta2 = 0.3f;
     
     VelocityBasedStructure pi = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
 

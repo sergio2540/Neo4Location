@@ -37,14 +37,9 @@ public class GeoCodingAnnotation implements Annotation {
 
 
   public GeoCodingAnnotation(){
-    //TODO: Set API KEY
-
 
     InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
     System.out.println(stream != null);
-
-    //    stream = this.getClass().getClassLoader().getResourceAsStream("/GOOGLE_API.key");
-    //    System.out.println(stream != null);
 
     BufferedReader br = new BufferedReader(new InputStreamReader(stream));
     mContext = null;
@@ -88,13 +83,16 @@ public class GeoCodingAnnotation implements Annotation {
         if(rdFrom == null && sdFrom == null)
           continue;
 
-
-        LatLng location = null;
-
-        if(rdFrom == null && sdFrom != null){ 
+        if(rdFrom == null){ 
           rdFrom = new RawData(Double.MIN_VALUE, Double.MIN_VALUE, Long.MIN_VALUE, null, null, null, null);
         } 
 
+        if(sdFrom == null){
+          sdFrom = new HashMap<String, Object>();
+        }
+        
+        LatLng location = null;
+        
         if(rdFrom.getLatitude() < -90 && rdFrom.getLatitude() > 90
             &&  rdFrom.getLongitude() < -180  && rdFrom.getLongitude() > 180
             && sdFrom.containsKey(Neo4LocationProperties.ADDRESS)){
@@ -109,12 +107,7 @@ public class GeoCodingAnnotation implements Annotation {
 
           //continue;
         }
-
-
-        if(sdFrom == null && rdFrom != null){
-          sdFrom = new HashMap<String, Object>();
-        }
-
+        
         //Se nao contem chave address
         if((!sdFrom.containsKey(Neo4LocationProperties.ADDRESS)) && rdFrom != null){
 

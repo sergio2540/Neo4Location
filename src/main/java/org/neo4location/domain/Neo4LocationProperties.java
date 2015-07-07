@@ -45,6 +45,18 @@ public interface Neo4LocationProperties {
   public final String END_INSTANT = "END_INSTANT";
   public final String WKT = "WKT";
   
+  //Semantic Information (Location)
   public final String ADDRESS = "ADDRESS";
+  public final String PLACE_NAME = "PLACE_NAME";
+  public final String PLACE_PHONE_NUMBER = "PLACE_PHONE_NUMBER";
+  public final String LANGUAGE = "LANGUAGE";
+  public final String TIMETABLE = "TIMETABLE";
+  
+  public final String PLACE_RATING = "PLACE_RATING";
+  public final String PLACE_PRICE = "PLACE_PRICE";
+  public final String PLACE_VICINITY = "PLACE_VICINITY";
+  public final String PLACE_STATUS = "PLACE_STATUS";
+  public final String WEBSITE = "WEBSITE";
+  public final String PLACE_TYPE = "PLACE_TYPE";
   
 }

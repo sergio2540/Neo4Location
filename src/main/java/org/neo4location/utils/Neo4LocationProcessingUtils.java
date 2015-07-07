@@ -291,5 +291,12 @@ public class Neo4LocationProcessingUtils {
 
   }
 
+  //Fazer a media de velocidade em todo o percurso com o LABEL
+  //Por exemplo: media de velocidade de um percurso de um carro.
+  public static float getAverageSpeed(List<Move> traj) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
 
 }

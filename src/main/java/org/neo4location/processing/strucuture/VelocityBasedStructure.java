@@ -39,8 +39,8 @@ public class VelocityBasedStructure implements Structure {
   //We analyze sensitivity of the coefficients δ1 and δ2 (e.g., δ1 = δ2 = δ = 30%) through experiments.
   //pag. 13
 
-  private double mDelta1 = 0.3;
-  private double mDelta2 = 0.3;
+  private float mDelta1 = 0.3f;
+  private float mDelta2 = 0.3f;
 
   private float mSpeedThreshold;
   private long mMinStopTime;
@@ -53,7 +53,7 @@ public class VelocityBasedStructure implements Structure {
   //  private List<Move> tempMovePoints;
 
 
-  public VelocityBasedStructure(float speedThreshold, long minStopTime, double delta1, double delta2){
+  public VelocityBasedStructure(float speedThreshold, long minStopTime, float delta1, float delta2){
 
     mSpeedThreshold = speedThreshold;
     mMinStopTime = minStopTime;
@@ -257,19 +257,40 @@ public class VelocityBasedStructure implements Structure {
    */
 
   //TODO: 
-  private float getDynamicSpeedThreshold(Object p, Object obj, double delta1, double delta2){
+  
+  /*
+  DYNAMIC VELOCITY THRESHOLD 
+  
+  For each GPS point P(lat,lon, t) of a given moving object, the speed is dynamically 
+  determined by the moving object (by using objectAvgSpeed – the average speed of this moving 
+  object) and the underlying context (by positionAvgSpeed – the average speed of most moving 
+  objects in this position. 
+  
+  Δspeed = min(delta1*objectAvgSpeed, delta2*positionAvgSpeedg, where delta1 and delta2 
+  are coefficients.
+  */
+  
+  private float getDynamicSpeedThreshold(List<Move> traj, Point obj, float delta1, float delta2){
 
     //p - ponto x,y,z
     //obj_id - objeto -> car, bus
 
     float velocityThreshold = 0;
+    
     //objectAvgSpeed – the average SPEED of this moving object
-    float objectAvgSpeed = 0;
+    //speed media do objecto na trajectoria
+    float objectAvgSpeed = Neo4LocationProcessingUtils.getAverageSpeed(traj);
+    
     //positionAvgSpeed – the average SPEED of most moving objects in this position ⟨x, y⟩
-    float positionAvgSpeed = 0;
-
+    RawData rd = obj.getRawData();
+    if(rd == null || rd.getSpeed() == null){
+      return delta1*objectAvgSpeed;
+    }
+    
+    float positionAvgSpeed = rd.getSpeed();
 
     velocityThreshold = (float) Math.min(delta1*objectAvgSpeed, delta2*positionAvgSpeed);
+    
     return velocityThreshold;
   }
 

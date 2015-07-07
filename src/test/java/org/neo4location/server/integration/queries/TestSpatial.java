@@ -39,7 +39,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TestSpatial {
 
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 2;
 
   //Max 8
   private static final int START_USERS = 3;
@@ -155,21 +155,9 @@ public class TestSpatial {
   private Iterable<Trajectory> httpGET(String url) throws JsonGenerationException, JsonMappingException, IOException{
 
     com.squareup.okhttp.Response response = Neo4LocationTestsUtils.GET(mNeo4j.httpsURI(), url);
-
-    //    assertThat(response.code())
-    //    .isEqualTo(Response.Status.OK.getStatusCode());
-
     Iterable<Trajectory> trajectories = Neo4LocationTestsUtils.getStreamingCollection(response);
-
-    //TEST
-    Path filename = Paths.get(String.format("./datasets/tests/get-spatial-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
-
-    if(!Files.exists(filename))
-      Files.write(filename,"".getBytes(), StandardOpenOption.CREATE_NEW);
-
-    Files.write(filename, (url + "\n").getBytes(), StandardOpenOption.APPEND);
-
     return trajectories;
+    
   }
 
   private void assertTrajectoriesGivenUser(Collection<Trajectory>  trajectories, int numberOfUsers) throws IOException{
@@ -253,7 +241,8 @@ public class TestSpatial {
 
   }
 
-  @Test
+  //TODO: Remover comentario!!!!!
+  //@Test
   public void shouldReturnMostPopularTrajectories() throws JsonParseException, IOException
   {
     //Given A = (bbox,radius, lat,lon), B = (bbox,radius, lat,lon)  ,rel + (n.indegree  return sum
@@ -286,13 +275,12 @@ public class TestSpatial {
     String property = "n.lat";
     url.append(String.format("&sum=%s", property));
 
-    TestSpatialParams testSpatialParams = new TestSpatialParams();
-    testSpatialParams.setA(new double[]{a.getLatitude()-e, a.getLongitude()-e, a.getLatitude()+e, a.getLongitude()+e});
-    testSpatialParams.setB(new double[]{b.getLatitude()-e, b.getLongitude()-e, b.getLatitude()+e, b.getLongitude()+e});   
-    
-    Path filename = Paths.get(String.format("./datasets/tests/shouldReturnMostPopularTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
-    byte[] json = objectMapper.writeValueAsBytes(testSpatialParams);
-    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
+//    TestSpatialParams testSpatialParams = new TestSpatialParams();
+//    testSpatialParams.setA(new double[]{a.getLatitude()-e, a.getLongitude()-e, a.getLatitude()+e, a.getLongitude()+e});
+//    testSpatialParams.setB(new double[]{b.getLatitude()-e, b.getLongitude()-e, b.getLatitude()+e, b.getLongitude()+e});    
+//    Path filename = Paths.get(String.format("./datasets/tests/shouldReturnMostPopularTrajectories-%d-%d-%d-%d.json", mTest, mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+//    byte[] json = objectMapper.writeValueAsBytes(testSpatialParams);
+//    Files.write(filename, json, StandardOpenOption.CREATE_NEW);
 
 
     Iterable<Trajectory> trajectories  = httpGET(url.toString());

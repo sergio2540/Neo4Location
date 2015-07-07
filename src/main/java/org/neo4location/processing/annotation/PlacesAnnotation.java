@@ -1,5 +1,6 @@
 package org.neo4location.processing.annotation;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,8 +23,12 @@ import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Annotation;
 
 import se.walkercrou.places.GooglePlaces;
+import se.walkercrou.places.Photo;
 import se.walkercrou.places.Place;
 import se.walkercrou.places.Price;
+import se.walkercrou.places.Review;
+import se.walkercrou.places.Scope;
+import se.walkercrou.places.Status;
 
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.ElevationApi;
@@ -44,13 +49,10 @@ public class PlacesAnnotation implements Annotation {
 
 
   public PlacesAnnotation(){
-    //TODO: Set API KEY
 
-    InputStream stream = this.getClass().getResourceAsStream("GOOGLE_PLACES_API.key");
+
+    InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
     System.out.println(stream != null);
-
-    //    stream = this.getClass().getClassLoader().getResourceAsStream("/GOOGLE_API.key");
-    //    System.out.println(stream != null);
 
     BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
@@ -75,7 +77,6 @@ public class PlacesAnnotation implements Annotation {
   //Obter a elevação
   private Trajectory elevationAnnotation(Trajectory trajectory){
 
-
     Trajectory annotatedTrajectory = null;
     Iterable<Move> moves = trajectory.getMoves();
 
@@ -88,12 +89,9 @@ public class PlacesAnnotation implements Annotation {
         RawData rdFrom = pFrom.getRawData();
         Map<String, Object> sdFrom = pFrom.getSemanticData();
 
-
-
         if(rdFrom == null){ 
           continue;
         } 
-
 
         LatLng location = null;
 
@@ -103,20 +101,10 @@ public class PlacesAnnotation implements Annotation {
         List<Place> places = mClient.getNearbyPlaces(lat, lng, GooglePlaces.MAXIMUM_RESULTS);
 
         for(Place p : places){
-          
-          String name = p.getName();
-          se.walkercrou.places.Hours hours = p.getHours();
-          String phoneNumber = p.getPhoneNumber();
-          double rating = p.getRating();
-          Price price = p.getPrice();
-          String vicinity = p.getVicinity();
-          
-         
+          toPlace(p);
         }
 
         annotatedTrajectory = new Trajectory(trajectory.getTrajectoryName(), trajectory.getUser(), moves, trajectory.getSemanticData());
-
-
 
       }
 
@@ -126,8 +114,95 @@ public class PlacesAnnotation implements Annotation {
     }
 
     return annotatedTrajectory;
+  }
 
 
+  public Map<String,Object> toPlace(Place p){
+
+    Map<String, Object> map = new HashMap<String, Object>();
+
+    String name = p.getName();
+    if(name != null)
+      map.put(Neo4LocationProperties.PLACE_NAME, name);
+
+    int accuracy = p.getAccuracy();
+
+    String phoneNumber = p.getPhoneNumber();
+    if(phoneNumber != null)
+      map.put(Neo4LocationProperties.PLACE_PHONE_NUMBER, phoneNumber);
+
+    String internationalPhoneNumber = p.getInternationalPhoneNumber();
+
+    String language = p.getLanguage();
+    if(language != null)
+      map.put(Neo4LocationProperties.LANGUAGE, language);
+
+    //TODO: Verificar property
+    se.walkercrou.places.Hours hours = p.getHours();
+    if(hours != null)
+      map.put(Neo4LocationProperties.TIMETABLE, hours);
+
+    double rating = p.getRating();
+    if(rating == -1)
+      map.put(Neo4LocationProperties.PLACE_RATING, rating);
+
+    Price price = p.getPrice();
+    if(price != null)
+      map.put(Neo4LocationProperties.PLACE_PRICE, price);
+
+    String vicinity = p.getVicinity();
+    if(vicinity != null)
+      map.put(Neo4LocationProperties.PLACE_VICINITY, vicinity);
+
+    List<Review> reviews = p.getReviews();
+    if(reviews != null){
+
+      for(Review r : reviews){
+
+        String author = r.getAuthor();
+        String lang = r.getLanguage();
+
+        int rat = r.getRating();
+
+        String text = r.getText();
+        long time = r.getTime();
+
+      }
+
+    }
+
+    Scope scope = p.getScope();
+    if(scope != null)
+      map.put(Neo4LocationProperties.PLACE_VICINITY, vicinity);
+
+    List<Photo> photos = p.getPhotos();
+    if(photos != null){
+
+      for(Photo photo : photos){
+        int h = photo.getHeight();
+        int w = photo.getWidth();
+        BufferedImage bi = photo.getImage();
+      }
+    }
+
+    Status status = p.getStatus();
+
+    if(status != null)
+      map.put(Neo4LocationProperties.PLACE_STATUS, status.name());
+
+    List<String> types = p.getTypes();
+    if(types != null){
+      for(String t : types){
+        StringBuilder array = new StringBuilder();
+        //map.put(Neo4LocationProperties.PLACE_TYPE, t);
+      }
+    }
+
+    String website = p.getWebsite();
+    if(website != null)
+      map.put(Neo4LocationProperties.WEBSITE, website);
+
+    return map;
   }
 
   @Override

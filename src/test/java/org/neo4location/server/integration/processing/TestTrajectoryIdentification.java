@@ -33,13 +33,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TestTrajectoryIdentification {
 
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 2;
   //Max 8
   private static final int START_USERS = 3;
   private static final int INC_USERS = 0;
-  private static final int START_TRAJECTORIES_PER_USER = 15;
+  private static final int START_TRAJECTORIES_PER_USER = 5;
   private static final int INC_TRAJECTORIES_PER_USER = 0;
-  private static final int START_MOVES_PER_TRAJECTORY = 10;
+  private static final int START_MOVES_PER_TRAJECTORY = 5;
   private static final int INC_MOVES_PER_TRAJECTORY = 0;
 
 
@@ -126,7 +126,7 @@ public class TestTrajectoryIdentification {
   public void shouldProcessRawGPSGapIdentification() throws Exception
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/rawGPSGapIdentification");  
+    StringBuilder url = new StringBuilder("neo4location/processing/identification/rawGPSGap");  
 
     long minStopTimeInMiliseconds = 1000;
     double maxDistance = 100;
@@ -153,7 +153,7 @@ public class TestTrajectoryIdentification {
   public void shouldProcessPredefinedTimeInterval() throws Exception
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/predefinedTimeInterval");  
+    StringBuilder url = new StringBuilder("neo4location/processing/identification/predefinedTimeInterval");  
 
     long minStopTimeInMiliseconds = 1000;
 

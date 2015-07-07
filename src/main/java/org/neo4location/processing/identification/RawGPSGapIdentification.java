@@ -15,118 +15,125 @@ import org.neo4location.domain.trajectory.Trajectory;
 import org.neo4location.processing.Identification;
 import org.neo4location.utils.Neo4LocationProcessingUtils;
 
-
+//TODO: Deve dar tb para quando só tem tempo!!!!
 public class RawGPSGapIdentification implements Identification {
 
-	private Duration mDuration;
-	private double mDistance;
+  private Duration mDuration;
+  private Double mDistance;
 
 
-	public RawGPSGapIdentification(double distance, long duration){
-		
-		mDuration = Duration.ofMillis(duration);
-		mDistance = distance;
+  public RawGPSGapIdentification(long duration){
 
-	}
+    mDuration = Duration.ofMillis(duration);
+   
 
-	private Collection<Trajectory> rawGPSGapIdentification(Trajectory trajectory){
+  }
 
-	  
-		//TODO:
-		Iterable<Move> moves = trajectory.getMoves();
-		if(moves == null)
-			return Collections.emptyList();
+  public RawGPSGapIdentification(long duration, double distance){
 
-		List<Move> tempMoves = new ArrayList<Move>();
-		Collection<Trajectory> tempTrajectories = new ArrayList<Trajectory>();
-		
-		
-		//Nao ha garantia de ordem no tempo
-		//Devo fazer sort de moves
+    mDuration = Duration.ofMillis(duration);
+    mDistance = distance;
 
-		for(Move m: moves){
+  }
 
-			Duration duration;
-			double distance;
-
-			Point pFrom = m.getFrom();
-
-			if(pFrom == null){
-				return Collections.emptyList();
-			}
-
-			Point pTo = m.getTo();
-
-			if(pTo == null){
-				return Collections.emptyList();
-			}
-
-			RawData rFrom = pFrom.getRawData();
-			RawData rTo = pTo.getRawData();
+  private Collection<Trajectory> rawGPSGapIdentification(Trajectory trajectory){
 
 
-			distance = Neo4LocationProcessingUtils.distance(m);
-			duration = Neo4LocationProcessingUtils.interval(m);
+    //TODO:
+    Iterable<Move> moves = trajectory.getMoves();
+    if(moves == null)
+      return Collections.emptyList();
+
+    List<Move> tempMoves = new ArrayList<Move>();
+    Collection<Trajectory> tempTrajectories = new ArrayList<Trajectory>();
 
 
-			//duration > mDuration
-			if (duration.compareTo(mDuration) == 1 && mDistance > 0 && distance < mDistance){
+    //Nao ha garantia de ordem no tempo
+    //Devo fazer sort de moves
 
-				//SUCESS
-				//end of trajectory, create temp trajectory 
-				//and prepare for a new trajectory
+    for(Move m: moves){
 
-				String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
-				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
-				
-				
-				tempTrajectories.add(tempTrajectory);
+      Duration duration;
+      double distance;
 
-				tempMoves = new ArrayList<Move>();
-				
-				//DEVO METER CONTINUE????????
-			
-			}
+      Point pFrom = m.getFrom();
 
-			tempMoves.add(m);
+      if(pFrom == null){
+        return Collections.emptyList();
+      }
 
-			//first = second;
+      Point pTo = m.getTo();
 
-		}
-		
-		return tempTrajectories;
+      if(pTo == null){
+        return Collections.emptyList();
+      }
 
-	}
-	
-	
-	
+      RawData rFrom = pFrom.getRawData();
+      RawData rTo = pTo.getRawData();
 
-	
-	@Override
-	public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
+      duration = Neo4LocationProcessingUtils.interval(m);
+      distance = Neo4LocationProcessingUtils.distance(m);
 
 
-		if(trajectories == null){
-			//Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
-			return Collections.emptyList();
+      //duration > mDuration
+      if (duration.compareTo(mDuration) == 1 && mDistance > 0 && distance < mDistance){
 
-		}
-		
-		
-		return trajectories.stream()
-				    	   .map((trajectory) -> rawGPSGapIdentification(trajectory))
-						   .flatMap((col) -> col.stream())
-						   .collect(Collectors.toList());
-		
-	}
+        //SUCESS
+        //end of trajectory, create temp trajectory 
+        //and prepare for a new trajectory
+
+        String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
+        Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
 
 
-	@Override
-	public String getName() {
-	  
-	  //Falta UID
-	  
-		return this.getClass().getSimpleName();
-	}
+        tempTrajectories.add(tempTrajectory);
+
+        tempMoves = new ArrayList<Move>();
+
+        //TODO:
+        //DEVO METER CONTINUE????????
+
+      }
+
+      tempMoves.add(m);
+
+
+
+    }
+
+    return tempTrajectories;
+
+  }
+
+
+
+
+
+  @Override
+  public Collection<Trajectory> process(Collection<Trajectory> trajectories) {
+
+
+    if(trajectories == null){
+      //Throw exception with text you must call setTrajectories(Collection<Trajectory> trajectories)
+      return Collections.emptyList();
+
+    }
+
+
+    return trajectories.stream()
+        .map((trajectory) -> rawGPSGapIdentification(trajectory))
+        .flatMap((col) -> col.stream())
+        .collect(Collectors.toList());
+
+  }
+
+
+  @Override
+  public String getName() {
+
+    //Falta UID
+
+    return this.getClass().getSimpleName();
+  }
 
 }

@@ -47,9 +47,6 @@ public class SnapToRoadsAnnotation implements Annotation {
     InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
     System.out.println(stream != null);
 
-    //    stream = this.getClass().getClassLoader().getResourceAsStream("/GOOGLE_API.key");
-    //    System.out.println(stream != null);
-
     BufferedReader br = new BufferedReader(new InputStreamReader(stream));
     mContext = null;
     try {
@@ -61,10 +58,7 @@ public class SnapToRoadsAnnotation implements Annotation {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
-
-
-
+  
   }
 
   @Override
@@ -72,13 +66,9 @@ public class SnapToRoadsAnnotation implements Annotation {
     return this.getClass().getSimpleName();
   }
 
-  //Obter a elevação
-  private Trajectory geoCodingAnnotation(Trajectory trajectory){
-
-
-
+  private Trajectory snapToRoadsAnnotation(Trajectory trajectory){
+    
     Iterable<Move> moves = trajectory.getMoves();
-
 
     try {
 
@@ -133,7 +123,7 @@ public class SnapToRoadsAnnotation implements Annotation {
     }
 
     return trajectories.stream()
-        .map((trajectory) -> geoCodingAnnotation(trajectory))
+        .map((trajectory) -> snapToRoadsAnnotation(trajectory))
         .collect(Collectors.toList());
 
   }

@@ -35,13 +35,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TestTrajectoryStructure {
 
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 2;
   //Max 8
   private static final int START_USERS = 3;
   private static final int INC_USERS = 0;
-  private static final int START_TRAJECTORIES_PER_USER = 15;
+  private static final int START_TRAJECTORIES_PER_USER = 5;
   private static final int INC_TRAJECTORIES_PER_USER = 0;
-  private static final int START_MOVES_PER_TRAJECTORY = 10;
+  private static final int START_MOVES_PER_TRAJECTORY = 5;
   private static final int INC_MOVES_PER_TRAJECTORY = 0;
 
 
@@ -127,10 +127,10 @@ public class TestTrajectoryStructure {
   public void shouldProcessVelocityBasedStructure() throws JsonParseException, IOException
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/velocityBasedStructure");  
+    StringBuilder url = new StringBuilder("neo4location/processing/structure/velocityBased");  
 
-    double delta1 = 0.3;
-    double delta2 = 0.2;
+    float delta1 = 0.3f;
+    float delta2 = 0.3f;
     float speedThreshold = 2;
     
     //long minStopTime = 10;
@@ -156,7 +156,7 @@ public class TestTrajectoryStructure {
   public void shouldProcessDensityBasedStructure() throws JsonParseException, IOException
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/densityBasedStructure");  
+    StringBuilder url = new StringBuilder("neo4location/processing/structure/densityBased");  
 
     long minStopTimeInMiliseconds = 1000;
     //meters

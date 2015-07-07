@@ -2,16 +2,15 @@ package org.neo4location.domain.trajectory;
 
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.math3.ml.clustering.Clusterable;
 import org.neo4location.domain.Neo4LocationLabels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -99,6 +98,7 @@ public final class Point implements Serializable, Comparable<Point>, Clusterable
     return 0;
   }
 
+  @JsonIgnore
   @Override
   public double[] getPoint() {
     

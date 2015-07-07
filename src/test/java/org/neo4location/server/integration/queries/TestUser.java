@@ -33,13 +33,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TestUser<TestUserParams> {
 
   //Max Person = 7
-  private static final int ITERATIONS = 10;
+  private static final int ITERATIONS = 2;
 
   //Max 8
-  private static final int START_USERS = 1;
+  private static final int START_USERS = 3;
   private static final int INC_USERS = 0;
 
-  private static final int START_TRAJECTORIES_PER_USER = 1;
+  private static final int START_TRAJECTORIES_PER_USER = 5;
   private static final int INC_TRAJECTORIES_PER_USER = 0;
 
   private static final int START_MOVES_PER_TRAJECTORY = 10;
@@ -62,7 +62,7 @@ public class TestUser<TestUserParams> {
       objs.add(i+1);
 
       col.add(objs.toArray());
-      System.out.println(i);
+      //System.out.println(i);
     }
 
     return col;
@@ -101,7 +101,7 @@ public class TestUser<TestUserParams> {
 
     byte[] json;
 
-    Path filename = Paths.get(String.format("./datasets/tests/teste-1/create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    Path filename = Paths.get(String.format("./datasets/tests/create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
 
     if(Files.exists(filename)){
 

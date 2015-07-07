@@ -37,14 +37,9 @@ public class ElevationAnnotation implements Annotation {
 
 
   public ElevationAnnotation(){
-    //TODO: Set API KEY
-
 
     InputStream stream = this.getClass().getResourceAsStream("GOOGLE_API.key");
     System.out.println(stream != null);
-
-    //    stream = this.getClass().getClassLoader().getResourceAsStream("/GOOGLE_API.key");
-    //    System.out.println(stream != null);
 
     BufferedReader br = new BufferedReader(new InputStreamReader(stream));
     mContext = null;

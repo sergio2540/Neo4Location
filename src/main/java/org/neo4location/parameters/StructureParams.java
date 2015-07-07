@@ -18,8 +18,8 @@ public class StructureParams implements Serializable {
   
   //Structure
   private float mSpeedThreshold;
-  private double mDelta1;
-  private double mDelta2;
+  private float mDelta1;
+  private float mDelta2;
   
   public StructureParams(){  
   }
@@ -29,7 +29,7 @@ public class StructureParams implements Serializable {
     setMaxDistance(maxDistance);
   }
   
-  public StructureParams(float speedThreshold, double delta1, double delta2){
+  public StructureParams(float speedThreshold, float delta1, float delta2){
     
     setSpeedThreshold(speedThreshold);
     setDelta1(delta1);
@@ -54,19 +54,19 @@ public class StructureParams implements Serializable {
     this.mSpeedThreshold = mSpeedThreshold;
   }
 
-  public double getDelta1() {
+  public float getDelta1() {
     return mDelta1;
   }
 
-  public void setDelta1(double mDelta1) {
+  public void setDelta1(float mDelta1) {
     this.mDelta1 = mDelta1;
   }
 
-  public double getDelta2() {
+  public float getDelta2() {
     return mDelta2;
   }
 
-  public void setDelta2(double mDelta2) {
+  public void setDelta2(float mDelta2) {
     this.mDelta2 = mDelta2;
   }
 

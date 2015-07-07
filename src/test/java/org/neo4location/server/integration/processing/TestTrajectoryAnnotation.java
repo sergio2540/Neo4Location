@@ -29,13 +29,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TestTrajectoryAnnotation {
 
   //Max START_MOVES_PER_TRAJECTORY - 2
-  private static final int ITERATIONS = 7;
+  private static final int ITERATIONS = 1;
   //Max 8
-  private static final int START_USERS = 3;
+  private static final int START_USERS = 2;
   private static final int INC_USERS = 0;
-  private static final int START_TRAJECTORIES_PER_USER = 15;
+  private static final int START_TRAJECTORIES_PER_USER = 2;
   private static final int INC_TRAJECTORIES_PER_USER = 0;
-  private static final int START_MOVES_PER_TRAJECTORY = 10;
+  private static final int START_MOVES_PER_TRAJECTORY = 4;
   private static final int INC_MOVES_PER_TRAJECTORY = 0;
 
 
@@ -55,7 +55,7 @@ public class TestTrajectoryAnnotation {
       objs.add(i+1);
 
       col.add(objs.toArray());
-      System.out.println(i);
+      
     }
 
     return col;
@@ -120,7 +120,58 @@ public class TestTrajectoryAnnotation {
   public void shouldGeocodeTrajectories() throws Exception
   {
 
-    StringBuilder url = new StringBuilder("neo4location/processing/geocodingAnnotation");   
+    StringBuilder url = new StringBuilder("neo4location/processing/annotation/geocoding");   
+    
+    com.squareup.okhttp.Response response = 
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+
+    assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
+    
+    shouldCreateTrajectory();
+    //wait 5 seconds
+    Thread.sleep(5000);
+
+  }
+  
+  @Test
+  public void shouldInsertElevationInTrajectories() throws Exception
+  {
+
+    StringBuilder url = new StringBuilder("neo4location/processing/annotation/elevation");   
+    
+    com.squareup.okhttp.Response response = 
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+
+    assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
+    
+    shouldCreateTrajectory();
+    //wait 5 seconds
+    Thread.sleep(5000);
+
+  }
+  
+  @Test
+  public void shouldInsertPlacesInformationInTrajectories() throws Exception
+  {
+
+    StringBuilder url = new StringBuilder("neo4location/processing/annotation/places");   
+    
+    com.squareup.okhttp.Response response = 
+        Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());
+
+    assertEquals(Response.Status.CREATED.getStatusCode(), response.code());
+    
+    shouldCreateTrajectory();
+    //wait 5 seconds
+    Thread.sleep(5000);
+
+  }
+  
+  @Test
+  public void shoulSnapToRoadsTrajectories() throws Exception
+  {
+
+    StringBuilder url = new StringBuilder("neo4location/processing/annotation/snapToRoads");   
     
     com.squareup.okhttp.Response response = 
         Neo4LocationTestsUtils.POST(mNeo4j.httpsURI(), url.toString(), "".getBytes());

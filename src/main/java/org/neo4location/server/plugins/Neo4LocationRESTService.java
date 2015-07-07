@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
+import org.neo4j.cypher.internal.compiler.v2_2.functions.E;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
@@ -34,7 +35,10 @@ import org.neo4location.parameters.StructureParams;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamJSON;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamKryo;
 import org.neo4location.processing.Annotation;
+import org.neo4location.processing.annotation.ElevationAnnotation;
 import org.neo4location.processing.annotation.GeoCodingAnnotation;
+import org.neo4location.processing.annotation.PlacesAnnotation;
+import org.neo4location.processing.annotation.SnapToRoadsAnnotation;
 import org.neo4location.processing.identification.PredefinedTimeIntervalIdentification;
 import org.neo4location.processing.identification.RawGPSGapIdentification;
 import org.neo4location.processing.strucuture.DensityBasedStructure;
@@ -86,7 +90,7 @@ public class Neo4LocationRESTService {
 
   //Talvez PUT
   @POST
-  @Path("/processing/geocodingAnnotation")
+  @Path("/processing/annotation/geocoding")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addGeocodingAnnotation(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
@@ -102,9 +106,64 @@ public class Neo4LocationRESTService {
     return Response.status(Response.Status.CREATED).build();
 
   }
+  
+  @POST
+  @Path("/processing/annotation/elevation")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response addElevationAnnotation(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
+
+
+    try{
+
+      Annotation an = new ElevationAnnotation();
+      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
+    return Response.status(Response.Status.CREATED).build();
+
+  }
+  
+  @POST
+  @Path("/processing/annotation/places")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response addPlacesInformationAnnotation(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
+
+
+    try{
+
+      Annotation an = new PlacesAnnotation();
+      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
+    return Response.status(Response.Status.CREATED).build();
+
+  }
+  
+  @POST
+  @Path("/processing/annotation/snapToRoads")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response addSnapToRoadsAnnotation(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
+
+
+    try{
+      
+      boolean interpolate = false;
+      Annotation an = new SnapToRoadsAnnotation(interpolate);
+      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+
+    }catch(Exception e){
+      logger.error(e.getMessage());
+    }
+    return Response.status(Response.Status.CREATED).build();
+
+  }
 
   @POST
-  @Path("/processing/velocityBasedStructure")
+  @Path("/processing/structure/velocityBased")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addVelocityBasedStructure(final InputStream stream,  @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
@@ -113,8 +172,8 @@ public class Neo4LocationRESTService {
       StructureParams structure = OBJECT_READER_STRUCTURE.readValue(stream); 
 
       long minStopTime = structure.getMinStopTime();
-      double delta1 = structure.getDelta1();
-      double delta2 = structure.getDelta2();
+      float delta1 = structure.getDelta1();
+      float delta2 = structure.getDelta2();
       float speedThreshold = structure.getSpeedThreshold();
 
 
@@ -129,7 +188,7 @@ public class Neo4LocationRESTService {
   }
 
   @POST
-  @Path("/processing/densityBasedStructure")
+  @Path("/processing/structure/densityBased")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addDensityBasedStructure(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
@@ -151,7 +210,7 @@ public class Neo4LocationRESTService {
   }
 
   @POST
-  @Path("/processing/predefinedTimeInterval")
+  @Path("/processing/indentification/predefinedTimeInterval")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addPredefinedTimeInterval(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
@@ -175,7 +234,7 @@ public class Neo4LocationRESTService {
 
 
   @POST
-  @Path("/processing/rawGPSGapIdentification")
+  @Path("/processing/identification/rawGPSGap")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addRawGPSGapIdentification(final InputStream stream, @Context GraphDatabaseService db) throws JsonProcessingException, IOException{
 
@@ -188,7 +247,7 @@ public class Neo4LocationRESTService {
       long minStopTime = integration.getMinStopTime();
       double maxDistance = integration.getMaxDistance();
 
-      RawGPSGapIdentification id = new RawGPSGapIdentification(maxDistance, minStopTime);
+      RawGPSGapIdentification id = new RawGPSGapIdentification(minStopTime, maxDistance);
       db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
 
     }catch(Exception e){
