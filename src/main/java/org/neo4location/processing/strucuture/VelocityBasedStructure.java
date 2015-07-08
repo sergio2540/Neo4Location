@@ -48,6 +48,7 @@ public class VelocityBasedStructure implements Structure {
   private Point mFrom;
   private Point mTo;
 
+  private final static int PRIORITY = 1; 
 
   //  private List<Move> tempStopPoints;
   //  private List<Move> tempMovePoints;
@@ -315,6 +316,12 @@ public class VelocityBasedStructure implements Structure {
   @Override
   public String getName() {
     return this.getClass().getSimpleName();
+  }
+
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
   }
 
 

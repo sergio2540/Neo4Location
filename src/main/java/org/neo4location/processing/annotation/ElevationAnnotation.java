@@ -34,7 +34,8 @@ import com.google.maps.model.LatLng;
 public class ElevationAnnotation implements Annotation {
 
   private GeoApiContext mContext;
-
+  
+  private final static int PRIORITY = 1; 
 
   public ElevationAnnotation(){
 
@@ -127,6 +128,11 @@ public class ElevationAnnotation implements Annotation {
         .map((trajectory) -> elevationAnnotation(trajectory))
         .collect(Collectors.toList());
 
+  }
+
+  @Override
+  public int getPriority() {
+    return PRIORITY;
   }
 
 }

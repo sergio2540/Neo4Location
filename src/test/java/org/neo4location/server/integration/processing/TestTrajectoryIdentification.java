@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.ws.rs.core.Response;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -149,6 +150,7 @@ public class TestTrajectoryIdentification {
 
   }
 
+  @Ignore
   @Test
   public void shouldProcessPredefinedTimeInterval() throws Exception
   {

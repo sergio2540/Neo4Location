@@ -44,10 +44,10 @@ import com.google.maps.model.LatLng;
 //https://github.com/googlemaps/google-maps-services-java/tree/master/src/test/java/com/google/maps
 public class PlacesAnnotation implements Annotation {
 
-
   private GooglePlaces mClient;
 
-
+  private final static int PRIORITY = 1; 
+  
   public PlacesAnnotation(){
 
 
@@ -218,6 +218,12 @@ public class PlacesAnnotation implements Annotation {
         .map((trajectory) -> elevationAnnotation(trajectory))
         .collect(Collectors.toList());
 
+  }
+  
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
   }
 
 }

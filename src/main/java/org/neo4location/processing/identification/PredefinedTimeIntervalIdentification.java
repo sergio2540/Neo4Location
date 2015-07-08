@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -23,7 +24,8 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 	 * Divide the stream of GPS feed into several subsequences contained in given time intervals,
 	 *  e.g., hourly trajectory, daily trajectory, weekly trajectory, monthly trajectory.
 	 */
-	
+  
+  private final static int PRIORITY = 1; 
 	
 	private long mMinStopTime;
 
@@ -78,10 +80,10 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 				//end of trajectory, create temp trajectory 
 				//and prepare for a new trajectory
 				
-				
-				String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
-				
-				
+			
+			  long startTrajectoryTime = (long) trajectory.getSemanticData().get(Neo4LocationProperties.START_INSTANT);
+        String newTrajectoryName = String.format("%s-%s-%d", getName(), trajectory.getTrajectoryName(), startTrajectoryTime);
+        
 				Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
 				tempTrajectories.add(tempTrajectory);
 
@@ -129,5 +131,11 @@ public class PredefinedTimeIntervalIdentification implements Identification {
 		return this.getClass().getSimpleName();
 	
 	}
+	
+	@Override
+  public int getPriority() {
+   
+    return PRIORITY;
+  }
 
 }

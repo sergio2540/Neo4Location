@@ -39,6 +39,7 @@ public class SnapToRoadsAnnotation implements Annotation {
   private GeoApiContext mContext;
   private boolean mInterpolate;
 
+  private final static int PRIORITY = 1; 
 
   public SnapToRoadsAnnotation(boolean interpolate){
     
@@ -126,6 +127,12 @@ public class SnapToRoadsAnnotation implements Annotation {
         .map((trajectory) -> snapToRoadsAnnotation(trajectory))
         .collect(Collectors.toList());
 
+  }
+  
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
   }
 
 }

@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -27,14 +31,13 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.Neo4LocationRelationships;
 import org.neo4location.domain.trajectory.Trajectory;
-import org.neo4location.handlers.AnnotationTransactionEventHandler;
-import org.neo4location.handlers.IdentificationTransactionEventHandler;
-import org.neo4location.handlers.StructureTransactionEventHandler;
+import org.neo4location.handlers.ProcessEventHandler;
 import org.neo4location.parameters.IntegrationParams;
 import org.neo4location.parameters.StructureParams;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamJSON;
 import org.neo4location.plugins.io.Neo4LocationOutputStreamKryo;
 import org.neo4location.processing.Annotation;
+import org.neo4location.processing.ProcessHandler;
 import org.neo4location.processing.annotation.ElevationAnnotation;
 import org.neo4location.processing.annotation.GeoCodingAnnotation;
 import org.neo4location.processing.annotation.PlacesAnnotation;
@@ -60,29 +63,34 @@ import com.fasterxml.jackson.databind.ObjectReader;
 @Path("")
 public class Neo4LocationRESTService {
 
-  //private GraphDatabaseService mDb;
-  private static final Neo4LocationService mNeo4LocationService = new Neo4LocationService();;
+  
+  private static final Neo4LocationService mNeo4LocationService = new Neo4LocationService();
+
+  
 
   private static final ObjectReader OBJECT_READER_TRAJECTORY = new ObjectMapper().reader(Trajectory.class);
   private static final ObjectReader OBJECT_READER_INTEGRATION = new ObjectMapper().reader(IntegrationParams.class);
   private static final ObjectReader OBJECT_READER_STRUCTURE = new ObjectMapper().reader(StructureParams.class);
 
   private static final JsonFactory JSON_FACTORY =  new JsonFactory();
-
   private static final String MEDIATYPE_KRYO = "application/x-kryo";
+  
   private static final int GET_QUERY_PARAMS_START_DEFAULT = 0;
   private static final int GET_QUERY_PARAMS_OFFSET_DEFAULT = 100;
   private static final int GET_QUERY_PARAMS_LIMIT_DEFAULT = 3;
-  private static final String GET_QUERY_PARAMS_REL_DEFAULT = Neo4LocationRelationships.MOVE.toString();
+  private static final String GET_QUERY_PARAMS_REL_DEFAULT = Neo4LocationRelationships.MOVE.name();
 
   private static MetricRegistry metrics = new MetricRegistry();
   private static final Logger logger = LoggerFactory.getLogger(Neo4LocationRESTService.class);
 
-
-
-  //UserResource, TrajectoryResource, 
+  private ProcessEventHandler processEventHandler; 
+  
+  //UserRes,ource, TrajectoryResource, 
   public Neo4LocationRESTService(@Context GraphDatabaseService db)
   {
+    
+    processEventHandler = new ProcessEventHandler(db);
+    db.registerTransactionEventHandler(processEventHandler);
 
     //Metrics
     //reporter.start();
@@ -98,7 +106,9 @@ public class Neo4LocationRESTService {
     try{
 
       Annotation an = new GeoCodingAnnotation();
-      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+      processEventHandler.registerEventHandler(an);
+      
+      //db.registerTransactionEventHandler(new ProcessTransactionEventHandler(db, an));
 
     }catch(Exception e){
       logger.error(e.getMessage());
@@ -116,7 +126,8 @@ public class Neo4LocationRESTService {
     try{
 
       Annotation an = new ElevationAnnotation();
-      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+      processEventHandler.registerEventHandler(an);
+      //db.registerTransactionEventHandler(new ProcessTransactionEventHandler(db, an)));
 
     }catch(Exception e){
       logger.error(e.getMessage());
@@ -134,7 +145,8 @@ public class Neo4LocationRESTService {
     try{
 
       Annotation an = new PlacesAnnotation();
-      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+      processEventHandler.registerEventHandler(an);
+      //db.registerTransactionEventHandler(new ProcessTransactionEventHandler(db, an));
 
     }catch(Exception e){
       logger.error(e.getMessage());
@@ -153,7 +165,8 @@ public class Neo4LocationRESTService {
       
       boolean interpolate = false;
       Annotation an = new SnapToRoadsAnnotation(interpolate);
-      db.registerTransactionEventHandler(new AnnotationTransactionEventHandler(db, an));
+      processEventHandler.registerEventHandler(an);
+      //db.registerTransactionEventHandler(new ProcessTransactionEventHandler(db, an));
 
     }catch(Exception e){
       logger.error(e.getMessage());
@@ -179,7 +192,9 @@ public class Neo4LocationRESTService {
 
 
       VelocityBasedStructure str = new VelocityBasedStructure(speedThreshold, minStopTime, delta1, delta2);
-      db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+      processEventHandler.registerEventHandler(str);
+      //db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+    
     }catch(Exception e){
       logger.error(e.getMessage());
     }
@@ -201,10 +216,13 @@ public class Neo4LocationRESTService {
 
 
       DensityBasedStructure str = new DensityBasedStructure(maxDistance, minStopTime);
-      db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+      processEventHandler.registerEventHandler(str);
+      //db.registerTransactionEventHandler(new StructureTransactionEventHandler(db, str));
+    
     }catch(Exception e){
       logger.error(e.getMessage());
     }
+    
     return Response.status(Response.Status.CREATED).build();
 
   }
@@ -223,7 +241,8 @@ public class Neo4LocationRESTService {
       long minStopTime = integration.getMinStopTime();
 
       PredefinedTimeIntervalIdentification id = new PredefinedTimeIntervalIdentification(minStopTime);
-      db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
+      processEventHandler.registerEventHandler(id);
+      //db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
 
     }catch(Exception e){
       logger.error(e.getMessage());
@@ -248,7 +267,8 @@ public class Neo4LocationRESTService {
       double maxDistance = integration.getMaxDistance();
 
       RawGPSGapIdentification id = new RawGPSGapIdentification(minStopTime, maxDistance);
-      db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
+      processEventHandler.registerEventHandler(id);
+      //db.registerTransactionEventHandler(new IdentificationTransactionEventHandler(db, id));
 
     }catch(Exception e){
       logger.error(e.getMessage());

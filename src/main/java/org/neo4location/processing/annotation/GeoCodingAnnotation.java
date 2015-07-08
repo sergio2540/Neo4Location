@@ -35,6 +35,7 @@ public class GeoCodingAnnotation implements Annotation {
 
   private GeoApiContext mContext;
 
+  private final static int PRIORITY = 1; 
 
   public GeoCodingAnnotation(){
 
@@ -174,6 +175,12 @@ public class GeoCodingAnnotation implements Annotation {
         .map((trajectory) -> geoCodingAnnotation(trajectory))
         .collect(Collectors.toList());
 
+  }
+  
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
   }
 
 }

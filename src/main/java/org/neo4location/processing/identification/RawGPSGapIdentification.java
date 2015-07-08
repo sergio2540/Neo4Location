@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.neo4location.domain.Neo4LocationProperties;
 import org.neo4location.domain.trajectory.Move;
 import org.neo4location.domain.trajectory.Point;
 import org.neo4location.domain.trajectory.RawData;
@@ -21,6 +22,7 @@ public class RawGPSGapIdentification implements Identification {
   private Duration mDuration;
   private Double mDistance;
 
+  private final static int PRIORITY = 1; 
 
   public RawGPSGapIdentification(long duration){
 
@@ -81,8 +83,12 @@ public class RawGPSGapIdentification implements Identification {
         //SUCESS
         //end of trajectory, create temp trajectory 
         //and prepare for a new trajectory
-
+        
+//        long startTrajectoryTime = (long) trajectory.getSemanticData().get(Neo4LocationProperties.START_INSTANT);
+//        String newTrajectoryName = String.format("%s-%s-%d", getName(), trajectory.getTrajectoryName(), startTrajectoryTime);
+       
         String newTrajectoryName = String.format("%s-%s", getName(), trajectory.getTrajectoryName());
+       
         Trajectory tempTrajectory = new Trajectory(newTrajectoryName, trajectory.getUser(), tempMoves, trajectory.getSemanticData());
 
 
@@ -127,7 +133,6 @@ public class RawGPSGapIdentification implements Identification {
 
   }
 
-
   @Override
   public String getName() {
 
@@ -136,4 +141,10 @@ public class RawGPSGapIdentification implements Identification {
     return this.getClass().getSimpleName();
   }
 
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
+  }
+  
 }

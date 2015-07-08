@@ -37,7 +37,8 @@ public class DensityBasedStructure implements Structure, DistanceMeasure {
 
   //interface -> Clusterable 
   
-
+  private final static int PRIORITY = 1; 
+  
   /**
    * 
    */
@@ -56,6 +57,9 @@ public class DensityBasedStructure implements Structure, DistanceMeasure {
     mMinStopTime = minStopTime;
 
   }
+  
+  
+
 
   
   
@@ -221,6 +225,12 @@ public class DensityBasedStructure implements Structure, DistanceMeasure {
   
   }
 
+  @Override
+  public int getPriority() {
+   
+    return PRIORITY;
+  }
+  
 
   //1. ∥tib −tia∥ ≤ τ e ∥⟨xia, yia⟩ − ⟨xib, yib⟩∥ ≤ σ
 
