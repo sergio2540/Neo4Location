@@ -1,3 +1,4 @@
+before_install: ./scripts/create-data.sh
 language: java
 jdk:
   - oraclejdk8

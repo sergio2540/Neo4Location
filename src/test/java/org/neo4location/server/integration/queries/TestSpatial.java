@@ -127,7 +127,7 @@ public class TestSpatial {
     byte[] json;
 
 
-    Path filename = Paths.get(String.format("./datasets/tests/create-spatial-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    Path filename = Paths.get(String.format("./examples/create-spatial-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
 
     if(Files.exists(filename)){
 

@@ -37,14 +37,14 @@ public class TestUser<TestUserParams> {
   private static final int ITERATIONS = 2;
 
   //Max 8
-  private static final int START_USERS = 3;
+  private static final int START_USERS = 2;
   private static final int INC_USERS = 0;
 
   private static final int START_TRAJECTORIES_PER_USER = 5;
   private static final int INC_TRAJECTORIES_PER_USER = 0;
 
-  private static final int START_MOVES_PER_TRAJECTORY = 10;
-  private static final int INC_MOVES_PER_TRAJECTORY = 10;
+  private static final int START_MOVES_PER_TRAJECTORY = 4;
+  private static final int INC_MOVES_PER_TRAJECTORY = 4;
 
   @Parameters(name = "{index}:")
   public static Collection<Object[]> data() {
@@ -102,7 +102,7 @@ public class TestUser<TestUserParams> {
 
     byte[] json;
 
-    Path filename = Paths.get(String.format("./datasets/tests/create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+    Path filename = Paths.get(String.format("./examples/create-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
 
     if(Files.exists(filename)){
 
@@ -138,6 +138,7 @@ public class TestUser<TestUserParams> {
   private static ObjectMapper objectMapper = new ObjectMapper();
   //private static ObjectWriter mObjectWriter = objectMapper.writerFor(TestUserParams.class);
 
+  @Ignore
   @Test
   public void shouldReturnTrajectories() throws JsonParseException, IOException
   {
@@ -323,16 +324,14 @@ public class TestUser<TestUserParams> {
 
 
 
-    Path filename = Paths.get(String.format("./datasets/tests/get-user-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+//    Path filename = Paths.get(String.format("./examples/get-user-%d-%d-%d.json", mNumberOfUsers, mTrajectoriesPerUser, mMovesPerTrajectory));
+//
+//    if(!Files.exists(filename))
+//      Files.write(filename,"".getBytes(), StandardOpenOption.CREATE_NEW);
+//
+//    Files.write(filename, (url + "\n").getBytes(), StandardOpenOption.APPEND);
 
-    if(!Files.exists(filename))
-      Files.write(filename,"".getBytes(), StandardOpenOption.CREATE_NEW);
 
-    Files.write(filename, (url + "\n").getBytes(), StandardOpenOption.APPEND);
-
-
-    //		assertThat(response.headers().toString())
-    //		.isEqualTo(Response.Status.OK.getStatusCode());
 
     return trajectories;
   }
